@@ -8,4 +8,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAGcqfyvAlxkiv6yHKFMoTlwAAAAACAAAAAAAQZgAAAAEAACAAAAAciXBEJsE0zBIJymzI+SEUazPc8mJsIEtlpouhXQ5sLAAAAAAOgAAAAAIAACAAAAD+9OEfbXJ28548PRXDQLsOISK++0JcCKJD/UY2k1njFSAAAAAA2RgWghI7TFkP9Lzvrgk9gwdpHp7jHmYo32S3HYyjO0AAAAABtFWn+llpOdTQKvjkS2hjsVWc4yIqKWDuJ0Ev0fqwiAzJASGAx3k1tqSV6CfiMBsM0gGUkwIYPS2Z8FPBE2uy</EncryptedPassword>
   </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=localhost;Database=TravelInCloud;Integrated Security=true;</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EfMigrations Include="TravelInCloud.Data.ApplicationDbContext">
+      <Value>Server=localhost;Database=TravelInCloud;Integrated Security=true;</Value>
+    </EfMigrations>
+  </ItemGroup>
 </Project>

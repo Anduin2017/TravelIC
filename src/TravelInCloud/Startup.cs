@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using TravelInCloud.Data;
 using TravelInCloud.Models;
 using TravelInCloud.Services;
+using Microsoft.AspNetCore.Identity;
+using TravelInCloud.Controllers;
 
 namespace TravelInCloud
 {
@@ -39,23 +41,28 @@ namespace TravelInCloud
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.Password = new PasswordOptions
+            {
+                RequireDigit = false,
+                RequiredLength = 6,
+                RequireLowercase = false,
+                RequireUppercase = false,
+                RequireNonAlphanumeric = false
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
 
-            // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -83,6 +90,8 @@ namespace TravelInCloud
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            await app.ApplicationServices.GetRequiredService<ApplicationDbContext>().Database.EnsureCreatedAsync();
         }
     }
 }

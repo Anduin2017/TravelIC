@@ -13,6 +13,7 @@ using TravelInCloud.Services;
 namespace TravelInCloud.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

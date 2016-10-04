@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-TravelInCloud-a9fa77ae-ec9d-44e4-ae33-ea36d8888c27",
 
   "dependencies": {
@@ -43,7 +43,9 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "System.Xml.XmlSerializer": "4.0.11",
+    "System.Net.Mail": "1.0.0-rtm-00002"
   },
 
   "tools": {
