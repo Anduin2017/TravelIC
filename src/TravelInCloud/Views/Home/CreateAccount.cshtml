@@ -1,0 +1,53 @@
+﻿@model TravelInCloud.Models.HomeViewModels.CreateAccountViewModel
+@{
+    ViewData["Title"] = "创建账户";
+}
+<form asp-controller="Home" asp-action="CreateAccount" method="post" class="form-horizontal">
+    <div class="page__hd">
+        <h1 class="page__title">创建并绑定云中旅行账号</h1>
+        <p class="page__desc">现在我们使用了你的微信信息进行认证，因此你无法在离开微信后继续访问你的账户。强烈建议创建独立的云中旅行账户。</p>
+        <div asp-validation-summary="All" class="page__desc"></div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">邮箱账号</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="Email" class="weui-input" type="email" placeholder="请输入作为云中旅行账号的邮箱账号">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">密码</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="Password" class="weui-input" type="password" placeholder="请输入云中旅行账号密码">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">确认密码</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="ConfirmPassword" class="weui-input" type="password" placeholder="请再次输入密码">
+            </div>
+        </div>
+    </div>
+
+    <div class="page__ft">
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <button class="weui-btn weui-btn_primary" type="submit">创建云中旅行账户并绑定当前微信账户</button>
+    </div>
+
+    <label class="weui-agree" for="weuiAgree">
+        <span class="weui-agree__text">
+            登录即视为同意<a href="javascript:void(0);">《相关条款》</a>
+        </span>
+    </label>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,70 @@
+﻿@using TravelInCloud.Controllers
+@model TravelInCloud.Models.HomeViewModels.SettingsViewModel
+@{
+    ViewData["Title"] = "设置";
+}
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <p>关于云中旅游</p>
+        </div>
+        <div class="weui-cell__ft">版本和开发信息</div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <p>意见反馈</p>
+        </div>
+        <div class="weui-cell__ft">告诉我们哪里可以改进</div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <p>下载安卓版APP</p>
+        </div>
+        <div class="weui-cell__ft">下载客户端以获得更佳的体验</div>
+    </a>
+    @if (Model.IsStore)
+    {
+        <div class="weui-panel__hd">欢迎您，尊敬的店主</div>
+        <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ApplyStore">
+            <div class="weui-cell__bd">
+                <p>商品信息管理</p>
+            </div>
+            <div class="weui-cell__ft">管理商店基本属性</div>
+        </a>
+        <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ApplyStore">
+            <div class="weui-cell__bd">
+                <p>商品管理</p>
+            </div>
+            <div class="weui-cell__ft">管理店内的商品</div>
+        </a>
+        <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ApplyStore">
+            <div class="weui-cell__bd">
+                <p>订单管理</p>
+            </div>
+            <div class="weui-cell__ft">查看订单情况</div>
+        </a>
+    }
+    else
+    {
+        var Target = Model.IsOurAccount?nameof(HomeController.ApplyStore):nameof (HomeController.CreateAccount);
+        <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="@Target">
+            <div class="weui-cell__bd">
+                <p>申请开店</p>
+            </div>
+            <div class="weui-cell__ft">在云游平台运营你自己的产业</div>
+        </a>
+    }
+
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<div class="weui-footer">
+    <p class="weui-footer__links">
+        <a class="weui-footer__link" href="javascript:;">大同盛世光明软件公司</a>
+        <a class="weui-footer__link" href="https://www.obisoft.com.cn/">Obisoft Corporation</a>
+    </p>
+    <p class="weui-footer__text">Copyright © 2016-@DateTime.Now.Year</p>
+</div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TravelInCloud.Models
 {
@@ -17,5 +18,8 @@ namespace TravelInCloud.Models
         /// </summary>
         [InverseProperty(nameof(Order.Owner))]
         public virtual List<Order> Orders { get; set; }
+        public virtual string Discriminator { get; set; }
+
+        public virtual DateTime RegisterTime { get; set; } = DateTime.Now;
     }
 }

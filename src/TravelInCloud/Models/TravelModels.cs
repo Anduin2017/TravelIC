@@ -7,96 +7,101 @@ using System.Threading.Tasks;
 namespace TravelInCloud.Models
 {
     /// <summary>
+    /// 商店的类型
+    /// </summary>
+    public enum StoreType : int
+    {
+        Hotel = 1,
+        Sight = 2,
+        KTV = 3,
+        Bath = 4,
+        Restaurant = 10,
+        Mall = 11
+    }
+
+    /// <summary>
     /// 商店用户
     /// </summary>
     public class Store : ApplicationUser
     {
+        public Store() { }
+        public Store(ApplicationUser _user)
+        {
+            this.AccessFailedCount = _user.AccessFailedCount;
+            this.ConcurrencyStamp = _user.ConcurrencyStamp;
+            this.Email = _user.Email;
+            this.EmailConfirmed = _user.EmailConfirmed;
+            this.IconAddress = _user.IconAddress;
+            this.Id = _user.Id;
+            this.LockoutEnabled = _user.LockoutEnabled;
+            this.LockoutEnd = _user.LockoutEnd;
+            this.NickName = _user.NickName;
+            this.NormalizedEmail = _user.NormalizedEmail;
+            this.NormalizedUserName = _user.NormalizedUserName;
+            this.openid = _user.openid;
+            this.Orders = _user.Orders;
+            this.PasswordHash = _user.PasswordHash;
+            this.PhoneNumber = _user.PhoneNumber;
+            this.PhoneNumberConfirmed = _user.PhoneNumberConfirmed;
+            this.RegisterTime = _user.RegisterTime;
+            this.SecurityStamp = _user.SecurityStamp;
+            this.TwoFactorEnabled = _user.TwoFactorEnabled;
+            this.UserName = _user.UserName;
+        }
         public virtual int StoreId { get; set; }
+        public virtual StoreType StoreType { get; set; }
+        public virtual string StoreOwnerName { get; set; }
+        public virtual string StoreOwnerCode { get; set; }
+        public virtual string StoreName { get; set; }
+        public virtual string StoreDescription { get; set; }
+        public virtual string StoreLocation { get; set; }
+        public virtual DateTime StartStoreTime { get; set; } = DateTime.Now;
 
         /// <summary>
         /// 商店里的商品
         /// </summary>
-        [InverseProperty(nameof(IBuyableProduct.Owner))]
-        public virtual List<IBuyableProduct> Products { get; set; }
+        [InverseProperty(nameof(Product.Owner))]
+        public virtual List<Product> Products { get; set; }
     }
 
     /// <summary>
     /// 商品
     /// </summary>
-    public interface IBuyableProduct
+    public class Product
     {
-        /// <summary>
-        /// 商品的子商品类型
-        /// </summary>
-        List<IBuyableItem> ProductTypes { get; set; }
-        /// <summary>
-        /// 商品所属的商店
-        /// </summary>
-        [ForeignKey(nameof(OwnerId))]
-        Store Owner { get; set; }
-        int OwnerId { get; set; }
-    }
-
-    /// <summary>
-    /// 品型 - 即商品的一种类型
-    /// </summary>
-    public interface IBuyableItem
-    {
-        /// <summary>
-        /// 品型的所属商品
-        /// </summary>
-        [ForeignKey(nameof(BelongingProductId))]
-        IBuyableProduct BelongingProduct { get; set; }
-        int BelongingProductId { get; set; }
+        public virtual int ProductId { get; set; }
 
         /// <summary>
-        /// 该品型加入的所有订单
-        /// </summary>
-        [InverseProperty(nameof(ProductInOrder.Product))]
-        List<ProductInOrder> BelongingOrders { get; set; } 
-    }
-
-    /// <summary>
-    /// 景区
-    /// </summary>
-    public class Sight:IBuyableProduct
-    {
-        public virtual int SightId { get; set; }
-
-        /// <summary>
-        /// 景区所属用户
+        /// 商品所属用户
         /// </summary>
         [ForeignKey(nameof(OwnerId))]
         public Store Owner { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
         /// <summary>
-        /// 景区的票型
+        /// 商品的票型
         /// </summary>
-        [InverseProperty(nameof(IBuyableItem.BelongingProduct))]
-        public List<IBuyableItem> ProductTypes { get; set; }
+        [InverseProperty(nameof(ProductType.BelongingProduct))]
+        public List<ProductType> ProductTypes { get; set; }
 
     }
+
     /// <summary>
-    /// 票型
+    /// 商品类型
     /// </summary>
-    public class SightType : IBuyableItem
+    public class ProductType
     {
-        public virtual int SightTypeId { get; set; }
+        public virtual int ProductTypeId { get; set; }
 
         /// <summary>
-        /// 票型的所属景区
+        /// 票型的所属商品
         /// </summary>
         [ForeignKey(nameof(BelongingProductId))]
         public int BelongingProductId { get; set; }
-        public IBuyableProduct BelongingProduct { get; set; }
+        public Product BelongingProduct { get; set; }
 
-        /// <summary>
-        /// 该票型所加入的所有订单
-        /// </summary>
-        [InverseProperty(nameof(ProductInOrder.Product))]
-        public List<ProductInOrder> BelongingOrders { get; set; }
     }
+
     /// <summary>
     /// 订单
     /// </summary>
@@ -109,7 +114,7 @@ namespace TravelInCloud.Models
         /// </summary>
         [ForeignKey(nameof(OwnerId))]
         public virtual ApplicationUser Owner { get; set; }
-        public virtual string OwnerId  { get; set; }
+        public virtual string OwnerId { get; set; }
 
         /// <summary>
         /// 订单里的所有商品
@@ -117,6 +122,7 @@ namespace TravelInCloud.Models
         [InverseProperty(nameof(ProductInOrder.BelongingOrder))]
         public virtual List<ProductInOrder> Products { get; set; }
     }
+
     /// <summary>
     /// 订单与商品关系对象
     /// </summary>
@@ -134,8 +140,8 @@ namespace TravelInCloud.Models
         /// <summary>
         /// PO中的商品
         /// </summary>
-        [ForeignKey(nameof(ProductId))]
-        public virtual IBuyableItem Product { get; set; }
-        public virtual int ProductId { get; set; }
+        [ForeignKey(nameof(ProductTypeId))]
+        public virtual ProductType ProductType { get; set; }
+        public virtual int ProductTypeId { get; set; }
     }
 }

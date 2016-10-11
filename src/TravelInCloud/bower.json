@@ -7,6 +7,7 @@
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "weui": "^1.0.1",
-    "zepto": "^1.1.6"
+    "zepto": "^1.1.6",
+    "Swiper": "swiper#^3.3.1"
   }
 }

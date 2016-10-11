@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TravelInCloud.Data;
 
-namespace TravelInCloud.Data.Migrations
+namespace TravelInCloud.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161004123532_createuserinformationstore")]
-    partial class createuserinformationstore
+    [Migration("20161005172737_createproductType")]
+    partial class createproductType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,6 +133,9 @@ namespace TravelInCloud.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasAnnotation("MaxLength", 256);
 
@@ -177,6 +180,48 @@ namespace TravelInCloud.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("TravelInCloud.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("OwnerId");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("TravelInCloud.Models.ProductType", b =>
+                {
+                    b.Property<int>("ProductTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BelongingProductId");
+
+                    b.HasKey("ProductTypeId");
+
+                    b.HasIndex("BelongingProductId");
+
+                    b.ToTable("ProductType");
+                });
+
+            modelBuilder.Entity("TravelInCloud.Models.Store", b =>
+                {
+                    b.HasBaseType("TravelInCloud.Models.ApplicationUser");
+
+                    b.Property<int>("StoreId")
+                        .ValueGeneratedOnAdd();
+
+                    b.ToTable("Store");
+
+                    b.HasDiscriminator().HasValue("Store");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -213,6 +258,21 @@ namespace TravelInCloud.Data.Migrations
                     b.HasOne("TravelInCloud.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TravelInCloud.Models.Product", b =>
+                {
+                    b.HasOne("TravelInCloud.Models.Store", "Owner")
+                        .WithMany("Products")
+                        .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("TravelInCloud.Models.ProductType", b =>
+                {
+                    b.HasOne("TravelInCloud.Models.Product", "BelongingProduct")
+                        .WithMany("ProductTypes")
+                        .HasForeignKey("BelongingProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

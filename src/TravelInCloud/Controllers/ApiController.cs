@@ -79,12 +79,12 @@ namespace TravelInCloud.Controllers
             };
             var NewButton = new Button
             {
-                name = "云中旅游",
+                name = "云中旅行",
                 sub_button = new List<SubButton>(1)
             };
             NewButton.sub_button.Add(new SubButton
             {
-                name = "微网站",
+                name = "进入云中",
                 type = "view",
                 url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
             });
@@ -100,6 +100,10 @@ namespace TravelInCloud.Controllers
             {
                 //Get user information
                 var AuthAccessToken = await AuthCodeToAccessTokenAsync(code);
+                if (AuthAccessToken.openid == null)
+                {
+                    return NoContent();
+                }
                 var WCUser = await UserInfomationAsync(AuthAccessToken.openid, await AccessTokenAsync());
                 //Find user in database
                 var _wuser = await _userManager.Users.Where(t => t.openid == AuthAccessToken.openid).SingleOrDefaultAsync();
@@ -119,8 +123,8 @@ namespace TravelInCloud.Controllers
                 else
                 {
                     //Create New Account
-                    var UserName = StringOperation.RandomString(10) + "@Obisoft.com.cn";
-                    var Password = StringOperation.RandomString(10);
+                    var UserName = StringOperation.RandomString(10) + Secrets.TempUserName;
+                    var Password = Secrets.TempPassword;
                     //Register him
                     var NewUser = new ApplicationUser
                     {
@@ -140,6 +144,7 @@ namespace TravelInCloud.Controllers
             //User is using typical browser
             else
             {
+
             }
             return RedirectToAction(nameof(HomeController.Index), "Home");
             //var LCuser = _userManager.Users.ToList().Find(t => t.openid == Result.openid);

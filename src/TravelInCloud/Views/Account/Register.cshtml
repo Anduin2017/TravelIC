@@ -1,40 +1,53 @@
 ﻿@model RegisterViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "注册";
 }
 
-<h2>@ViewData["Title"].</h2>
-
 <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Create a new account.</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="page__hd">
+        <h1 class="page__title">注册云游账号</h1>
+        <p class="page__desc">提示：在微信官方公众号云中旅行中中打开可以直接登录</p>
+        <div asp-validation-summary="All" class="page__desc"></div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">邮箱账号</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="Email" class="weui-input" type="email" placeholder="请输入作为云游账号的邮箱账号">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">密码</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="Password" class="weui-input" type="password" placeholder="请输入云游账号密码">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">确认密码</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="ConfirmPassword" class="weui-input" type="password" placeholder="请再次输入密码">
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_default" asp-controller="Account" asp-action="Login">已有账号？立即登录</a>
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" type="submit">注册</button>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
-        </div>
-    </div>
+
+    <label class="weui-agree" for="weuiAgree">
+        <span class="weui-agree__text">
+            注册即视为同意<a href="javascript:void(0);">《相关条款》</a>
+        </span>
+    </label>
 </form>
 
 @section Scripts {

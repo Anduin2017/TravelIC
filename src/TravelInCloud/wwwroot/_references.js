@@ -4,4 +4,5 @@
 /// <reference path="lib/jquery/dist/jquery.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="lib/swiper/dist/js/swiper.js" />
 /// <reference path="lib/zepto/zepto.js" />

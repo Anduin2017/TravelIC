@@ -16,7 +16,6 @@ namespace TravelInCloud.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -55,9 +54,28 @@ namespace TravelInCloud.Controllers
             var Model = new MineViewModel
             {
                 NickName = user.NickName,
-                IconAddress = user.IconAddress
+                IconAddress = user.IconAddress,
+                OurAccount = !user.Email.Contains(Secrets.TempUserName)
             };
             return View(Model);
+        }
+        public IActionResult CreateAccount()
+        {
+            return View(new CreateAccountViewModel());
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateAccount(CreateAccountViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            user.Email = model.Email;
+            user.UserName = model.Email;
+            await _userManager.UpdateAsync(user);
+            await _userManager.ChangePasswordAsync(user, Secrets.TempPassword, model.Password);
+            return RedirectToAction(nameof(Mine));
         }
 
         public IActionResult Error()
@@ -65,7 +83,42 @@ namespace TravelInCloud.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Settings()
+        {
+            var User = await GetCurrentUserAsync();
+            var Model = new SettingsViewModel
+            {
+                IsStore = User.Discriminator == nameof(Store),
+                IsOurAccount = !User.Email.Contains(Secrets.TempUserName)
+            };
+            return View(Model);
+        }
 
+        public IActionResult ApplyStore()
+        {
+            return View(new ApplyStoreViewModel { });
+        }
+        [HttpPost]
+        public async Task<IActionResult> ApplyStore(ApplyStoreViewModel Model)
+        {
+            if (ModelState.IsValid)
+            {
+                var User = await GetCurrentUserAsync();
+                var NewStoreUser = new Store(User);
+                NewStoreUser.StoreDescription = Model.StoreDescription;
+                NewStoreUser.StoreLocation = Model.StoreLocation;
+                NewStoreUser.StoreName = Model.StoreName;
+                NewStoreUser.StoreOwnerCode = Model.StoreOwnerCode;
+                NewStoreUser.StoreOwnerName = Model.StoreOwnerName;
+                NewStoreUser.PhoneNumber = Model.StoreOwnerPhone;
+                NewStoreUser.StoreType = Model.StoreType;
+                await _userManager.DeleteAsync(User);
+                await _userManager.CreateAsync(NewStoreUser);
+                await _signInManager.SignInAsync(NewStoreUser, false);
+                return RedirectToAction(nameof(Settings));
+            }
+            return View(Model);
+        }
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);

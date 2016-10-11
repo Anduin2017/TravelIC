@@ -8,11 +8,11 @@ namespace TravelInCloud.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="必须输入邮箱账号")]
+        [EmailAddress(ErrorMessage ="输入的邮箱账号不合法")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="必须输入密码")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

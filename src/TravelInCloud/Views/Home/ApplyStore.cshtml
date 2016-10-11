@@ -1,0 +1,166 @@
+﻿@model TravelInCloud.Models.HomeViewModels.ApplyStoreViewModel
+
+@{
+    ViewData["Title"] = "申请商店";
+}
+<form asp-action="ApplyStore" asp-controller="Home" method="post" class="page input" style="opacity: 1;">
+    <div class="page__bd">
+        <div asp-validation-summary="All" class="page__desc"></div>
+        <div class="weui-cells__title">选择商店类型</div>
+        <div class="weui-cells weui-cells_radio">
+            <label class="weui-cell weui-check__label" for="x1">
+                <div class="weui-cell__bd">
+                    <p>酒店</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input class="weui-check" id="x1" asp-for="StoreType" value="1" type="radio" checked="checked">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="x2">
+                <div class="weui-cell__bd">
+                    <p>景区</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input class="weui-check" id="x2" asp-for="StoreType" value="2" type="radio">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="x3">
+                <div class="weui-cell__bd">
+                    <p>KTV\酒吧</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input class="weui-check" id="x3" asp-for="StoreType" value="3" type="radio">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="x4">
+                <div class="weui-cell__bd">
+                    <p>洗浴\汗蒸</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input class="weui-check" id="x4" asp-for="StoreType" value="4" type="radio">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="x10">
+                <div class="weui-cell__bd">
+                    <p>饭店</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input class="weui-check" id="x10" asp-for="StoreType" value="10" type="radio">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="x11">
+                <div class="weui-cell__bd">
+                    <p>商店</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input class="weui-check" id="x11" asp-for="StoreType" value="11" type="radio">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            <a class="weui-cell weui-cell_link" href="javascript:void(0);">
+                <div class="weui-cell__bd">其它</div>
+            </a>
+        </div>
+        <div class="weui-cells__title">支持的消费方式</div>
+        <div class="weui-cells weui-cells_checkbox">
+            <label class="weui-cell weui-check__label" for="s11">
+                <div class="weui-cell__hd">
+                    <input name="checkbox1" class="weui-check" id="s11" type="checkbox" checked="checked">
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>线上付款线下消费.</p>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="s12">
+                <div class="weui-cell__hd">
+                    <input name="checkbox1" class="weui-check" id="s12" type="checkbox">
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>线上预约消费后付款.</p>
+                </div>
+            </label>
+            <a class="weui-cell weui-cell_link" href="javascript:void(0);">
+                <div class="weui-cell__bd">其它</div>
+            </a>
+        </div>
+        <div class="weui-cells__title">表单</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">责任人</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="StoreOwnerName" placeholder="请输入责任人姓名">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">身份证号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="StoreOwnerCode" placeholder="请输入责任人身份证号" pattern="[0-9]*">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">电话</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="tel" asp-for="StoreOwnerPhone" placeholder="请输入手机号码" pattern="[0-9]*">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">地址</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="StoreLocation" placeholder="请提供实体店地址">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" placeholder="请输入qq号" pattern="[0-9]*">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" placeholder="请输入验证码">
+                </div>
+                <div class="weui-cell__ft">
+                    <img class="weui-vcode-img" src="~/lib/weui/dist/example/images/vcode.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">店名</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="StoreName" placeholder="请输入店名">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">店介绍</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" asp-for="StoreDescription" placeholder="请输入简介" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+        </div>
+
+        <label class="weui-agree" for="weuiAgree">
+            <input class="weui-agree__checkbox" id="weuiAgree" type="checkbox">
+            <span class="weui-agree__text">
+                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+            </span>
+        </label>
+        <div class="weui-btn-area">
+            <button class="weui-btn weui-btn_primary" id="showTooltips" type="submit">提交开店申请</button>
+        </div>
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
+    </div>
+</form>

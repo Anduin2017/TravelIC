@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TravelInCloud.Data.Migrations
+namespace TravelInCloud.Migrations
 {
-    public partial class createuserinformationstore : Migration
+    public partial class ChangeModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "IconAddress",
+                name: "StoreOwnerCode",
                 table: "AspNetUsers",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "NickName",
+                name: "StoreOwnerName",
                 table: "AspNetUsers",
                 nullable: true);
         }
@@ -22,11 +22,11 @@ namespace TravelInCloud.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IconAddress",
+                name: "StoreOwnerCode",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "NickName",
+                name: "StoreOwnerName",
                 table: "AspNetUsers");
         }
     }

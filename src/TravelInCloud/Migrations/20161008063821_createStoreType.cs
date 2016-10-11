@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TravelInCloud.Data.Migrations
+namespace TravelInCloud.Migrations
 {
-    public partial class createopenid : Migration
+    public partial class createStoreType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "openid",
+            migrationBuilder.AddColumn<int>(
+                name: "StoreType",
                 table: "AspNetUsers",
                 nullable: true);
         }
@@ -17,7 +17,7 @@ namespace TravelInCloud.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "openid",
+                name: "StoreType",
                 table: "AspNetUsers");
         }
     }

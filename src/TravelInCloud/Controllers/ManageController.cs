@@ -231,7 +231,7 @@ namespace TravelInCloud.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User changed their password successfully.");
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangePasswordSuccess });
+                    return RedirectToAction(nameof(HomeController.Mine), "Home", new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
                 AddErrors(result);
                 return View(model);
