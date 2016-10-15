@@ -113,9 +113,9 @@ namespace TravelInCloud.Controllers
                     //Sign in
                     await _signInManager.SignInAsync(_wuser, false);
                     //Update his information from WeChat
-                    _wuser.NickName = WCUser.nickname;
-                    _wuser.IconAddress = WCUser.headimgurl;
-                    await _userManager.UpdateAsync(_wuser);
+                    //_wuser.NickName = WCUser.nickname;
+                    //_wuser.IconAddress = WCUser.headimgurl;
+                    //await _userManager.UpdateAsync(_wuser);
 
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }

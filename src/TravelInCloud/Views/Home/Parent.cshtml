@@ -1,0 +1,38 @@
+﻿@using TravelInCloud.Controllers
+@model TravelInCloud.Models.HomeViewModels.ParentViewModel
+@{
+    ViewData["Title"] = "设置";
+}
+@section css{
+    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/common.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/member.css" asp-append-version="true"/>
+}
+<header class="member-header">
+    <h3 class="user-name c-333">
+        @Model.NickName
+    </h3>
+    <p class="header-explian c-666">积分值：4400</p>
+    <img class="user-face" src="@Model.IconAddress">
+</header>
+<section>
+    <ul class="tab clearfix member-tab">
+        <li><a href="/wap/order/userOrder.htm"><i class="font-icon icon-iconfont-dingdan"></i>全部订单</a></li>
+        <li><a href="/wap/order/userOrder.htm?payStatus=1"><i class="font-icon icon-iconfont-yizhifu dingdan-pay"></i>已支付</a></li>
+        <li><a href="/wap/order/userOrder.htm?payStatus=0"><i class="font-icon icon-iconfont-weizhifu dingdan-unpay"></i>待支付</a></li>
+        <li><a href="/wap/order/userOrder.htm?orderStatus=3"><i class="font-icon icon-iconfont-tuik dingdan-yellow"></i>退款</a></li>
+    </ul>
+</section>
+
+<div class="page-line"></div>
+<ul class="order-list member-list">
+    <li><a asp-controller="Home" asp-action="Cart"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>购物车</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+    <li><a asp-controller="Home" asp-action="Mine"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>账户设置</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+    <li><a href="tel:13080868017"><label class="lab-title" for=""><i class="font-icon icon-iconfont-kefudianhua"></i>客服中心</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+</ul>
+<div class="page__ft">
+</div>
+
+<form class="page__bd page__bd_spacing" asp-action="LogOff" asp-controller="Account" method="post">
+    <button class="weui-btn weui-btn_warn" type="submit">注销登录</button>
+</form>

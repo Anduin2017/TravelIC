@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
     <title>@ViewData["Title"] - 云中旅行</title>
-    <link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" />
-    <link rel="stylesheet" href="~/lib/weui/dist/example/example.css" />
-    <link rel="stylesheet" href="~/lib/Swiper/dist/css/swiper.min.css" />
+    <link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/weui/dist/example/example.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/Swiper/dist/css/swiper.min.css" asp-append-version="true"/>
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -22,15 +22,15 @@
                             <img class="weui-tabbar__icon" alt="" src="~/lib/weui/dist/example/images/icon_nav_panel.png">
                             <p class="weui-tabbar__label">首页</p>
                         </a>
-                        <a class="weui-tabbar__item" asp-controller="Home" asp-action="Cart">
-                            <img class="weui-tabbar__icon" alt="" src="~/lib/weui/dist/example/images/icon_nav_toast.png">
-                            <p class="weui-tabbar__label">购物车</p>
-                        </a>
                         <a class="weui-tabbar__item" asp-controller="Home" asp-action="Order">
                             <img class="weui-tabbar__icon" alt="" src="~/lib/weui/dist/example/images/icon_nav_article.png">
                             <p class="weui-tabbar__label">订单</p>
                         </a>
-                        <a class="weui-tabbar__item" asp-controller="Home" asp-action="Mine">
+                        <a class="weui-tabbar__item" href="tel:13080868017">
+                            <img class="weui-tabbar__icon" alt="" src="~/lib/weui/dist/example/images/icon_nav_toast.png">
+                            <p class="weui-tabbar__label">客服</p>
+                        </a>
+                        <a class="weui-tabbar__item" asp-controller="Home" asp-action="Parent">
                             <img class="weui-tabbar__icon" alt="" src="~/lib/weui/dist/example/images/icon_nav_button.png">
                             <p class="weui-tabbar__label">我的</p>
                         </a>

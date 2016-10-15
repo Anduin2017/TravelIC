@@ -267,6 +267,9 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\VerifyCodeV
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ApplyStoreViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\CreateAccountViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\MineViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ParentModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductListViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\SettingsViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ManageViewModels\AddPhoneNumberViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ManageViewModels\ChangePasswordViewModel.cs

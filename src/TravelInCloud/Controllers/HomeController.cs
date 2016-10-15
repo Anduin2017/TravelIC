@@ -9,6 +9,8 @@ using TravelInCloud.Models;
 using TravelInCloud.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
+using TravelInCloud.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace TravelInCloud.Controllers
 {
@@ -21,19 +23,22 @@ namespace TravelInCloud.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _dbContext;
 
         public HomeController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         IEmailSender emailSender,
         ISmsSender smsSender,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory,
+        ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
+            _dbContext = dbContext;
         }
         [AllowAnonymous]
         public IActionResult Index()
@@ -48,6 +53,40 @@ namespace TravelInCloud.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> Parent()
+        {
+            var user = await GetCurrentUserAsync();
+            var Model = new ParentViewModel
+            {
+                NickName = user.NickName,
+                IconAddress = user.IconAddress,
+                OurAccount = !user.Email.Contains(Secrets.TempUserName)
+            };
+            return View(Model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ProductList(StoreType StoreType)
+        {
+            var _products = _dbContext.Products.Include(t => t.Owner).ToList();
+            var Model = new ProductListViewModel
+            {
+                Products = _products.Where(t=>t.Owner.StoreType==StoreType).ToList()
+            };
+            ViewData["Title"] = StoreType;
+            return View(Model);
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> Product(int id)
+        {
+            var _product = await _dbContext.Products.Include(t => t.Owner).SingleOrDefaultAsync(t => t.ProductId == id);
+            return View(new ProductViewModel
+            {
+                Product = _product
+            });
+        }
+
         public async Task<IActionResult> Mine()
         {
             var user = await GetCurrentUserAsync();
@@ -59,10 +98,12 @@ namespace TravelInCloud.Controllers
             };
             return View(Model);
         }
+
         public IActionResult CreateAccount()
         {
             return View(new CreateAccountViewModel());
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateAccount(CreateAccountViewModel model)
         {
@@ -98,6 +139,7 @@ namespace TravelInCloud.Controllers
         {
             return View(new ApplyStoreViewModel { });
         }
+
         [HttpPost]
         public async Task<IActionResult> ApplyStore(ApplyStoreViewModel Model)
         {

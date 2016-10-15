@@ -1,0 +1,20 @@
+@import url('site.min.css');
+@import url('site.css');
+.member-header{ height: 8.5rem; background: url("../images/member/header.jpg") no-repeat; background-size: cover;}
+.user-name{ font-size: 1.0rem; padding-top: 1rem; text-align: center;}
+.header-explian{ font-size: 0.8rem; padding-top: 0.5rem; text-align: center;}
+.user-face{ width: 3rem; height: 3rem; display: block; margin: 0.5rem auto 0; border-radius: 100%; background-color: rgba(255,255,255,0.6); text-align: center; line-height: 3rem; color: #333;}
+
+.member-tab li{ width: 25%;}
+.member-tab li a i{ display: block; margin: 0 auto 0.25rem; font-size: 0.9rem;}
+.dingdan-pay{ color: #62a42b;}
+.dingdan-unpay{ color: #b31b1b;}
+.dingdan-yellow{ color:#f63;}
+
+.member-list{ border-top: none;}
+.member-list li{ text-align: right;}
+.vantages,.bonus{ font-size: 0.5rem; color: #666; margin-right: 0.5rem;}
+.vantages em,.bonus em{ font-size: 0.7rem; margin-right: 0.25rem; }
+.bonus{ color: #f00;}
+
+.member-handle .btn i{ font-size: 0.6rem;}
