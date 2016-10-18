@@ -1,0 +1,25 @@
+﻿@model TravelInCloud.Models.HomeViewModels.SetMethodViewModel
+
+@{
+    ViewData["Title"] = "修改排序方式";
+}
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ProductList" asp-route-StoreType="@Model.id" asp-route-queryMethod="1">
+        <div class="weui-cell__bd">
+            <p>按价格</p>
+        </div>
+        <div class="weui-cell__ft">按价格排序</div>
+    </a>
+    <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ProductList" asp-route-StoreType="@Model.id" asp-route-queryMethod="2">
+        <div class="weui-cell__bd">
+            <p>按人气排序</p>
+        </div>
+        <div class="weui-cell__ft">按购买次数排序</div>
+    </a>
+    <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ProductList" asp-route-StoreType="@Model.id" asp-route-queryMethod="3">
+        <div class="weui-cell__bd">
+            <p>默认排序</p>
+        </div>
+        <div class="weui-cell__ft">按发布时间</div>
+    </a>
+</div>

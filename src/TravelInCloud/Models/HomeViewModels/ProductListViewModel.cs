@@ -9,6 +9,8 @@ namespace TravelInCloud.Models.HomeViewModels
     public class ProductListViewModel
     {
         public virtual string ProductName { get; set; }
+        public virtual string QueryMethod { get; set; }
+        public virtual int StoreType { get; set; }
         public List<Product> Products { get; set; }
     }
 }

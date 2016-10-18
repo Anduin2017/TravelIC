@@ -1,6 +1,20 @@
-﻿@{
+﻿@model TravelInCloud.Models.HomeViewModels.OrderViewModel
+@{
     ViewData["Title"] = "订单";
 }
+
+@section css{
+<link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/member.css" asp-append-version="true" />
+}
+<header class="member-orderheader">
+    <h3 class="user-name c-333">
+        @Model.NickName
+    </h3>
+    <p class="header-explian c-666">积分值：4400</p>
+    <img class="user-face" src="@Model.IconAddress">
+</header>
 <div class="weui-flex weui-form-preview">
     <div class="weui-flex__item">
         <div class="placeholder">
@@ -13,6 +27,27 @@
         <div class="placeholder">
             <div class="weui-form-preview__ft">
                 <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">全部订单</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">待付款</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">待使用</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">待评价</a>
             </div>
         </div>
     </div>

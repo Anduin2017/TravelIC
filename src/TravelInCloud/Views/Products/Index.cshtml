@@ -1,0 +1,19 @@
+@model IEnumerable<TravelInCloud.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="weui-cells">
+
+    @foreach (var item in Model)
+    {
+        <a class="weui-cell weui-cell_access" asp-action="PreEdit" asp-route-id="@item.ProductId">
+            <div class="weui-cell__bd">
+                <p>@item.ProductName</p>
+            </div>
+            <div class="weui-cell__ft">已被购买:@item.BuyTimes 次</div>
+        </a>
+    }
+</div>

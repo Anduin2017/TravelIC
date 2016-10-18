@@ -1,5 +1,8 @@
-﻿@{
+﻿@using TravelInCloud.Services
+@model TravelInCloud.Models.HomeViewModels.IndexViewModel
+@{
     ViewData["Title"] = "主页";
+    bool Left = true;
 }
 @section css {
     <style>
@@ -28,8 +31,10 @@
                     <i class="weui-icon-search"></i>
                     <span>搜索</span>
                 </label>
+
             </form>
-            <a class="weui-search-bar__cancel-btn" id="search_cancel" href="javascript:">取消</a>
+            <a class="weui-search-bar__cancel-btn" id="search_cancel" href="javascript:">取消</a> &nbsp;
+            <a class="weui-search-bar_focusing" id="switch" href="javascript:">修改地区</a>
         </div>
         <div class="weui-cells weui-cells_access search_show" id="search_show" style="display: none; opacity: 1; transform: scale(1); transform-origin: 0px 0px 0px; position:absolute; width:100%;z-index:1000;">
             <div class="weui-cell">
@@ -94,7 +99,7 @@
             </a>
         </div>
         <div class="weui-flex__item">
-            <a class="weui-tabbar__item weui-bar__item_on" asp-controller="Home" asp-action="Index">
+            <a class="weui-tabbar__item weui-bar__item_on" asp-controller="Home" asp-action="Index" asp-route-StoreType="3">
                 <img class="obitabbar__icon" alt="" src="~/images/10buttons/5.png">
                 <p class="weui-tabbar__label">酒吧KTV</p>
             </a>
@@ -109,13 +114,13 @@
         </div>
         <div class="weui-flex__item">
             <a class="weui-tabbar__item weui-bar__item_on" asp-controller="Home" asp-action="Index">
-                <img class="obitabbar__icon" alt="" src="~/images/10buttons/7.png">
+                <img class="obitabbar__icon" alt="" src="~/images/10buttons/8.png">
                 <p class="weui-tabbar__label">美食</p>
             </a>
         </div>
         <div class="weui-flex__item">
             <a class="weui-tabbar__item weui-bar__item_on" asp-controller="Home" asp-action="Index">
-                <img class="obitabbar__icon" alt="" src="~/images/10buttons/8.png">
+                <img class="obitabbar__icon" alt="" src="~/images/10buttons/7.png">
                 <p class="weui-tabbar__label">领金币</p>
             </a>
         </div>
@@ -132,96 +137,77 @@
             </a>
         </div>
     </div>
-    <div style="text-align:center;">
-        <img style="width:100%;max-width:600px;" src="~/images/line.png">
-    </div>
-    <div class="weui-flex weui-form-preview">
-        <div class="weui-flex__item">
-            <div class="weui-panel__bd">
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h1.jpg">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">大同刀削面</h4>
-                        <p class="weui-media-box__desc">共199家，最低9元</p>
-                    </div>
-                </a>
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h2.jpg">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">山西老酒</h4>
-                        <p class="weui-media-box__desc">共991家，最低3元</p>
-                    </div>
-                </a>
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h3.jpg">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">大同东海</h4>
-                        <p class="weui-media-box__desc">共191家，最低333元</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <hr />
-        <div class="weui-flex__item">
-            <div class="weui-panel__bd">
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h4.jpg">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">大同洗浴</h4>
-                        <p class="weui-media-box__desc">共899家，最低99元</p>
-                    </div>
-                </a>
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h5.jpg">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">大同餐厅</h4>
-                        <p class="weui-media-box__desc">共291家，最低13元</p>
-                    </div>
-                </a>
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h6.jpg">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">大同包子</h4>
-                        <p class="weui-media-box__desc">共691家，最低3元</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    @*<div style="text-align:center;">
+            <img style="width:100%;max-width:600px;" src="~/images/line.png">
+        </div>*@
 
-    @for (int i = 0; i < 10; i++)
+    @if (false)
     {
-        <div class="weui-panel">
-            <div class="weui-panel__hd">波音公司</div>
-            <div class="weui-panel__bd">
-                <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==">
+        <div class="weui-flex weui-form-preview">
+            @for (int j = 1; j < 3; j++)
+            {
+                <div class="weui-flex__item">
+                    <div class="weui-panel__bd">
+                        @for (int i = 1; i < 4; i++)
+                        {
+                            <a class="weui-media-box weui-media-box_appmsg" href="javascript:void(0);" style="padding:5px;">
+                                <div class="weui-media-box__hd" style="width:40%;height:100%;">
+                                    <img class="weui-media-box__thumb" alt="" src="~/images/6heads/h@(i * j).jpg">
+                                </div>
+                                <div class="weui-media-box__bd">
+                                    <h4 class="weui-media-box__title">大同刀削面</h4>
+                                    <p class="weui-media-box__desc">共199家，最低9元</p>
+                                </div>
+                            </a>
+                        }
                     </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">示例商品</h4>
-                        <p class="weui-media-box__desc">波音777客机是由美国波音公司在上个世纪六十年代末在美国空军的主导下推出的大型商用宽体客/货运输机。是由美国波音公司在上个世纪六十年代末在美国空军的主导下推出的大型商用宽体客/货运输机...</p>
-                    </div>
-                </a>
-                <div class="weui-form-preview__hd">
-                    <label class="weui-form-preview__label">剩余5套</label>
-                    <em class="weui-form-preview__value">¥@(100 * i)</em>
                 </div>
-            </div>
+                <hr />
+            }
         </div>
     }
+
+    @foreach (var Product in Model.Products)
+    {
+        <div class="weui-panel">
+            <div class="weui-panel__bd">
+                <a class="weui-media-box weui-media-box_appmsg" style="padding:0" asp-action="Product" asp-controller="Home" asp-route-id="@Product.ProductId">
+                    @if (Left)
+                    {
+                        <div class="weui-media-box__hd" style="width:38.2%;max-width:300px;height:auto">
+                            @if (Product.ImageOfProducts.Count > 0)
+                            {
+                                <img class="weui-media-box__thumb" alt="" src="@Product.ImageOfProducts[0]?.ImageSrc">
+                            }
+                        </div>
+                    }
+                    <div class="weui-media-box__bd" style="margin-left:10px;">
+                        <h4 class="weui-media-box__title">@Product.ProductName</h4>
+                        <p class="weui-media-box__desc">@Product.ProductDetails.OTake(100)</p>
+                    </div>
+                    @if (!Left)
+                    {
+                        <div class="weui-media-box__hd" style="width:38.2%;max-width:300px;height:auto">
+                            @if (Product.ImageOfProducts.Count > 0)
+                            {
+                                <img class="weui-media-box__thumb" alt="" src="@Product.ImageOfProducts[0]?.ImageSrc">
+                            }
+                        </div>
+                    }
+                </a>
+                <ul class="weui-media-box__info">
+                    @if (Product.ProductTypes?.Count > 0)
+                    {
+                        <li class="weui-media-box__info__meta">@Product.ProductTypes.OrderBy(t => t.Price).First().Price</li>
+                    }
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">已经售出：@Product.BuyTimes</li>
+                </ul>
+                @{
+                    Left = !Left;
+                }
+            </div>
+        </div>
+                    }
 </div>
 
 @section Scripts {

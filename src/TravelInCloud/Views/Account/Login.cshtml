@@ -7,13 +7,25 @@
 @{
     ViewData["Title"] = "登录";
 }
-<form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <div class="page__hd">
-        <h1 class="page__title">登录云游账号</h1>
-        <p class="page__desc">提示：在官方公众号云中旅行中中打开可以直接登录</p>
-        <div asp-validation-summary="All" class="page__desc"></div>
+
+@section css{
+<link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/member.css" asp-append-version="true" />
+}
+<header class="member-signinheader" style="height:16em;">
+    <h2 class="user-name c-333">
+        登录云游账号
+    </h2>
+    <div class="page__ft">
     </div>
-    <div class="weui-cells weui-cells_form">
+    <p class="header-explian c-666">提示：在官方公众号云中旅行中中打开可以直接登录</p>
+    <div class="page__ft">
+    </div>
+</header>
+<form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+        <div asp-validation-summary="All" class="page__desc" style="margin-top:0"></div>
+    <div class="weui-cells weui-cells_form" style="margin-top:0">
         <div class="weui-cell">
             <div class="weui-cell__hd">
                 <label class="weui-label">邮箱账号</label>

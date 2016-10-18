@@ -21,6 +21,21 @@ namespace TravelInCloud.Services
             }
             return sBuilder.ToString();
         }
+        public static bool IsImage(this string str)
+        {
+            bool isimage = false;
+            string thestr = str.ToLower();
+            string[] allowExtension = { ".jpg", ".gif", ".bmp", ".png", ".jpeg" };
+            for (int i = 0; i < allowExtension.Length; i++)
+            {
+                if (thestr == allowExtension[i])
+                {
+                    isimage = true;
+                    break;
+                }
+            }
+            return isimage;
+        }
         public static string GetMD5(this string SourceString)
         {
             string hash = GetMd5Hash(MD5.Create(), SourceString);

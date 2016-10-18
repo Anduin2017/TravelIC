@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/common.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/member.css" asp-append-version="true"/>
+    <style>
+        html {
+        font-size:20px;
+        }
+    </style>
 }
 <header class="member-header">
     <h3 class="user-name c-333">
@@ -29,6 +34,8 @@
     <li><a asp-controller="Home" asp-action="Cart"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>购物车</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
     <li><a asp-controller="Home" asp-action="Mine"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>账户设置</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
     <li><a href="tel:13080868017"><label class="lab-title" for=""><i class="font-icon icon-iconfont-kefudianhua"></i>客服中心</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+    <li><a asp-controller="Home" asp-action="Mine"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>收藏的商品</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+    <li><a asp-controller="Home" asp-action="Mine"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>收藏的店铺</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
 </ul>
 <div class="page__ft">
 </div>

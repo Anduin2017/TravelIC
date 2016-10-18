@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using TravelInCloud.Models;
 using TravelInCloud.Models.ManageViewModels;
 using TravelInCloud.Services;
+using TravelInCloud.Data;
 
 namespace TravelInCloud.Controllers
 {
@@ -21,19 +22,22 @@ namespace TravelInCloud.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _dbContext;
 
         public ManageController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         IEmailSender emailSender,
         ISmsSender smsSender,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory,
+        ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
+            _dbContext = dbContext;
         }
 
         //

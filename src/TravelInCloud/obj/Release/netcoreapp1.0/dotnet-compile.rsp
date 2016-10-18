@@ -254,6 +254,12 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161008063821_createStor
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161008063821_createStoreType.Designer.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161011122420_ChangeModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161011122420_ChangeModel.Designer.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161015135005_ImplementedProductModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161015135005_ImplementedProductModel.Designer.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161015141023_createTimes.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161015141023_createTimes.Designer.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161017081032_whathappened.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161017081032_whathappened.Designer.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\ApplicationDbContextModelSnapshot.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ApplicationUser.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\TravelModels.cs
@@ -267,8 +273,13 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\SendCodeVie
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\VerifyCodeViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ApplyStoreViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\CreateAccountViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\IndexViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\MineViewModel.cs
-D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ParentModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\OrderViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ParentViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductListViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\SetMethodViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\SettingsViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ManageViewModels\AddPhoneNumberViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ManageViewModels\ChangePasswordViewModel.cs

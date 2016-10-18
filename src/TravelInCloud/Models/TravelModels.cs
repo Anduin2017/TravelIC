@@ -48,7 +48,6 @@ namespace TravelInCloud.Models
             this.TwoFactorEnabled = _user.TwoFactorEnabled;
             this.UserName = _user.UserName;
         }
-        public virtual int StoreId { get; set; }
         public virtual StoreType StoreType { get; set; }
         public virtual string StoreOwnerName { get; set; }
         public virtual string StoreOwnerCode { get; set; }
@@ -70,6 +69,17 @@ namespace TravelInCloud.Models
     public class Product
     {
         public virtual int ProductId { get; set; }
+        public virtual string ProductName { get; set; }
+        public virtual string ProductDetails { get; set; }
+        public virtual string ProductInfo { get; set; }
+        public virtual string ProductWarnning { get; set; }
+        public virtual int BuyTimes { get; set; } = 0;
+
+        /// <summary>
+        /// 商品的图片列表
+        /// </summary>
+        [InverseProperty(nameof(ImageOfProduct.Product))]
+        public List<ImageOfProduct> ImageOfProducts { get; set; }
 
         /// <summary>
         /// 商品所属用户
@@ -79,19 +89,39 @@ namespace TravelInCloud.Models
         public string OwnerId { get; set; }
 
         /// <summary>
-        /// 商品的票型
+        /// 商品的品型
         /// </summary>
         [InverseProperty(nameof(ProductType.BelongingProduct))]
         public List<ProductType> ProductTypes { get; set; }
-
     }
 
     /// <summary>
-    /// 商品类型
+    /// 商品的一个图片
+    /// </summary>
+    public class ImageOfProduct
+    {
+        public virtual int ImageOfProductId { get; set; }
+
+
+        [ForeignKey(nameof(ProductId))]
+        public virtual Product Product { get; set; }
+        public virtual int ProductId { get; set; }
+
+        public virtual string ImageDescription { get; set; }
+        public virtual string ImageSrc { get; set; }
+    }
+
+    /// <summary>
+    /// 商品类型\票型
     /// </summary>
     public class ProductType
     {
         public virtual int ProductTypeId { get; set; }
+
+        public virtual string ProductTypeName { get; set; }
+        public virtual string ProductTypeDetails { get; set; }
+        public virtual decimal Price { get; set; }
+        public virtual decimal OldPrice { get; set; }
 
         /// <summary>
         /// 票型的所属商品

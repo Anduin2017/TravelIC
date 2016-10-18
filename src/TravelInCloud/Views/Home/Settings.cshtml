@@ -24,10 +24,14 @@
     </a>
     @if (Model.IsStore)
     {
+        <div class="page__ft">
+        </div>
+        <div class="page__ft">
+        </div>
         <div class="weui-panel__hd">欢迎您，尊敬的店主</div>
         <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ApplyStore">
             <div class="weui-cell__bd">
-                <p>商品信息管理</p>
+                <p>商店信息管理</p>
             </div>
             <div class="weui-cell__ft">管理商店基本属性</div>
         </a>

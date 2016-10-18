@@ -1,0 +1,52 @@
+@model TravelInCloud.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@section css{
+    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/member.css" asp-append-version="true" />
+}
+
+@if (Model.ImageOfProducts.Count > 0)
+{
+    <header class="member-signinheader" style="height:16em;background:url(@Model.ImageOfProducts.First().ImageSrc) no-repeat; background-size: cover;">
+        <h2 class="user-name c-333">
+            @Model.ProductName
+        </h2>
+        <div class="page__ft">
+        </div>
+        <div class="page__ft">
+        </div>
+    </header>
+}
+<div class="weui-cells">
+
+    <a class="weui-cell weui-cell_access" asp-action="Edit" asp-route-id="@Model.ProductId">
+        <div class="weui-cell__bd">
+            <p>编辑商品信息</p>
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" asp-action="CreateImage" asp-route-id="@Model.ProductId">
+        <div class="weui-cell__bd">
+            <p>管理商品图片</p>
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" asp-action="EditTypes" asp-route-id="@Model.ProductId">
+        <div class="weui-cell__bd">
+            <p>编辑商品品型</p>
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" asp-action="Delete" asp-route-id="@Model.ProductId">
+        <div class="weui-cell__bd">
+            <p>删除商品</p>
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" asp-action="Index">
+        <div class="weui-cell__bd">
+            <p>返回商品列表</p>
+        </div>
+    </a>
+</div>

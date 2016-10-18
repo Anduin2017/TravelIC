@@ -185,6 +185,24 @@ namespace TravelInCloud.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("TravelInCloud.Models.ImageOfProduct", b =>
+                {
+                    b.Property<int>("ImageOfProductId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ImageDescription");
+
+                    b.Property<string>("ImageSrc");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("ImageOfProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ImageOfProduct");
+                });
+
             modelBuilder.Entity("TravelInCloud.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -204,7 +222,17 @@ namespace TravelInCloud.Migrations
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BuyTimes");
+
                     b.Property<string>("OwnerId");
+
+                    b.Property<string>("ProductDetails");
+
+                    b.Property<string>("ProductInfo");
+
+                    b.Property<string>("ProductName");
+
+                    b.Property<string>("ProductWarnning");
 
                     b.HasKey("ProductId");
 
@@ -238,6 +266,14 @@ namespace TravelInCloud.Migrations
 
                     b.Property<int>("BelongingProductId");
 
+                    b.Property<decimal>("OldPrice");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("ProductTypeDetails");
+
+                    b.Property<string>("ProductTypeName");
+
                     b.HasKey("ProductTypeId");
 
                     b.HasIndex("BelongingProductId");
@@ -252,9 +288,6 @@ namespace TravelInCloud.Migrations
                     b.Property<DateTime>("StartStoreTime");
 
                     b.Property<string>("StoreDescription");
-
-                    b.Property<int>("StoreId")
-                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("StoreLocation");
 
@@ -305,6 +338,14 @@ namespace TravelInCloud.Migrations
                     b.HasOne("TravelInCloud.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TravelInCloud.Models.ImageOfProduct", b =>
+                {
+                    b.HasOne("TravelInCloud.Models.Product", "Product")
+                        .WithMany("ImageOfProducts")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
