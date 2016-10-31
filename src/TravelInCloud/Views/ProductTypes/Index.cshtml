@@ -1,0 +1,36 @@
+@model TravelInCloud.Models.ProductTypesViewModels.IndexViewModel
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        <a asp-action="Create" asp-route-ProductId="@Model.ProductId">Create New</a>
+    </p>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.ProductTypes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OldPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductTypeDetails)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductTypeName)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ProductTypeId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ProductTypeId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

@@ -1,17 +1,11 @@
 ﻿@using TravelInCloud.Controllers
 @model TravelInCloud.Models.HomeViewModels.ParentViewModel
 @{
+    Layout = "_LayoutFish";
     ViewData["Title"] = "设置";
 }
 @section css{
-    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/common.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/member.css" asp-append-version="true"/>
-    <style>
-        html {
-        font-size:20px;
-        }
-    </style>
 }
 <header class="member-header">
     <h3 class="user-name c-333">
@@ -40,6 +34,6 @@
 <div class="page__ft">
 </div>
 
-<form class="page__bd page__bd_spacing" asp-action="LogOff" asp-controller="Account" method="post">
-    <button class="weui-btn weui-btn_warn" type="submit">注销登录</button>
+<form class="member-handle btn-handle" asp-action="LogOff" id="LogOffForm" asp-controller="Account" method="post">
+    <a href="javascript:$('#LogOffForm').submit()" class="btn">退出登录</a>
 </form>

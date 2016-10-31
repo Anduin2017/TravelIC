@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - 云中旅行</title>
     <link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/lib/weui/dist/example/example.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/lib/Swiper/dist/css/swiper.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/Swiper/dist/css/swiper.min.css" asp-append-version="true" />
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -21,6 +21,29 @@
                         <div class="page__ft">
                         </div>
                     </div>
+                    @*<div class="footer-box">
+                        <div class="footer-box">
+                            <footer>
+                                <a asp-controller="Home" asp-action="Index" class="on">
+                                    <i class="footer-ico1"></i>
+                                    <span>首页</span>
+                                </a>
+                                <a asp-controller="Home" asp-action="Order">
+                                    <i class="footer-ico3"></i>
+                                    <span>订单</span>
+                                </a>
+                                <a href="tel:13080868017">
+                                    <i class="footer-ico4"></i>
+                                    <span>客服</span>
+                                </a>
+                                <a asp-controller="Home" asp-action="Parent">
+                                    <i class="footer-ico2"></i>
+                                    <span>我的</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </div>*@
+
                     <div class="weui-tabbar">
                         <a class="weui-tabbar__item weui-bar__item_on" asp-controller="Home" asp-action="Index">
                             <img class="weui-tabbar__icon" alt="" src="~/lib/weui/dist/example/images/icon_nav_panel.png">

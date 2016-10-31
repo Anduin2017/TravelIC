@@ -1,0 +1,49 @@
+﻿@model TravelInCloud.Models.HomeViewModels.ChangeMyInfoViewModel
+
+@{
+    ViewData["Title"] = "修改个人信息";
+}
+
+<form asp-controller="Home" asp-action="ChangeMyInfo" method="post" class="form-horizontal">
+    <div class="page__hd">
+        <h1 class="page__title">修改个人信息</h1>
+        <div asp-validation-summary="All" class="page__desc"></div>
+    </div>
+    <input type="hidden" asp-for="ReturnUrl" />
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">姓名</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="Name" class="weui-input" type="text" placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">电话</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="Phone" class="weui-input" type="text" placeholder="请输入电话号码">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">身份证号</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input asp-for="IDCode" class="weui-input" type="text" placeholder="请输入身份证号">
+            </div>
+        </div>
+    </div>
+
+    <div class="page__ft">
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <button class="weui-btn weui-btn_primary" type="submit">保存</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

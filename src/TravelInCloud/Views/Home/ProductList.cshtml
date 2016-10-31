@@ -4,18 +4,26 @@
 
 
 
-    <div class="weui-form-preview">
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">全部景区</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" asp-controller="Home" asp-action="SetMethod" asp-route-id="@Model.StoreType">@Model.QueryMethod</a>
-        </div>
+<div class="weui-form-preview">
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">全部景区</a>
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" asp-controller="Home" asp-action="SetMethod" asp-route-id="@Model.StoreType">@Model.QueryMethod</a>
     </div>
+</div>
 
 
 @foreach (var Product in Model.Products)
 {
     <div class="weui-panel">
-        <div class="weui-panel__hd">@Product.Owner.StoreName</div>
+        <div class="weui-panel__hd">
+            <div style="font-size: 20px;">
+                @Product.Owner.StoreName
+                @if (Product.ProductTypes?.Count > 0)
+                {
+                    <a style="text-align: right; color: orange; font-size: 20px; float: right;">￥@Product.ProductTypes.OrderBy(t => t.Price).First().Price</a>
+                }
+            </div>
+        </div>
         <div class="weui-panel__bd">
             <a class="weui-media-box weui-media-box_appmsg" style="padding:0" asp-action="Product" asp-route-id="@Product.ProductId">
                 <div class="weui-media-box__hd" style="width:38.2%;max-width:300px;height:auto">
@@ -30,11 +38,8 @@
                 </div>
             </a>
             <ul class="weui-media-box__info">
-                @if (Product.ProductTypes?.Count > 0)
-                {
-                    <li class="weui-media-box__info__meta">@Product.ProductTypes.OrderBy(t => t.Price).First().Price</li>
-                }
                 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">已经售出：@Product.BuyTimes</li>
+                <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">展示次数：@Product.ViewTimes</li>
             </ul>
         </div>
     </div>

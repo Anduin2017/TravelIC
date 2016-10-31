@@ -4,7 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-
+<div class="page__ft">
+</div>
+<div class="page__bd page__bd_spacing">
+    <a class="weui-btn weui-btn_primary" asp-controller="Products" asp-action="Create">新建商品</a>
+</div>
 <div class="weui-cells">
 
     @foreach (var item in Model)

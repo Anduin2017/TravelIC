@@ -36,9 +36,9 @@ namespace TravelInCloud.Controllers
             _logger = loggerFactory.CreateLogger<ManageController>();
         }
 
-        public async Task<string> WeChatVerify(string signature, string timestamp, string nonce, string echostr)
+        public string WeChatVerify(string signature, string timestamp, string nonce, string echostr)
         {
-            if (await Verify(signature, timestamp, nonce))
+            if (Verify(signature, timestamp, nonce))
             {
                 return echostr;
             }
@@ -48,7 +48,7 @@ namespace TravelInCloud.Controllers
         // POST: /api/WeChatVerify
         public async Task<string> WeChatVerify(string signature, string timestamp, string nonce, string echostr, object obj)
         {
-            if (await Verify(signature, timestamp, nonce))
+            if (Verify(signature, timestamp, nonce))
             {
                 var s = Request.Form.ToString();
                 var Result = await XMLDeserializeObjectAsync<xml>(s);

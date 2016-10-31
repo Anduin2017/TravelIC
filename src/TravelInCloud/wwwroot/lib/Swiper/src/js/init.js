@@ -36,6 +36,9 @@ s.init = function () {
     if (s.params.preloadImages && !s.params.lazyLoading) {
         s.preloadImages();
     }
+    if (s.params.zoom && s.zoom) {
+        s.zoom.init();
+    }
     if (s.params.autoplay) {
         s.startAutoplay();
     }
@@ -44,6 +47,13 @@ s.init = function () {
     }
     if (s.params.mousewheelControl) {
         if (s.enableMousewheelControl) s.enableMousewheelControl();
+    }
+    // Deprecated hashnavReplaceState changed to replaceState for use in hashnav and history
+    if (s.params.hashnavReplaceState) {
+        s.params.replaceState = s.params.hashnavReplaceState;
+    }
+    if (s.params.history) {
+        if (s.history) s.history.init();
     }
     if (s.params.hashnav) {
         if (s.hashnav) s.hashnav.init();
@@ -115,6 +125,11 @@ s.destroy = function (deleteInstance, cleanupStyles) {
     }
     // Disconnect observer
     s.disconnectObservers();
+
+    // Destroy zoom
+    if (s.params.zoom && s.zoom) {
+        s.zoom.destroy();
+    }
     // Disable keyboard/mousewheel
     if (s.params.keyboardControl) {
         if (s.disableKeyboardControl) s.disableKeyboardControl();
@@ -124,6 +139,13 @@ s.destroy = function (deleteInstance, cleanupStyles) {
     }
     // Disable a11y
     if (s.params.a11y && s.a11y) s.a11y.destroy();
+    // Delete history popstate
+    if (s.params.history && !s.params.replaceState) {
+        window.removeEventListener('popstate', s.history.setHistoryPopState);
+    }
+    if (s.params.hashnav && s.hashnav)  {
+        s.hashnav.destroy();
+    }
     // Destroy callback
     s.emit('onDestroy');
     // Delete instance

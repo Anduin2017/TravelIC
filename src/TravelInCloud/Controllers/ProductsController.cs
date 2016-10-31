@@ -49,6 +49,7 @@ namespace TravelInCloud.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -130,7 +131,7 @@ namespace TravelInCloud.Controllers
             {
                 return NotFound();
             }
-            return View(product);
+            return View(nameof(Edit),product);
         }
 
         public async Task<IActionResult> PreEdit(int id)
@@ -157,7 +158,7 @@ namespace TravelInCloud.Controllers
             {
                 _context.Update(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { id = product.ProductId });
+                return RedirectToAction(nameof(PreEdit), new { id = product.ProductId });
             }
             return View(product);
         }

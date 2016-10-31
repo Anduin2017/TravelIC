@@ -9,19 +9,20 @@ s.lazy = {
         if (s.slides.length === 0) return;
 
         var slide = s.slides.eq(index);
-        var img = slide.find('.swiper-lazy:not(.swiper-lazy-loaded):not(.swiper-lazy-loading)');
-        if (slide.hasClass('swiper-lazy') && !slide.hasClass('swiper-lazy-loaded') && !slide.hasClass('swiper-lazy-loading')) {
+        var img = slide.find('.' + s.params.lazyLoadingClass + ':not(.' + s.params.lazyStatusLoadedClass + '):not(.' + s.params.lazyStatusLoadingClass + ')');
+        if (slide.hasClass(s.params.lazyLoadingClass) && !slide.hasClass(s.params.lazyStatusLoadedClass) && !slide.hasClass(s.params.lazyStatusLoadingClass)) {
             img = img.add(slide[0]);
         }
         if (img.length === 0) return;
 
         img.each(function () {
             var _img = $(this);
-            _img.addClass('swiper-lazy-loading');
+            _img.addClass(s.params.lazyStatusLoadingClass);
             var background = _img.attr('data-background');
             var src = _img.attr('data-src'),
-                srcset = _img.attr('data-srcset');
-            s.loadImage(_img[0], (src || background), srcset, false, function () {
+                srcset = _img.attr('data-srcset'),
+                sizes = _img.attr('data-sizes');
+            s.loadImage(_img[0], (src || background), srcset, sizes, false, function () {
                 if (background) {
                     _img.css('background-image', 'url("' + background + '")');
                     _img.removeAttr('data-background');
@@ -31,6 +32,10 @@ s.lazy = {
                         _img.attr('srcset', srcset);
                         _img.removeAttr('data-srcset');
                     }
+                    if (sizes) {
+                        _img.attr('sizes', sizes);
+                        _img.removeAttr('data-sizes');
+                    }
                     if (src) {
                         _img.attr('src', src);
                         _img.removeAttr('data-src');
@@ -38,8 +43,8 @@ s.lazy = {
 
                 }
 
-                _img.addClass('swiper-lazy-loaded').removeClass('swiper-lazy-loading');
-                slide.find('.swiper-lazy-preloader, .preloader').remove();
+                _img.addClass(s.params.lazyStatusLoadedClass).removeClass(s.params.lazyStatusLoadingClass);
+                slide.find('.' + s.params.lazyPreloaderClass + ', .' + s.params.preloaderClass).remove();
                 if (s.params.loop && loadInDuplicate) {
                     var slideOriginalIndex = slide.attr('data-swiper-slide-index');
                     if (slide.hasClass(s.params.slideDuplicateClass)) {
@@ -60,14 +65,19 @@ s.lazy = {
     },
     load: function () {
         var i;
+        var slidesPerView = s.params.slidesPerView;
+        if (slidesPerView === 'auto') {
+            slidesPerView = 0;
+        }
+        if (!s.lazy.initialImageLoaded) s.lazy.initialImageLoaded = true;
         if (s.params.watchSlidesVisibility) {
             s.wrapper.children('.' + s.params.slideVisibleClass).each(function () {
                 s.lazy.loadImageInSlide($(this).index());
             });
         }
         else {
-            if (s.params.slidesPerView > 1) {
-                for (i = s.activeIndex; i < s.activeIndex + s.params.slidesPerView ; i++) {
+            if (slidesPerView > 1) {
+                for (i = s.activeIndex; i < s.activeIndex + slidesPerView ; i++) {
                     if (s.slides[i]) s.lazy.loadImageInSlide(i);
                 }
             }
@@ -76,13 +86,13 @@ s.lazy = {
             }
         }
         if (s.params.lazyLoadingInPrevNext) {
-            if (s.params.slidesPerView > 1 || (s.params.lazyLoadingInPrevNextAmount && s.params.lazyLoadingInPrevNextAmount > 1)) {
+            if (slidesPerView > 1 || (s.params.lazyLoadingInPrevNextAmount && s.params.lazyLoadingInPrevNextAmount > 1)) {
                 var amount = s.params.lazyLoadingInPrevNextAmount;
-                var spv = s.params.slidesPerView;
+                var spv = slidesPerView;
                 var maxIndex = Math.min(s.activeIndex + spv + Math.max(amount, spv), s.slides.length);
                 var minIndex = Math.max(s.activeIndex - Math.max(spv, amount), 0);
                 // Next Slides
-                for (i = s.activeIndex + s.params.slidesPerView; i < maxIndex; i++) {
+                for (i = s.activeIndex + slidesPerView; i < maxIndex; i++) {
                     if (s.slides[i]) s.lazy.loadImageInSlide(i);
                 }
                 // Prev Slides

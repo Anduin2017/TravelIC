@@ -1,0 +1,57 @@
+@model TravelInCloud.Models.ProductType
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>ProductType</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="BelongingProductId" value="@Model.BelongingProductId" />
+        <div class="form-group">
+            <label asp-for="OldPrice" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="OldPrice" class="form-control" />
+                <span asp-validation-for="OldPrice" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductTypeDetails" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ProductTypeDetails" class="form-control" />
+                <span asp-validation-for="ProductTypeDetails" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductTypeName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ProductTypeName" class="form-control" />
+                <span asp-validation-for="ProductTypeName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" asp-controller="ProductTypes" asp-route-ProductId="@Model.BelongingProductId">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

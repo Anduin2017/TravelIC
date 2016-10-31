@@ -16,6 +16,12 @@
         </div>
         <div class="weui-cell__ft">按购买次数排序</div>
     </a>
+    <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ProductList" asp-route-StoreType="@Model.id" asp-route-queryMethod="4">
+        <div class="weui-cell__bd">
+            <p>按浏览量排序</p>
+        </div>
+        <div class="weui-cell__ft">按浏览次数排序</div>
+    </a>
     <a class="weui-cell weui-cell_access" asp-controller="Home" asp-action="ProductList" asp-route-StoreType="@Model.id" asp-route-queryMethod="3">
         <div class="weui-cell__bd">
             <p>默认排序</p>

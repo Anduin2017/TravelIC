@@ -45,7 +45,8 @@
       "type": "build"
     },
     "System.Xml.XmlSerializer": "4.0.11",
-    "System.Net.Mail": "1.0.0-rtm-00002"
+    "System.Net.Mail": "1.0.0-rtm-00002",
+    "System.Xml.XmlDocument": "4.0.1"
   },
 
   "tools": {

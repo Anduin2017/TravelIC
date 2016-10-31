@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using TravelInCloud.Models;
+using System.Text;
 
 namespace TravelInCloud.Services
 {
     public class WeChatService
     {
-        public static async Task<bool> Verify(string signature, string timestamp, string nonce)
+        public static bool Verify(string signature, string timestamp, string nonce)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                var Token = Secrets.Token;
-                string[] ArrTmp = { Token, timestamp, nonce };
-                Array.Sort(ArrTmp);
-                var tmpStr = string.Join(string.Empty, ArrTmp);
-                //tmpStr = FormsAuthentication.HashPasswordForStoringInConfigFile(tmpStr, "SHA1").ToLower();
-                return true;
-                //return tmpStr == signature;
-            });
+            var Token = Secrets.Token;
+            string[] ArrTmp = { Token, timestamp, nonce };
+            Array.Sort(ArrTmp);
+            var tmpStr = string.Join(string.Empty, ArrTmp);
+            var sha1 = System.Security.Cryptography.SHA1.Create();
+            var hash = sha1.ComputeHash(Encoding.Unicode.GetBytes(tmpStr));
+            return true;
+            //return Encoding.Unicode.GetString(hash).ToLower().Trim() == signature.ToLower().Trim();
         }
         private static DateTime _AccessTokenRefreshTime { get; set; }
         private static string _WeChatServerAddress = @"https://api.weixin.qq.com/cgi-bin/";

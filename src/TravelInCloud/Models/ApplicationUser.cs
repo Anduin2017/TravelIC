@@ -21,5 +21,16 @@ namespace TravelInCloud.Models
         public virtual string Discriminator { get; set; }
 
         public virtual DateTime RegisterTime { get; set; } = DateTime.Now;
+
+        public virtual string Name { get; set; }
+        public virtual string IDCode { get; set; }
+
+        public bool FullInfo()
+        {
+            var HasName = !string.IsNullOrEmpty(Name);
+            var HasCode = !string.IsNullOrEmpty(IDCode);
+            var HasPhone = !string.IsNullOrEmpty(PhoneNumber);
+            return HasName && HasCode && HasPhone;
+        }
     }
 }

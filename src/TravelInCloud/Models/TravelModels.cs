@@ -16,7 +16,10 @@ namespace TravelInCloud.Models
         KTV = 3,
         Bath = 4,
         Restaurant = 10,
-        Mall = 11
+        Mall = 11,
+        Car = 12,
+        TravelArount = 13,
+        TravelWithGroup = 14
     }
 
     /// <summary>
@@ -74,12 +77,24 @@ namespace TravelInCloud.Models
         public virtual string ProductInfo { get; set; }
         public virtual string ProductWarnning { get; set; }
         public virtual int BuyTimes { get; set; } = 0;
+        public virtual int ViewTimes { get; set; } = 0;
 
         /// <summary>
         /// 商品的图片列表
         /// </summary>
         [InverseProperty(nameof(ImageOfProduct.Product))]
         public List<ImageOfProduct> ImageOfProducts { get; set; }
+        public string TryGetFirst()
+        {
+            try
+            {
+                return ImageOfProducts[0].ImageSrc;
+            }
+            catch
+            {
+                return "http://s.cn.bing.net/az/hprichbg/rb/GreaterKudu_ZH-CN8868031087_1920x1080.jpg";
+            }
+        }
 
         /// <summary>
         /// 商品所属用户
@@ -93,6 +108,14 @@ namespace TravelInCloud.Models
         /// </summary>
         [InverseProperty(nameof(ProductType.BelongingProduct))]
         public List<ProductType> ProductTypes { get; set; }
+        public decimal TryGetPrice()
+        {
+            try
+            {
+                return ProductTypes.Min(t => t.Price);
+            }
+            catch { return 0; }
+        }
     }
 
     /// <summary>

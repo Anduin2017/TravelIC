@@ -5,15 +5,16 @@
 
 
 @{
+    Layout = "_LayoutFish";
     ViewData["Title"] = "登录";
 }
 
 @section css{
-<link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/weui/dist/example/example.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/member.css" asp-append-version="true" />
 }
-<header class="member-signinheader" style="height:16em;">
+<header class="member-signinheader" style="height:8em;">
     <h2 class="user-name c-333">
         登录云游账号
     </h2>
@@ -64,6 +65,6 @@
     </label>
 </form>
 
-@section Scripts {
+@section js {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

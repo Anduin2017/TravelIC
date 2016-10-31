@@ -1,0 +1,83 @@
+﻿@model TravelInCloud.Models.HomeViewModels.OrderViewModel
+@{
+    Layout = "_LayoutFish";
+    ViewData["Title"] = "订单";
+}
+
+@section css{
+<link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/weui/dist/example/example.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/member.css" asp-append-version="true" />
+}
+<header class="member-orderheader">
+    <h3 class="user-name c-333">
+        @Model.NickName
+    </h3>
+    <p class="header-explian c-666">积分值：4400</p>
+    <img class="user-face" src="@Model.IconAddress">
+</header>
+<div class="weui-flex weui-form-preview">
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">最近订单</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">全部订单</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">待付款</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">待使用</a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">待评价</a>
+            </div>
+        </div>
+    </div>
+</div>
+@for(int i=0;i<10;i++)
+{
+<br />
+<div class="weui-form-preview">
+    <div class="weui-form-preview__hd">
+        <label class="weui-form-preview__label">云岗饭店</label>
+        <em class="weui-form-preview__value">¥540.00</em>
+    </div>
+    <div class="weui-form-preview__bd">
+        <p>
+            <label class="weui-form-preview__label">商品</label>
+            <span class="weui-form-preview__value">满汉全席</span>
+        </p>
+        <p>
+            <label class="weui-form-preview__label">数量</label>
+            <span class="weui-form-preview__value">1</span>
+        </p>
+        <p>
+            <span class="weui-form-preview__value">满汉全席，清朝时期宫廷盛宴。既有宫廷菜肴之特色，又有地方风味之精华；突出满与汉族菜点特殊风味</span>
+        </p>
+    </div>
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">删除订单</a>
+        <button class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">再次预定</button>
+    </div>
+</div>
+
+}

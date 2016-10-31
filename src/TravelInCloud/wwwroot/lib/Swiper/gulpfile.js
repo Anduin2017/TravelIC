@@ -9,7 +9,7 @@
         path = require('path'),
         uglify = require('gulp-uglify'),
         sourcemaps = require('gulp-sourcemaps'),
-        minifyCSS = require('gulp-minify-css'),
+        cleanCSS = require('gulp-clean-css'),
         tap = require('gulp-tap'),
         concat = require('gulp-concat'),
         jshint = require('gulp-jshint'),
@@ -21,6 +21,11 @@
                 root: 'build/',
                 styles: 'build/css/',
                 scripts: 'build/js/'
+            },
+            custom: {
+                root: 'custom/',
+                styles: 'custom/css/',
+                scripts: 'custom/js/'
             },
             dist: {
                 root: 'dist/',
@@ -47,9 +52,11 @@
                 'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/hashnav.js',
+                'src/js/history.js',
                 'src/js/keyboard.js',
                 'src/js/mousewheel.js',
                 'src/js/parallax.js',
+                'src/js/zoom.js',
                 'src/js/plugins.js',
                 'src/js/emitter.js',
                 'src/js/a11y.js',
@@ -71,9 +78,11 @@
                 'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/hashnav.js',
+                'src/js/history.js',
                 'src/js/keyboard.js',
                 'src/js/mousewheel.js',
                 'src/js/parallax.js',
+                'src/js/zoom.js',
                 'src/js/plugins.js',
                 'src/js/emitter.js',
                 'src/js/a11y.js',
@@ -94,9 +103,11 @@
                 'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/hashnav.js',
+                'src/js/history.js',
                 'src/js/keyboard.js',
                 'src/js/mousewheel.js',
                 'src/js/parallax.js',
+                'src/js/zoom.js',
                 'src/js/plugins.js',
                 'src/js/emitter.js',
                 'src/js/a11y.js',
@@ -108,13 +119,14 @@
                 'src/js/wrap-end-umd.js',
             ],
             Framework7Files : [
-                'src/js/swiper-intro-f7.js',
+                'src/js/swiper-intro-swiper.js',
                 'src/js/core.js',
                 'src/js/effects.js',
                 'src/js/lazy-load.js',
                 'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/parallax.js',
+                'src/js/zoom.js',
                 'src/js/plugins.js',
                 'src/js/emitter.js',
                 'src/js/a11y.js',
@@ -123,10 +135,29 @@
                 'src/js/swiper-proto.js',
             ],
             pkg: require('./bower.json'),
+            modules: require('./modules.json'),
             banner: [
                 '/**',
                 ' * Swiper <%= pkg.version %>',
                 ' * <%= pkg.description %>',
+                ' * ',
+                ' * <%= pkg.homepage %>',
+                ' * ',
+                ' * Copyright <%= date.year %>, <%= pkg.author %>',
+                ' * The iDangero.us',
+                ' * http://www.idangero.us/',
+                ' * ',
+                ' * Licensed under <%= pkg.license.join(" & ") %>',
+                ' * ',
+                ' * Released on: <%= date.month %> <%= date.day %>, <%= date.year %>',
+                ' */',
+                ''].join('\n'),
+            customBanner: [
+                '/**',
+                ' * Swiper <%= pkg.version %> - Custom Build',
+                ' * <%= pkg.description %>',
+                ' * ',
+                ' * Included modules: <%= modulesList %>',
                 ' * ',
                 ' * <%= pkg.homepage %>',
                 ' * ',
@@ -152,7 +183,7 @@
         if (['wrap-start.js', 'wrap-start-umd.js', 'wrap-end.js', 'wrap-end-umd.js', 'amd.js'].indexOf(filename) !== -1) {
             addIndent = '';
         }
-        if (filename === 'swiper-intro.js' || filename === 'swiper-intro-f7.js' || filename === 'swiper-outro.js' || filename === 'dom.js' || filename === 'get-dom-lib.js' || filename === 'get-jquery.js' || filename === 'dom-plugins.js' || filename === 'swiper-proto.js') addIndent = '    ';
+        if (filename === 'swiper-intro.js' || filename === 'swiper-intro-swiper.js' || filename === 'swiper-outro.js' || filename === 'dom.js' || filename === 'get-dom-lib.js' || filename === 'get-jquery.js' || filename === 'dom-plugins.js' || filename === 'swiper-proto.js') addIndent = '    ';
         if (minusIndent) {
             addIndent = addIndent.substring(4);
         }
@@ -178,7 +209,7 @@
             .pipe(sourcemaps.write('./maps/'))
             .pipe(gulp.dest(paths.build.scripts));
 
-            
+
         gulp.src(swiper.jQueryFiles)
             .pipe(tap(function (file, t){
                 addJSIndent (file, t);
@@ -226,8 +257,9 @@
                 paths.source.styles + 'core.less',
                 paths.source.styles + 'navigation-f7.less',
                 paths.source.styles + 'effects.less',
+                paths.source.styles + 'zoom.less',
                 paths.source.styles + 'scrollbar.less',
-                paths.source.styles + 'preloader-f7.less',
+                paths.source.styles + 'preloader-f7.less'
             ])
             .pipe(concat(swiper.filename + '.framework7.less'))
             .pipe(header('/* === Swiper === */\n'))
@@ -274,7 +306,7 @@
 
         gulp.src(paths.build.styles + '*.css')
             .pipe(gulp.dest(paths.dist.styles))
-            .pipe(minifyCSS({
+            .pipe(cleanCSS({
                 advanced: false,
                 aggressiveMerging: false,
             }))
@@ -283,6 +315,89 @@
                 path.basename = swiper.filename + '.min';
             }))
             .pipe(gulp.dest(paths.dist.styles));
+    });
+
+    /* =================================
+    Custom Build
+    ================================= */
+    gulp.task('custom', function () {
+        var modules = process.argv.slice(3);
+        modules = modules.toString();
+        if (modules === '') {
+            modules = [];
+        }
+        else {
+            modules = modules.substring(1).replace(/ /g, '').replace(/,,/g, ',');
+            modules = modules.split(',');
+        }
+        var modulesJs = [], modulesLess = [];
+        var i, module;
+        modulesJs.push.apply(modulesJs, swiper.modules.core_intro.js);
+        modulesLess.push.apply(modulesLess, swiper.modules.core_intro.less);
+
+        for (i = 0; i < modules.length; i++) {
+            module = swiper.modules[modules[i]];
+            if (!(module)) continue;
+
+            if (module.dependencies && module.dependencies.length > 0) {
+                modules.push.apply(modules, module.dependencies);
+            }
+            if (module.js.length > 0) {
+                modulesJs.push.apply(modulesJs, module.js);
+            }
+            if (module.less && module.less.length > 0) {
+                modulesLess.push.apply(modulesLess, module.less);
+            }
+        }
+        modulesJs.push.apply(modulesJs, swiper.modules.core_outro.js);
+        modulesLess.push.apply(modulesLess, swiper.modules.core_outro.less);
+
+        // Unique
+        var customJsList = [];
+        var customLessList = [];
+        for (i = 0; i < modulesJs.length; i++) {
+            if (customJsList.indexOf(modulesJs[i]) < 0) customJsList.push(modulesJs[i]);
+        }
+        for (i = 0; i < modulesLess.length; i++) {
+            if (customLessList.indexOf(modulesLess[i]) < 0) customLessList.push(modulesLess[i]);
+        }
+
+        // JS
+        gulp.src(customJsList)
+            .pipe(tap(function (file, t){
+                addJSIndent (file, t);
+            }))
+            .pipe(concat(swiper.filename + '.custom.js'))
+            .pipe(header(swiper.customBanner, { pkg : swiper.pkg, date: swiper.date, modulesList: modules.join(',') } ))
+            .pipe(jshint())
+            .pipe(jshint.reporter(stylish))
+            .pipe(gulp.dest(paths.custom.scripts))
+
+            .pipe(uglify())
+            .pipe(header(swiper.customBanner, { pkg : swiper.pkg, date: swiper.date, modulesList: modules.join(',') }))
+            .pipe(rename(function(path) {
+                path.basename = path.basename + '.min';
+            }))
+            .pipe(gulp.dest(paths.custom.scripts));
+
+        // CSSes
+        gulp.src(customLessList)
+            .pipe(concat(swiper.filename + '.custom.less'))
+            .pipe(less({
+                paths: [ path.join(__dirname, 'less', 'includes') ]
+            }))
+            .pipe(header(swiper.customBanner, { pkg : swiper.pkg, date: swiper.date, modulesList: modules.join(',') } ))
+            .pipe(gulp.dest(paths.custom.styles))
+
+            .pipe(cleanCSS({
+                advanced: false,
+                aggressiveMerging: false
+            }))
+            .pipe(header(swiper.customBanner, { pkg : swiper.pkg, date: swiper.date, modulesList: modules.join(',') }))
+            .pipe(rename(function(path) {
+                path.basename = path.basename + '.min';
+            }))
+            .pipe(gulp.dest(paths.custom.styles));
     });
 
     gulp.task('watch', function () {

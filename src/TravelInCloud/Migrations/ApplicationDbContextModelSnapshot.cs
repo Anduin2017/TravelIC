@@ -140,11 +140,15 @@ namespace TravelInCloud.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("IDCode");
+
                     b.Property<string>("IconAddress");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NickName");
 
@@ -233,6 +237,8 @@ namespace TravelInCloud.Migrations
                     b.Property<string>("ProductName");
 
                     b.Property<string>("ProductWarnning");
+
+                    b.Property<int>("ViewTimes");
 
                     b.HasKey("ProductId");
 

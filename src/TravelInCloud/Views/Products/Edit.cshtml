@@ -4,54 +4,62 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
-
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Edit" asp-controller="Products" method="post" class="page input" style="opacity: 1;">
+    <div class="page__bd">
+        <div asp-validation-summary="All" class="page__desc"></div>
         <input type="hidden" asp-for="ProductId" />
-        <div class="form-group">
-            <label asp-for="ProductDetails" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductDetails" class="form-control" />
-                <span asp-validation-for="ProductDetails" class="text-danger" />
+        <div class="weui-cells__title">编辑商品表单</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">商品名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="ProductName" placeholder="例如：云冈石窟门票">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">购买警示</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="ProductWarnning" placeholder="例如：仅限成年人使用">
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="ProductInfo" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductInfo" class="form-control" />
-                <span asp-validation-for="ProductInfo" class="text-danger" />
+
+        <div class="weui-cells__title">商品参数</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" asp-for="ProductInfo" placeholder="详细介绍型号、配置等客观参数" rows="5"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="ProductName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger" />
+
+        <div class="weui-cells__title">商品详细信息</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" asp-for="ProductDetails" placeholder="详细介绍商品本身" rows="20"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/2000</div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="ProductWarnning" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductWarnning" class="form-control" />
-                <span asp-validation-for="ProductWarnning" class="text-danger" />
-            </div>
+
+        <div class="weui-btn-area">
+            <button class="weui-btn weui-btn_primary" id="showTooltips" type="submit">保存</button>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="page__bd page__bd_spacing">
+    <a class="weui-btn weui-btn_warn" asp-controller="Products" asp-action="Index">返回商品列表</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

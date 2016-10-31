@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<div class="page__ft">
+</div>
+<div class="page__bd page__bd_spacing">
+    <p>注意：你上传的第一幅图片将会用于推广展示。请注意挑选第一幅图片。</p>
+</div>
 <div class="page__bd">
     <div class="weui-gallery" id="gallery" style="display: none; opacity: 0;">
         <span class="weui-gallery__img" id="galleryImg" style="background-image:url(./images/pic_160.png)"></span>
@@ -14,7 +18,7 @@
         </div>
     </div>
     <form class="weui-cells weui-cells_form" method="post" id="uploadForm" asp-action="CreateImage" asp-controller="Products" role="form" enctype="multipart/form-data">
-        <input type="hidden" name="ProductId" value="@Model.ProductId"/>
+        <input type="hidden" name="ProductId" value="@Model.ProductId" />
         <div class="weui-cell">
             <div class="weui-cell__bd">
                 <div class="weui-uploader">
@@ -22,7 +26,7 @@
                         <ul class="weui-uploader__files" id="uploaderFiles">
                             @foreach (var image in Model.ImageOfProducts)
                             {
-                            <li class="weui-uploader__file" style="background-image:url(@image.ImageSrc)"></li>
+                                <li class="weui-uploader__file" style="background-image:url(@image.ImageSrc)"></li>
                             }
                         </ul>
                         <div class="weui-uploader__input-box">
@@ -32,7 +36,7 @@
                 </div>
             </div>
         </div>
-            <button class="weui-btn weui-btn_warn" type="submit">上传</button>
-            <a class="weui-btn weui-btn_default" asp-action="Index">返回</a>
+        <button class="weui-btn weui-btn_warn" type="submit">上传</button>
+        <a class="weui-btn weui-btn_default" asp-action="Index">返回</a>
     </form>
 </div>

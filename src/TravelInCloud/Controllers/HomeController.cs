@@ -47,6 +47,7 @@ namespace TravelInCloud.Controllers
             var _products = _dbContext.Products
                 .Include(t => t.Owner)
                 .Include(t => t.ImageOfProducts)
+                .Include(t => t.ProductTypes)
                 .ToList();
 
             var Model = new IndexViewModel
@@ -55,10 +56,57 @@ namespace TravelInCloud.Controllers
             };
             return View(Model);
         }
+
+        public async Task<IActionResult> Buy()
+        {
+            var _user = await GetCurrentUserAsync();
+            if (!_user.FullInfo())
+            {
+                return RedirectToAction(nameof(ChangeMyInfo), new { ReturnUrl = Request.Path });
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public IActionResult Cart()
         {
             return View();
         }
+
+        public async Task<IActionResult> ChangeMyInfo(string ReturnUrl = "")
+        {
+            var _user = await GetCurrentUserAsync();
+            var _model = new ChangeMyInfoViewModel
+            {
+                Name = _user.Name,
+                Phone = _user.PhoneNumber,
+                IDCode = _user.IDCode,
+                ReturnUrl = ReturnUrl
+            };
+            return View(_model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeMyInfo(ChangeMyInfoViewModel model, string ReturnUrl = "")
+        {
+            var _user = await GetCurrentUserAsync();
+            _user.Name = model.Name;
+            _user.PhoneNumber = model.Phone;
+            _user.IDCode = model.IDCode;
+            await _userManager.UpdateAsync(_user);
+
+            if (string.IsNullOrEmpty(ReturnUrl) || !_user.FullInfo())
+            {
+                return RedirectToAction(nameof(Mine));
+            }
+            else
+            {
+                return LocalRedirect(ReturnUrl);
+            }
+        }
+
+
         public async Task<IActionResult> Order()
         {
             var user = await GetCurrentUserAsync();
@@ -82,9 +130,6 @@ namespace TravelInCloud.Controllers
             return View(Model);
         }
 
-        //按价格       1  按价格
-        //按购买次数   2  按人气
-        //按发布时间    3  默认
         [AllowAnonymous]
         public ActionResult ProductList(StoreType StoreType, int queryMethod = 3)
         {
@@ -98,22 +143,29 @@ namespace TravelInCloud.Controllers
 
             var Model = new ProductListViewModel
             {
-                StoreType =(int)StoreType
+                StoreType = (int)StoreType
             };
 
             switch (queryMethod)
             {
                 case 1:
-                    Model.Products = _products.OrderBy(t => t.ProductTypes.Min(p => p.Price)).ToList();
+                    Model.Products = _products
+                        .Where(t => t.ProductTypes.Count > 0)//所有具有价值的商品
+                        .OrderBy(t => t.ProductTypes.Min(p => p.Price))//价格最低值
+                        .ToList();
                     Model.QueryMethod = "按价格排序";
                     break;
                 case 2:
-                    Model.Products = _products.OrderByDescending(t=>t.BuyTimes).ToList();
+                    Model.Products = _products.OrderByDescending(t => t.BuyTimes).ToList();
                     Model.QueryMethod = "按人气排序";
                     break;
                 case 3:
                     Model.Products = _products;
                     Model.QueryMethod = "默认排序";
+                    break;
+                case 4:
+                    Model.Products = _products.OrderByDescending(t => t.ViewTimes).ToList();
+                    Model.QueryMethod = "按浏览量排序";
                     break;
                 default:
                     throw new Exception();
@@ -137,6 +189,10 @@ namespace TravelInCloud.Controllers
                 .Include(t => t.ImageOfProducts)
                 .Include(t => t.Owner)
                 .SingleOrDefaultAsync(t => t.ProductId == id);
+
+            _product.ViewTimes++;
+            await _dbContext.SaveChangesAsync();
+
             return View(new ProductViewModel
             {
                 Product = _product
@@ -234,6 +290,22 @@ namespace TravelInCloud.Controllers
             }
             return View(Model);
         }
+
+        public IActionResult Pay()
+        {
+            return View();
+        }
+        public async Task<IActionResult> PayTest()
+        {
+            string wxJsApiParam;
+            var cuser = await GetCurrentUserAsync();
+            var jsApiPay = new JsApiPay(cuser.openid, 1, HttpContext.Connection.RemoteIpAddress.ToString());
+            var unifiedOrderResult = await jsApiPay.GetUnifiedOrderResult();
+            wxJsApiParam = jsApiPay.GetJsApiParameters();
+            var Result = unifiedOrderResult.ToPrintStr();
+            return View(new PayViewModel { unifiedOrderResult = Result, wxJsApiParam = wxJsApiParam });
+        }
+
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);

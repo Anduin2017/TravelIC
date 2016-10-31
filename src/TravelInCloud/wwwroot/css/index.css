@@ -1,0 +1,77 @@
+﻿@charset "UTF-8";
+/* lky 2016-7-6 首页 */
+body { background: #FFFFFF; }
+.page-line { height: 0.3rem; background: #f0f0f0; border: 0; }
+/*头部*/
+.header { width: 100%; height: 2.05rem; position:relative; z-index:10; background: url("../images/index/heder-bg.jpg") no-repeat center bottom; -webkit-background-size: cover; background-size: cover; }
+.logo { width: 5.75rem; height: 2.05rem; background: url("../images/index/logo.png") no-repeat; -webkit-background-size: 100%; background-size: 100%; text-indent: -99999pt; }
+.region-screen { display: inline-block; vertical-align: top; font: normal 0.7rem/1rem "Microsoft YaHei"; position:relative;}
+.region-screen .region-this { margin-top: 0.525rem; display: inline-block; }
+.region-screen .region-this:after { content: "\e60f"; font-family: 'icomoon'; display: inline-block; vertical-align: top; font-size: 0.4rem; transform: rotate(90deg); width: 1rem; height: 1rem; line-height: 1rem; text-align: center; }
+.region-screen ul{ position:absolute; left:-0.35rem; top:1.525rem; background:#fff; width:100%; border:0.15rem solid #eee; box-shadow:3px 3px 5px #666;}
+.region-screen ul li{ padding:0.1rem 0.2rem; border-bottom:1px solid #eee; line-height: 1rem; color:#666; font-size:0.5rem;}
+.region-screen ul li.cur{ color:#333; }
+.header-login { display: inline-block; vertical-align: top; padding-right: 1.1rem; height: 100%; }
+.header-login a { margin-top: 0.525rem; display: block; width: 1rem; height: 1rem; background: url("../images/index/ico-login-ent.png") no-repeat; -webkit-background-size: 100%; background-size: 100%; }
+/*banner*/
+.home-slider { height: 5rem;  position:relative; z-index:9; }
+.home-slider .swiper-pagination-bullet { width: 0.3rem; height: 0.3rem; opacity: 1; }
+.swiper-container-horizontal > .swiper-pagination-bullets { text-align: right; padding-right: 1rem; box-sizing: border-box; }
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet { margin: 0 0.1rem; }
+/*导航*/
+.nav { margin: 0 3%; padding-top: 0.6rem; position:relative; z-index:8; }
+.nav a { float: left; width: 20%; box-sizing: border-box; height: 3.5rem; text-align: center; margin-bottom: 0.4em; }
+.nav a strong.i-bor { border: 1px solid rgba(204, 216, 226, 0.6); display: inline-block; vertical-align: top; padding: 3px; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+.nav a i { display: inline-block; vertical-align: top; width: 2rem; height: 2rem; background: #53a7ea; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; text-align: center; line-height: 2rem; font-size: 1.3rem; color: #fff; }
+.nav a i.icon-nav-hotel { background: #ef4351; }
+.nav a i.icon-nav-periphery { background: #3ec1a2; }
+.nav a i.icon-nav-route { background: #225bde; }
+.nav a i.icon-nav-shopping { background: #468010; }
+.nav a i.icon-nav-foods { background: #f57f16; }
+.nav a i.icon-nav-teach-you { background: #24728b; }
+.nav a i.icon-nav-new-pro { background: #fa72a2; }
+.nav a span { display: block; font-size: 0.6rem; color: #666; line-height: 1.3rem; }
+/*活动*/
+.home-activity { background: #f0f0f0; }
+.home-activity a { float: left; width: 49%; height: 3.875em; }
+.home-activity a:first-child { margin-right: 2%; }
+.home-activity a img { width: 100%; height: 100%; }
+/*热销产品*/
+.hot-pro { background: #fff; }
+.hot-pro h3 { color: #65574b; font-size: 0.8rem; line-height: 1.5rem; padding-top: 0.5rem; padding-left: 0.5rem; }
+.hot-pro h3 em { text-transform: uppercase; padding-left: 0.4rem; font-size: 0.4rem; }
+.hot-pro ul { margin: 0 0.5rem; padding-bottom: 0.3rem; }
+.hot-pro ul li { width: 100%; overflow: hidden; padding: 0.4rem 0; border-bottom: 2px solid #e8e8e8; }
+.hot-pro ul li:last-child { border: 0; }
+.hot-pro ul li a { display: block; height: 3.5rem; }
+.hot-pro ul li img { float: left; width: 4.45rem; height: 3.5rem; }
+.gline-con { padding-left: 4.95rem; }
+.gline-con h4 { font-size: 0.6rem; color: #65574b; line-height: 0.7rem; }
+.gline-con p.con-text { color: #999; font-size: 0.5rem; line-height: 0.75rem; height: 1.5rem; overflow: hidden; padding-top: 0.2rem; text-align: justify; }
+.gline-con p.con-lab { line-height: 0.75rem; display: inline-block; width: 100%; padding-top: 0.2rem; }
+.gline-con .sold { font-size: 0.5rem; float: right; color: #999; }
+.gline-con .sold em { color: #ff4477; }
+.gline-con .price { font-size: 0.5rem; float: left; color: #999; }
+.gline-con .price em { color: #f63; font-size: 0.6rem; }
+
+/*地区选择*/
+.region-layer{ position:fixed; left:50%; top:50%; z-index:22; width:65%; margin:-3.5rem 0 0 -32.5%;background:#fff; -webkit-border-radius:0.25rem; -moz-border-radius:0.25rem; border-radius:0.25rem; text-align:center; overflow: hidden;
+ 	-webkit-transform:scale(0); transform:scale(0); opacity:0; display:none; transition:0.3s;
+ }
+.region-layer.thisshow{
+	-webkit-transform:scale(1); transform:scale(1); opacity:1; transition:0.3s ;
+}
+
+
+.region-layer h3{ font-size:0.75rem; height:1.9rem; line-height: 1.9rem; background:#ebebeb; border-bottom:1px solid #dcdcdc; color:#333; box-sizing:border-box; position:relative;}
+.region-layer ul{ max-height:9rem; overflow-x: hidden; overflow-y:auto;}
+.region-layer ul li{ height:1.8rem; line-height: 1.8rem; font-size:0.6rem; border-bottom:1px solid #f0f0f0; box-sizing:border-box;}
+.region-layer ul li:last-child{ border:0;}
+.region-layer ul li.cur{ color:#f57f16;}
+.close-reglayer{ position:absolute; right:1rem; top:0; background:#666; width: 0.85rem; height: 1rem; border-radius:0 0 45% 45%; text-align:center;}
+.close-reglayer i{ color:#fff; font-weight:bold; font-size:0.4rem; line-height: 0.8rem; vertical-align: top;}
+
+
+
+
+
