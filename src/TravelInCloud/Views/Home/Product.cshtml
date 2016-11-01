@@ -1,88 +1,102 @@
 ﻿@model TravelInCloud.Models.HomeViewModels.ProductViewModel
 
-<div class="swiper-container home-slider" style="height:260px;">
+@{
+    Layout = "_LayoutFish";
+}
+@section css{
+    <link rel="stylesheet" type="text/css" href="~/lib/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/common.css">
+    <link rel="stylesheet" type="text/css" href="~/css/details.css">
+}
+@section js{
+}
+
+<div class="swiper-container details-slider">
     <ul class="swiper-wrapper">
-        @foreach (var Image in Model.Product.ImageOfProducts)
+        @foreach (var img in Model.Product.ImageOfProducts)
         {
-        <li class="swiper-slide">
-            <a href="javascript:;"style="width:100%;height:280px;position:relative;">
-                <img src="@Image.ImageSrc" style="min-height:100%;min-width:100%; max-width:100%;height:auto; display:block;vertical-align:central"/>
-            </a>
-        </li>
+            <li class="swiper-slide">
+                <img src="@img.ImageSrc" alt="@img.ImageDescription" />
+            </li>
         }
     </ul>
     <div class="swiper-pagination"></div>
 </div>
+<div class="details-info">
+    <h3 class="details-title">@Model.Product.ProductName </h3>
+    <p class="details-explian">@Model.Product.Owner.StoreName</p>
+    <p class="details-explian"><span class="flag-panel">@Model.Product.Owner.StoreType</span><span class="price fr"><em>￥</em><strong>@Model.Product.TryGetPrice()</strong>起</span></p>
+    <a href="/wap/ticket/parkComments.htm?id=2880" class="details-comment clearfix">
+        <span class="comment-score c-base">
+            <em>5</em>
+            <i class="font-icon icon-iconfont-aixin"></i>
+            <i class="font-icon icon-iconfont-aixin"></i>
+            <i class="font-icon icon-iconfont-aixin"></i>
+            <i class="font-icon icon-iconfont-aixin"></i>
+            <i class="font-icon icon-iconfont-aixin"></i>
+        </span>
+        查看1条评论 <i class="font-icon fr icon-iconfont-jiantou"></i>
+    </a>
+</div>
+<div class="page-line"></div>
+<ul class="order-list myorder-list">
+    <li>
+        <label for="" class="lab-title">地址</label>
+        <div class="order-item">
+            <a href="/wap/ticket/index!map.htm?id=2880">
+                <span>@Model.Product.Owner.StoreLocation</span>
+                <i class="font-icon icon-iconfont-jiantou"></i>
+            </a>
+        </div>
+    </li>
+    <li>
+        <label for="" class="lab-title">景区介绍</label>
+        <div class="order-item">
+            <a href="/wap/ticket/buyTicket.htm?id=2880&&show=1">
+                <span></span>
+                <i class="font-icon icon-iconfont-jiantou"></i>
+            </a>
+        </div>
+    </li>
+</ul>
+<div class="page-line"></div>
+<ul class="order-list myorder-list">
+    <li>
+        <label for="" class="lab-title">预订须知</label>
+        <div class="order-item">
+            <a href="/wap/ticket/buyTicket.htm?id=2880&&show=2">
+                <i class="font-icon icon-iconfont-jiantou"></i>
+            </a>
+        </div>
+    </li>
+</ul>
+<div class="page-line"></div>
+<h3 class="details-list-title">票型</h3>
+<div class="no-data n-nbm">
+    <i class="font-icon icon-iconfont-gantanhaom"></i>
+    <p>暂无数据</p>
+</div>
+<div class="page-line"></div>
 
-<div class="weui-cells">
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p>选择分类、品型</p>
-        </div>
-        <div class="weui-cell__ft">购买的商品品种</div>
-    </a>
-</div>
-<div class="weui-cells">
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p>查看评价</p>
-        </div>
-        <div class="weui-cell__ft">已购买用户的评价</div>
-    </a>
-</div>
-<div class="weui-cells">
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__bd">
-            <p>购买说明</p>
-        </div>
-    </a>
-</div>
-<div class="weui-panel weui-panel_access" style="margin-top:0">
-    <article class="weui-article">
-        @Model.Product.ProductWarnning
-    </article>
+
+<div class="tab-swiper">
+    <ul class="tab details-triple clearfix" id="details-tab">
+        <li class="swiper-li active"><a href="javascript:;" data-div="book" class="active">产品特色</a></li>
+        <li class="swiper-li"><a href="javascript:;" data-div="anpai">行程说明</a></li>
+    </ul>
 </div>
 
-<div class="weui-flex weui-form-preview">
-    <div class="weui-flex__item">
-        <div class="placeholder">
-            <div class="weui-form-preview__ft">
-                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">产品特色</a>
+<div class="details-tab-panel">
+    <div class="ticket-details-tabs" id="tab-panel">
+        <div class="details-tab-item" id="book">
+            <div class="tab-article">
+                <p>@Model.Product.ProductInfo</p>
+            </div>
+        </div>
+        <div class="details-tab-item" id="anpai">
+            <div class="tab-article">
+                <p>@Model.Product.ProductDetails</p>
             </div>
         </div>
     </div>
-    <div class="weui-flex__item">
-        <div class="placeholder">
-            <div class="weui-form-preview__ft">
-                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">费用说明</a>
-            </div>
-        </div>
-    </div>
 </div>
-
-
-<div class="weui-panel weui-panel_access" style="margin-top:0">
-    <article class="weui-article">
-        @Model.Product.ProductDetails
-    </article>
-</div>
-
-<div class="page__ft">
-</div>
-
-<div class="page__bd page__bd_spacing">
-    <a class="weui-btn weui-btn_warn" asp-controller="Home" asp-action="Buy">立即购买</a>
-</div>
-
-@section Scripts {
-    <script src="~/lib/Swiper/dist/js/swiper.min.js" type="text/javascript"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            slidesPerView: 1,
-            paginationClickable: true,
-            spaceBetween: 0,
-            loop: true,
-        });
-    </script>
-}

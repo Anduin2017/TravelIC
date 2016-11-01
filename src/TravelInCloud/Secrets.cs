@@ -17,6 +17,6 @@ namespace TravelInCloud
         public static string device_info { get; set; } = "WEB";
         public static string NOTIFY_URL { get; set; } = "https://travelincloud.obisoft.com.cn/home/ResultNotifyPage";
         public static string IP { get; set; } = "8.8.8.8";
-        public static string KEY { get; set; } = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        public static string KEY { get; set; } = "yuehepingyueheping18511177788yhp";
     }
 }

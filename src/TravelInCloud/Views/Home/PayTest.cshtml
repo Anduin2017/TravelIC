@@ -1,4 +1,7 @@
 ﻿@model TravelInCloud.Models.HomeViewModels.PayViewModel
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,52 +11,57 @@
     <title>微信支付样例-JSAPI支付</title>
 </head>
 
-<script type="text/javascript">
 
-    //调用微信JS api 支付
-    function jsApiCall()
-    {
-        WeixinJSBridge.invoke(
-        'getBrandWCPayRequest',
-        @Model.wxJsApiParam,//josn串
-         function (res)
-         {
-             WeixinJSBridge.log(res.err_msg);
-             alert(res.err_code + res.err_desc + res.err_msg);
-         }
-         );
-    }
-
-    function callpay()
-    {
-        if (typeof WeixinJSBridge == "undefined")
-        {
-            if (document.addEventListener)
-            {
-                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-            }
-            else if (document.attachEvent)
-            {
-                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-            }
-        }
-        else
-        {
-            jsApiCall();
-        }
-    }
-
-</script>
 
 <body>
-    <form runat="server">
-        <br />
-        <div align="center">
-            <br /><br /><br />
-            <Button ID="submit" Text="立即支付" OnClientClick="callpay()" style="width:210px; height:50px; border-radius: 15px;background-color:#00CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" />
-        </div>
-    </form>
+
     @Model.unifiedOrderResult
+    <br />
+    @Model.wxJsApiParam
+
+
+    <br />
+    <div align="center">
+        <button value="Pay" onclick="callpay()"></button>
+    </div>
+   
+    <script>
+
+        alert('started1');
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+             @Html.Raw(Model.wxJsApiParam),//josn串
+             function (res)
+             {
+                 WeixinJSBridge.log(res.err_msg);
+                 alert(res.err_code + res.err_desc +'  '+ res.err_msg);
+             });
+        }
+
+        function callpay()
+        {
+            alert('started2');
+            if (typeof WeixinJSBridge == "undefined")
+            {
+                if (document.addEventListener)
+                {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }
+                else if (document.attachEvent)
+                {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }
+            else
+            {
+                jsApiCall();
+            }
+        }
+
+    </script>
 </body>
 </html>

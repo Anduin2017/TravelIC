@@ -1,0 +1,152 @@
+/*²úÆ·»ù±¾ÐÅÏ¢*/
+.details-info{ background-color: #fff;}
+.details-title{ padding: 0.5rem 0.75rem 0.3rem; font-size: 0.75rem; color: #333; word-break:break-all;}
+.details-comment{ display: block; padding:0.5rem 4%; font-size: 0.5rem; color: #999; text-align: right;  line-height: 1rem; border-top: 1px solid #eee;}
+.comment-score{ float: left;}
+.comment-score em{ margin-right: 0.5rem; font-size: 0.6rem; display: inline-block; vertical-align: middle;}
+.comment-score i{ font-size: 0.75rem; margin-right: 0.25rem; vertical-align: middle;}
+.comment-score i.not-light{ color: #ccc;}
+.details-comment i.icon-iconfont-jiantou{ font-size: 0.6rem; margin-left: 0.6rem; margin-top: 0.2rem;}
+.details-explian{ padding: 0 0.75rem 0.5rem; font-size: 0.55rem; color: #999; word-break:break-all;}
+.details-explian:after{ content:""; display: block; clear: both;}
+/*ÏêÏ¸Ò³ÃæÁÐ±í*/
+.details-list-title{ background-color: #fff; padding: 0.5rem 0.75rem; font-size: 0.6rem; color: #333; border-top: 1px solid #eee;}
+.details-list{ background-color: #fff;}
+.details-list li{padding: 0.4rem 4%; border-top: 1px solid #eee; display: table; width: 100%; box-sizing: border-box;}
+.pro-price{ width: 20%;text-align: center; display: table-cell; vertical-align: middle; font-size: 0; }
+.pro-price .price{ vertical-align: top; display: inline-block; text-align: center; width: 2.5rem; color:#f66;}
+.pro-price .price strong{ font-size: 0.65rem;}
+.pro-price .original-price {text-align: center; color:#999;}
+.pro-price a,.room-handle a{ display: inline-block; text-align: center;/* height: 1.25rem;*/ line-height: 1.25rem; font-size: 0.55rem; width:85%; vertical-align: top; border-radius: 3px;  color: #fff; background-color: #ff6408;}
+.room-handle a{ width: 100%; line-height: 1.6rem; }
+.pro-info{ min-height: 1.9rem; height: auto; display: table-cell; vertical-align: middle; padding-right:4%;}
+.pro-info-title{ font-size: 0.65rem; color: #333;}
+.pro-info-explian{ font-size: 0.5rem; color: #999; margin-top: 0.25rem;/* height: 0.75rem;*/ line-height: 0.75rem;}
+.pro-info-explian span{ margin-right: 0.5rem;}
+.details-explian .price{ font-size: 0.5rem; color: #999; margin-left: 0.5rem;}
+.details-explian .price strong{ margin-right: 0.2rem;}
+.details-explian .original-price{ padding-top: 0.1rem;}
+
+/*ÃÀÊ³ÏêÏ¸Ò³ÃæÁÐ±í*/
+.foods-list{ background-color: #fff;}
+.foods-list li{ padding: 0.5rem 0.75rem; border-bottom: 1px solid #eee;}
+.foods-list-img{ width: 3.25rem; height:2.75rem; overflow: hidden; float: left; }
+.foods-list-img img{ height: 100%;}
+.foods-list-info{ margin-left: 4rem; min-height: 2.5rem; height: auto;}
+.foods-list-title{ font-size: 0.65rem; color: #333; height: 2rem;}
+.foods-list-explian{ font-size: 0.45rem; height: 0.75rem; line-height: 0.75rem; text-align: right; color: #999;}
+.foods-list-explian span{ display: inline-block; vertical-align: bottom;}
+.foods-list-explian .price{ margin-left: 0.5rem;}
+.foods-list-explian span.fl{ margin-top: 0.05rem;}
+
+.myorder-list{ border-top: none;}
+
+/*ÎÄÕÂÏêÏ¸Ò³Ãæ*/
+.article-info{ padding:4%; font-size: 0.6rem; line-height: 1.8; color: #666;}
+.article-main{ word-break:break-all;}
+.article-main img{ max-width:100%!important; height:auto!important;}
+.article-flag{ padding-bottom: 0.8rem; margin-bottom: 0.8rem; border-bottom: 1px solid #dcdcdc; font-size: 0.5rem;}
+.article-flag-icon{ float: left; margin-top: 0.2rem;}
+.article-flag-info{ margin-left:6%; line-height: 160%;}
+.article-main img{ margin: 0.5rem 0;}
+
+.page-calendar{ background-color: #fff; font-size: 0.6rem; padding: 0 0.75rem;}
+.page-calendar a{ display: block; height:1rem; line-height: 1rem; padding:0.55rem 0;}
+.page-calendar a span{ margin: 0 0.7rem 0 0.25rem;}
+.page-calendar a i{ margin-top: 0.2rem;}
+
+/*¾ÆµêÏêÇéÁÐ±í*/
+.pro-img{ width: 37%; height: 2.75rem; overflow: hidden; float: left; position: relative;}
+.pro-img a{ display: block;}
+.img-bottom{ position: absolute; bottom: 0; width: 90%; height: 0.6rem; background-color: rgba(0,0,0,.6); line-height: 0.6rem; font-size: 0.45rem; color: #fff; padding: 0 5%;}
+.img-bottom i{ line-height: 0.6rem;}
+.pro-img img{ width: 100%; height: 100%;}
+.hotel-info{ margin-left:42%;}
+.order-item span.facility{ padding-top: 0.25rem;}
+.myorder-list .order-item .facility i{ margin: 0 0.125rem; font-size: 0.75rem; width: 1rem; vertical-align: baseline;}
+
+/*·¿ÐÍÏêÏ¸*/
+.room-handle{ height: 2.1rem; line-height: 2.1rem; background-color: #fff; border-bottom: 1px solid #eee; padding: 0 0.75rem; font-size: 0.6rem;}
+.room-handle .price{ margin-left: 1.7rem;}
+.room-handle a{ margin-top: 0.5rem;}
+
+.article-facility{ padding: 0.75rem; margin-top: -0.8rem; border-bottom: 1px solid #dcdcdc; margin-bottom: 0.8rem;}
+.article-facility span{ font-size: 0.6rem; width: 3.75rem; display: inline-block;}
+.article-facility span i{ font-size: 0.65rem; margin-right: 0.25rem;}
+
+.myorder-list .zyx-title{ width: 4.5rem;}
+
+.details-tab{ border-top: 1px solid #eee; }
+.tab-swiper {width:100%; overflow:hidden; background: #fff;border-top: 1px solid #eee;}
+.details-triple{display:flex; width:100%;}
+.details-triple .swiper-li {-webkit-flex-shrink: 0; -ms-flex: 0 0 auto; flex-shrink: 0; width:25%; height: 100%; position: relative;}
+.details-triple .swiper-li.active a {color:#f66;}
+/*.details-tab li{ width: 50%;}*/
+/*.details-triple li{ width: 33%;}*/
+.details-tab li a,.details-triple li a{ height: 1.45rem; line-height: 1.45rem; }
+.details-tab-item{ font-size: 0.55rem; color: #666; background-color: #fff; padding: 0.5rem 0.75rem; line-height: 180%; border-top: 1px solid #eee; word-break:break-all;}
+.details-tab-item b{ font-size: 0.6rem; margin-top: 0.5rem; display: inline-block; margin-bottom: 0.25rem;}
+
+.trun-down{ border-top: 1px solid #eee; border-bottom: 1px solid #eee;}
+.trun-down a{ height: 2.1rem; line-height: 2.1rem; display: block; text-align: center; background-color: #fff; font-size: 0.6rem;}
+.trun-down a i{-webkit-transform: rotate(90deg);}
+
+/*ÀàÐÍ*/
+.mold-panel{ background-color: #fff;}
+.mold-panel-title{ height: 2.1rem; line-height: 2.1rem; padding: 0 0.75rem; font-size: 0.6rem; color: #333; border-bottom: 1px solid #eee;}
+.mold-panel p{ padding: 0.5rem;}
+.mold-panel p a{ font-size: 0.5rem; color: #999; display: inline-block; height: 1rem; line-height: 1rem; text-align: center; padding: 0 0.5rem; border: 1px solid #999; border-radius: 3px; margin-right: 0.75rem; margin-bottom: 0.5rem;}
+.mold-panel p a.active{ color: #f66; border: 1px solid #f66;}
+/*轮播高度*/
+.block_home_slider .slide { height:8rem; }
+.block_home_slider .big { height:12rem; }
+/**/
+
+.details-tab-panel {width: 100%;overflow: hidden; background-color: #fff;}
+.ticket-details-tabs { display:flex; display: -webkit-box;}
+.swiper-container-autoheight .ticket-details-tabs {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    -webkit-transition-property: -webkit-transform,height;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    -ms-transition-property: -ms-transform;
+    transition-property: transform,height
+}
+.ticket-details-tabs .details-tab-item {-webkit-flex-shrink: 0; -ms-flex: 0 0 auto; flex-shrink: 0; width:100%; height:auto; position: relative; font-size: 0.55rem; color: #666; background-color: #fff; padding: 0.5rem 0; line-height: 180%; border-top: 1px solid #eee;}
+.ticket-details-tabs .details-tab-item b{ font-size: 0.6rem; margin-top: 0.5rem; display: inline-block; margin-bottom: 0.25rem;}
+.tab-article{ width:100%; box-sizing:border-box; padding:4%;}
+.tab-article img{ max-width:100%!important; height:auto!important;}
+
+/**/
+.coupon-details-list .pro-info{ width: 32%;  padding-right: 0;}
+.coupon-details-list .pro-info .price{ display: inline-block; vertical-align: middle; height: 2.6rem; background: url("../images/details/coupon-bg.png") no-repeat; background-size: 100% 100%; width: 100%; font-size: 0; padding: 0.125rem; box-sizing: border-box;}
+.coupon-details-list .pro-info .price strong{ font-size: 1.5rem; display: block; padding-right: 1.2rem; margin-top: -0.25rem; text-align: center}
+.coupon-details-list .pro-price{ padding-left: 3%; width:65%;}
+.coupon-details-list .pro-price p{ font-size: 0.6rem;  width: 65%; text-align: left; line-height: 160%; float: left;}
+.coupon-details-list .pro-price p span{ display: block; color: #333;}
+.coupon-details-list .pro-price p span:last-child{ color: #999;}
+.coupon-details-list .pro-price a{  margin-left: 70%; width:30%; margin-top: 0.85rem; display: block; }
+
+/*商品分类*/
+.goods-mold-panel{ position: fixed; bottom: -40rem; max-height:100%;  overflow-y: auto;  overflow-x: hidden; width: 100%; left: 0; background-color: #fff; z-index: 21; transition: 0.3s; -webkit-transition: 0.3s; }
+.goods-show{ bottom: 0; }
+.goods-mold-header{ padding: 0.75rem; border-top: 1px solid #dcdcdc; border-bottom: 1px solid #dcdcdc;}
+.goods-header-img{ width: 4rem; height: 3.15rem; float: left; overflow: hidden;}
+.goods-header-img img{ width: 4rem; height: 3.15rem;}
+.goods-header-info{ margin-left: 4.5rem;}
+.goods-header-info .price{ color: #ff6633;}
+.goods-header-info p{ font-size: 0.65rem; color: #333; padding-top: 0.75rem;}
+.goods-mold-content{ padding: 0.75rem 0.75rem 0.4rem 0.75rem; font-size: 0; border-bottom: 1px solid #dcdcdc; overflow-y: auto;}
+.goods-mold-content div{  margin-bottom: 0.4rem;}
+.goods-mold-content h4{ font-size: 0.6rem; line-height: 0.8rem;  margin-bottom: 0.2rem; }
+.goods-mold-content span{ display: inline-block; height: 1.4rem; line-height: 1.4rem; padding: 0 0.6rem; border: 1px solid #ccc; border-radius: 0.25rem; font-size: 0.6rem; color: #666; margin: 0.25rem;}
+.goods-mold-content span.c-base{ color: #f63; border-color: #f63;}
+.goods-footer-title{ height: 2.1rem; line-height: 2.1rem; padding: 0 0.75rem; font-size: 0.6rem; color: #000; border-bottom: 1px solid #dcdcdc;}
+.goods-footer-tab{ font-size: 0; display:inline-block; width:100%;}
+.goods-footer-tab span{ float:left; width: 50%; box-sizing: border-box; border-right: 1px solid #dcdcdc; height: 2rem; line-height: 2rem; text-align: center; font-size: 0.65rem; color: #999; background-color: #f5f5f5; border-bottom: 1px solid #dcdcdc;}
+.goods-footer-tab span .font-icon{ font-size: 0.8rem; vertical-align: middle; margin-right: 0.25rem; margin-top: -0.125rem;}
+.goods-footer-tab span.cur{ color: #ff6666; background-color: #fff;}
+ 

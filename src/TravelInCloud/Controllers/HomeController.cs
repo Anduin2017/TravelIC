@@ -187,6 +187,7 @@ namespace TravelInCloud.Controllers
             var _product = await _dbContext
                 .Products
                 .Include(t => t.ImageOfProducts)
+                .Include(t => t.ProductTypes)
                 .Include(t => t.Owner)
                 .SingleOrDefaultAsync(t => t.ProductId == id);
 
@@ -301,6 +302,7 @@ namespace TravelInCloud.Controllers
             var cuser = await GetCurrentUserAsync();
             var jsApiPay = new JsApiPay(cuser.openid, 1, HttpContext.Connection.RemoteIpAddress.ToString());
             var unifiedOrderResult = await jsApiPay.GetUnifiedOrderResult();
+
             wxJsApiParam = jsApiPay.GetJsApiParameters();
             var Result = unifiedOrderResult.ToPrintStr();
             return View(new PayViewModel { unifiedOrderResult = Result, wxJsApiParam = wxJsApiParam });
