@@ -1,0 +1,84 @@
+﻿.myorder-tab{ position: fixed; z-index: 33; top:0; left:0; width: 100%;}
+.myorder-tab li{ width: 50%;}
+.myorder-tab li a{ height: 1.45rem; line-height: 1.45rem;}
+.myorder-tab li a.c-base{ color: #f00;}
+
+/*顶部下拉列表*/
+.tab-search-panel{ position:absolute; background-color: #fff; width: 100%; left: 0; top:-32rem; z-index: 21; overflow-x: hidden; overflow-y: auto;}
+.tab-search-panel li{ border-bottom: 1px solid #eee; height:2.2rem;}
+.tab-search-panel li a{ display: block; padding: 0.75rem; font-size: 0.6rem;}
+
+/* */
+.myorder-item{ background-color: #fff; padding: 0 1rem; font-size: 0.6rem;}
+.myorder-header{ padding: 0.55rem 0 0.3rem 0; overflow: hidden; border-bottom: 1px solid #eee; font-size: 0.5rem; color: #666;}
+.myorder-header .price{ color: #f00; font-size: 0.6rem;}
+.order-info i{ margin-right: 0.25rem; font-size: 0.75rem; color: #333; vertical-align: middle;}
+.order-info em{ margin: 0 0.25rem;}
+.order-time{ margin-left: 0.6rem;}
+.myorder-item a{ display: block; color: #666; padding: 0.5rem 0;}
+.myorder-item-title{ font-size: 0.7rem; color: #333;}
+.myorder-item a p{ padding-top: 0.25rem;}
+
+/*顶部分类栏*/
+.ticket-tab{ position:absolute; z-index: 33; top:0; left:0; width: 100%; border-bottom: 1px solid #eee;}
+.ticket-tab li{ width: 50%;}
+.ticket-tab li a{ height: 1.45rem; line-height: 1.45rem;}
+.ticket-tab li a span{ display:inline-block;vertical-align: top; max-width: 6rem; vertical-align: top; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ticket-tab li a i{ display: inline-block; vertical-align: middle; line-height:1; font-size:0.8rem;}
+.ticket-tab li a.c-base i{ transform:rotate(180deg); -webkit-transform:rotate(180deg);}
+
+.filter-item{ padding: 0.75rem; border-bottom: 1px solid #dcdcdc;}
+.filter-item .c-base{ color:#149d34;}
+.filter-title{ font-size: 0.65rem;}
+.filter-list{ margin-top: 0.25rem; font-size: 0;}
+.filter-list span{ display: inline-block; height: 1rem; line-height: 1rem; min-width: 2.25rem; width: auto; padding: 0 0.3rem; border: 1px solid #ccc; font-size: 0.55rem; border-radius: 0.25rem; color: #666; margin: 0.3rem; text-align: center;}
+.filter-list span.c-base{ color: #f66;}
+.filter-handle{ height: 2.1rem; line-height: 2.1rem; font-size: 0.7rem; text-align: center;}
+.filter-handle a{ display: block; color:#149d34;}
+/*列表页基础样式*/
+.page-list{ background-color: #fff;}
+.page-list li{ border-bottom: 1px solid #eee; padding:3%;}
+.page-list li:after{ content:""; display:block; clear: both;}
+.page-list li a{ display: block;}
+.page-list-img{ width: 36%; height: 4rem; float: left; overflow: hidden;}
+.page-list-img img{ height: 100%; width:100%;}
+.page-list-info{ margin-left:40%; min-height: 4rem; height: auto; }
+.page-list-title{ font-size: 0.65rem; color: #333; min-height: 1rem; line-height: 0.75rem;  word-break:break-all; }
+.page-list-title span{ margin-left: 0.25rem;}
+.page-list-article{ font-size: 0.5rem; line-height: 160%; min-height: 1.5rem; color: #999; margin-top: 0.25rem; word-break:break-all;}
+.page-list-foods{ font-size: 0.5rem; line-height: 160%; color: #999; margin-top: 0.25rem;}
+.page-list-explian{ margin-top: 0.3rem; font-size: 0.5rem; color: #999; line-height: 0.9rem; }
+.page-list-explian .price{font-size: 0.5rem;}
+.page-list-explian .price strong{ margin-right: 0.25rem;}
+.page-list-explian .original-price{margin-top: 0.05rem; margin-right: 0.25rem;}
+
+
+.zyx-list .page-list-title{ overflow: auto; min-height: 2.2rem; height: auto; line-height: 140%;}
+
+/**/
+.page-list-num{ margin-right: 0.5rem; display: inline-block; vertical-align: middle;}
+
+/*列表边框*/
+.list-border{ margin: 0 0.5rem;}
+.list-border .page-list-img{ width: 4.25rem;}
+.list-border .page-list-info{ margin-left: 4.75rem;}
+
+/*商品*/
+.goods-list-explian{ margin-top: 0.6rem; font-size: 0.5rem; color: #999; height: 0.6rem; line-height: 0.6rem;}
+.goods-list-explian .fr{ vertical-align: bottom;}
+.goods-group{ margin-top: 0.5rem; margin-bottom: 0.25rem; padding-bottom: 0.5rem; font-size: 0.5rem;clear: both; }
+.goods-group-info { float: left; margin-left: 0.25rem;}
+.goods-line{border-top: 1px solid #eee; padding:0.2rem;}
+.goods-active{float: left;}
+
+/*攻略*/
+.raider-list { width: 100%; }
+.raider-list a { display: block; }
+.raider-list li { margin: 0 auto; margin-bottom: 0.3rem; background: #fff; padding-bottom: 0.3rem; width: 15rem; border: 1px solid #dcdcdc; border-radius: 0.3rem; overflow: hidden; }
+.raider-list img { width: 15rem; height: 5.3rem; }
+.raider-list h4 { font-size: 0.65rem; line-height: 1.1rem; padding: 0.1rem 0 0 0.35rem; width: 11rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.raider-list .look-nub { font-size: 0.5rem; line-height: 1.1rem; padding: 0.1rem 0.35rem 0 0; }
+.raider-list p:before { display: block; content: ""; clear: both; }
+.raider-list p { font-size: 0.5rem; display: block; padding: 0 0.35rem; line-height: 0.85rem; }
+.raider-list p .fl em { padding: 0 0.3rem 0 0; }
+.raider-list p .fl { max-width: 10rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

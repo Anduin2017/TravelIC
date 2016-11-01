@@ -262,6 +262,8 @@
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161020073137_CreateTwoInfoForUser.Designer.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161023100819_CreateViewTimes.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161023100819_CreateViewTimes.Designer.cs"
+"D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161101074000_ChangeOrder.cs"
+"D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161101074000_ChangeOrder.Designer.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\ApplicationDbContextModelSnapshot.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\ApplicationUser.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\TravelModels.cs"

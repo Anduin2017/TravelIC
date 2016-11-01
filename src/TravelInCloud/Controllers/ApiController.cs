@@ -75,25 +75,117 @@ namespace TravelInCloud.Controllers
         {
             var Buttons = new Source
             {
-                button = new List<Button>(1)
+                button = new List<Button>(3)
             };
-            var NewButton = new Button
             {
-                name = "云中旅行",
-                sub_button = new List<SubButton>(1)
-            };
-            NewButton.sub_button.Add(new SubButton
+                var NewButton = new Button
+                {
+                    name = "云中预定",
+                    sub_button = new List<SubButton>(1)
+                };
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "云中游官网",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect","Index")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "酒店预留",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "旅游景区",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "周边看看",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "拼拼跟团",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                Buttons.button.Add(NewButton);
+            }
+
             {
-                name = "进入云中",
-                type = "view",
-                url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
-            });
-            Buttons.button.Add(NewButton);
+                var NewButton = new Button
+                {
+                    name = "粉丝专享",
+                    sub_button = new List<SubButton>(1)
+                };
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "兴趣小游",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "每日签到",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "金币小礼",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "积分景区",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                Buttons.button.Add(NewButton);
+            }
+
+            {
+                var NewButton = new Button
+                {
+                    name = "我的服务",
+                    sub_button = new List<SubButton>(1)
+                };
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "我的订单",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "个人中心",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect","Parent")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "在线客服",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                NewButton.sub_button.Add(new SubButton
+                {
+                    name = "天气预报",
+                    type = "view",
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                });
+                Buttons.button.Add(NewButton);
+            }
             return JsonConvert.SerializeObject(Buttons);
         }
 
         // GET: /api/AuthRedirect
-        public async Task<IActionResult> AuthRedirect(string code = "", string state = "")
+        public async Task<IActionResult> AuthRedirect(string code = "", string state = "Index")
         {
             //If user is using browser from wechat
             if (code != null)
@@ -117,7 +209,7 @@ namespace TravelInCloud.Controllers
                     //_wuser.IconAddress = WCUser.headimgurl;
                     //await _userManager.UpdateAsync(_wuser);
 
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToAction(state, "Home");
                 }
                 //Not Our User
                 else
@@ -150,12 +242,12 @@ namespace TravelInCloud.Controllers
             //var LCuser = _userManager.Users.ToList().Find(t => t.openid == Result.openid);
             //switch (state.ToLower().Trim())
             //{
-            //    case "checkmorning":
-            //        return RedirectToAction("CheckMorning", "WeChat", new { openid = Result.openid });//await Check(WCUser);
-            //    case "schedule":
-            //        return RedirectToAction("Schedule", "WeChat", new { openid = Result.openid });//await Check(WCUser);
-            //    case "grade":
-            //        return RedirectToAction("Grade", "WeChat", new { openid = Result.openid });//await Check(WCUser);
+            // case "checkmorning":
+            // return RedirectToAction("CheckMorning", "WeChat", new { openid = Result.openid });//await Check(WCUser);
+            // case "schedule":
+            // return RedirectToAction("Schedule", "WeChat", new { openid = Result.openid });//await Check(WCUser);
+            // case "grade":
+            // return RedirectToAction("Grade", "WeChat", new { openid = Result.openid });//await Check(WCUser);
             //}
             //return null;
         }

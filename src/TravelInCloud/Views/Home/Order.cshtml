@@ -4,8 +4,72 @@
     ViewData["Title"] = "订单";
 }
 
-@*@section css{
-<link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/lib/weui/dist/example/example.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/member.css" asp-append-version="true" />
-}*@
+@section css{
+    <link rel="stylesheet" href="~/css/list.css" asp-append-version="true" />
+}
+
+<section class="header-tab">
+    <ul class="tab clearfix ticket-tab" id="searchtab">
+        <li data-div="all">
+            <a href="javascript:;">
+                订单状态
+                <i class="font-icon icon-header-tab-b"></i>
+            </a>
+        </li>
+        <li data-div="default">
+            <a href="javascript:;">
+                订单类型
+                <i class="font-icon icon-header-tab-b"></i>
+            </a>
+        </li>
+    </ul>
+</section>
+@foreach (var Order in Model.Orders)
+{
+    <div id="right">
+        <div class="page-line"></div>
+        <div class="myorder-item">
+            <div class="myorder-header">
+                <span class="order-info">
+                    <i class="font-icon icon-order-shopping"></i>
+                    <em>购物</em>|
+                    <em class="payed">
+                        @if(Order.Paid)
+                        {
+                            @:已支付
+                        }
+                        else
+                        {
+                            @:未支付
+                        }
+                    </em>
+                </span>
+                <span>下单日期：@Html.DisplayFor(t=>Order.CreateTime)</span>
+                <span class="price fr"><em>￥</em>1.0</span>
+            </div>
+            <a href="/wap/order/userOrder!info.htm?orderId=16237">
+                <h3 class="myorder-item-title">@Order.ProductType.BelongingProduct.ProductName </h3>
+                <p>
+
+                </p>
+                <p><i class="font-icon fr icon-iconfont-jiantou"></i>1份</p>
+            </a>
+        </div>
+    </div>
+}
+<div class="page-line"></div>
+<ul class="tab-search-panel" id="all">
+    <li><a href="/wap/order/userOrder.htm?orderType=" class="c-base">全部</a></li>
+    <li><a href="/wap/order/userOrder.htm?payStatus=0&orderType=">未支付</a></li>
+    <li><a href="/wap/order/userOrder.htm?payStatus=1&orderType=">已支付</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderStatus=3&orderType=">退单</a></li>
+</ul>
+<ul class="tab-search-panel" id="default">
+    <li><a href="/wap/order/userOrder.htm?payStatus=&orderStatus=" class="c-base">订单类型</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderType=0&payStatus=&orderStatus=">门票订单</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderType=1&payStatus=&orderStatus=">酒店订单</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderType=2&payStatus=&orderStatus=">美食订单</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderType=3&payStatus=&orderStatus=">周边游订单</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderType=4&payStatus=&orderStatus=">跟团游订单</a></li>
+    <li><a href="/wap/order/userOrder.htm?orderType=5&payStatus=&orderStatus=">商品订单</a></li>
+</ul>

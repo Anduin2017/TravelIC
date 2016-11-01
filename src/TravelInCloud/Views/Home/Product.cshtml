@@ -72,10 +72,24 @@
 </ul>
 <div class="page-line"></div>
 <h3 class="details-list-title">票型</h3>
-<div class="no-data n-nbm">
-    <i class="font-icon icon-iconfont-gantanhaom"></i>
-    <p>暂无数据</p>
-</div>
+@foreach (var Type in Model.Product.ProductTypes)
+{
+    <ul class="details-list">
+        <li>
+            <div class="pro-info">
+                <h4 class="pro-info-title">@Type.ProductTypeName</h4>
+                <p class="pro-info-explian"><a class="c-base" href="/wap/ticket/buyTicket!ticket.htm?id=2980&&show=1">查看详情&gt;</a></p>
+            </div>
+            <div class="pro-price">
+                <span class="price"><em>￥</em><strong>@Type.Price</strong></span>
+                <span class="original-price"><em>￥@Type.OldPrice</em></span>
+            </div>
+            <div class="pro-price ">
+                <a asp-controller="Home" asp-action="PreOrder" asp-route-id="@Type.ProductTypeId">预订</a>
+            </div>
+        </li>
+    </ul>
+}
 <div class="page-line"></div>
 
 

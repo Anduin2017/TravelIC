@@ -110,11 +110,25 @@ namespace TravelInCloud.Controllers
         public async Task<IActionResult> Order()
         {
             var user = await GetCurrentUserAsync();
+            var Orders = _dbContext
+                    .Orders
+                    .Include(t => t.ProductType)
+                    .Include(t => t.Owner)
+                    .Where(t => t.OwnerId == user.Id)
+                    .ToList();
+            Orders.ForEach(async t =>
+            {
+                t.ProductType.BelongingProduct = await _dbContext
+                    .Products
+                    .SingleOrDefaultAsync(p => p.ProductId == t.ProductType.BelongingProductId);
+            });
+
             var Model = new OrderViewModel
             {
                 NickName = user.NickName,
                 IconAddress = user.IconAddress,
-                OurAccount = !user.Email.Contains(Secrets.TempUserName)
+                OurAccount = !user.Email.Contains(Secrets.TempUserName),
+                Orders = Orders
             };
             return View(Model);
         }

@@ -19,7 +19,6 @@ namespace TravelInCloud.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
 
-        public DbSet<ProductInOrder> ProductInOrders { get; set; }
         public DbSet<ImageOfProduct> ImageOfProduct { get; set; }
         public DbSet<Order> Orders { get; set; }
 

@@ -170,31 +170,35 @@ namespace TravelInCloud.Models
         public virtual string OwnerId { get; set; }
 
         /// <summary>
-        /// 订单里的所有商品
+        /// 订单里的商品
         /// </summary>
-        [InverseProperty(nameof(ProductInOrder.BelongingOrder))]
-        public virtual List<ProductInOrder> Products { get; set; }
+        [ForeignKey(nameof(ProductTypeId))]
+        public virtual ProductType ProductType { get; set; }
+        public virtual int ProductTypeId { get; set; }
+
+        public virtual bool Paid { get; set; }
+        public virtual DateTime CreateTime { get; set; }
     }
 
     /// <summary>
     /// 订单与商品关系对象
     /// </summary>
-    public class ProductInOrder
-    {
-        public virtual int ProductInOrderId { get; set; }
+    //public class ProductInOrder
+    //{
+    //    public virtual int ProductInOrderId { get; set; }
 
-        /// <summary>
-        /// PO的所属订单
-        /// </summary>
-        [ForeignKey(nameof(OrderId))]
-        public virtual Order BelongingOrder { get; set; }
-        public virtual int OrderId { get; set; }
+    //    /// <summary>
+    //    /// PO的所属订单
+    //    /// </summary>
+    //    [ForeignKey(nameof(OrderId))]
+    //    public virtual Order BelongingOrder { get; set; }
+    //    public virtual int OrderId { get; set; }
 
-        /// <summary>
-        /// PO中的商品
-        /// </summary>
-        [ForeignKey(nameof(ProductTypeId))]
-        public virtual ProductType ProductType { get; set; }
-        public virtual int ProductTypeId { get; set; }
-    }
+    //    /// <summary>
+    //    /// PO中的商品
+    //    /// </summary>
+    //    [ForeignKey(nameof(ProductTypeId))]
+    //    public virtual ProductType ProductType { get; set; }
+    //    public virtual int ProductTypeId { get; set; }
+    //}
 }
