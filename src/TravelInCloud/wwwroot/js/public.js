@@ -120,45 +120,48 @@ $(function () {
                 window.history.back();
             }
         });
+        if (touch) {
 
-        touch.on(tar, 'touchstart', function (ev) {
-            ev.preventDefault();
-        });
-        //var target = document.getElementById("target");
-        var ww = $(window).width();
-        var wh = $(window).height();
-        var dx, dy;
-        var dot_w = $(tar).width(); // 按钮宽度
-        var dot_h = $(tar).height(); // 按钮高度
-        var pos_x = ww * .05; // 按钮初始位置x
-        var pos_y = wh * .05; // 按钮初始位置y
+            touch.on(tar, 'touchstart', function (ev) {
+                ev.preventDefault();
+            });
+            //var target = document.getElementById("target");
+            var ww = $(window).width();
+            var wh = $(window).height();
+            var dx, dy;
+            var dot_w = $(tar).width(); // 按钮宽度
+            var dot_h = $(tar).height(); // 按钮高度
+            var pos_x = ww * .05; // 按钮初始位置x
+            var pos_y = wh * .05; // 按钮初始位置y
 
-        touch.on(tar, 'drag', function (ev) {
-            dx = dx || 0;
-            dy = dy || 0;
-            var offx = dx + ev.x + "px";
-            var offy = dy + ev.y + "px";
-            var adsorb = 8; //距离屏幕边缘的间距，会被吸附到边缘
-            //检测是否到4个屏幕边缘
-            if (parseFloat(offx) + dot_w - pos_x + dot_w >= ww - adsorb) {
-                offx = ww - dot_w - pos_x + "px";
-            }
-            if (parseFloat(offx) + pos_x <= adsorb) {
-                offx = -pos_x + "px";
-            }
-            if (parseFloat(offy) + 2 * dot_h >= wh - adsorb) {
-                offy = wh - dot_h - pos_y + "px";
-            }
-            if (parseFloat(offy) + pos_y <= adsorb) {
-                offy = -pos_y + "px";
-            }
-            this.style.webkitTransform = "translate3d(" + offx + "," + offy + ",0)";
-        });
+            touch.on(tar, 'drag', function (ev) {
+                dx = dx || 0;
+                dy = dy || 0;
+                var offx = dx + ev.x + "px";
+                var offy = dy + ev.y + "px";
+                var adsorb = 8; //距离屏幕边缘的间距，会被吸附到边缘
+                //检测是否到4个屏幕边缘
+                if (parseFloat(offx) + dot_w - pos_x + dot_w >= ww - adsorb) {
+                    offx = ww - dot_w - pos_x + "px";
+                }
+                if (parseFloat(offx) + pos_x <= adsorb) {
+                    offx = -pos_x + "px";
+                }
+                if (parseFloat(offy) + 2 * dot_h >= wh - adsorb) {
+                    offy = wh - dot_h - pos_y + "px";
+                }
+                if (parseFloat(offy) + pos_y <= adsorb) {
+                    offy = -pos_y + "px";
+                }
+                this.style.webkitTransform = "translate3d(" + offx + "," + offy + ",0)";
+            });
 
-        touch.on(tar, 'dragend', function (ev) {
-            dx += ev.x;
-            dy += ev.y;
-        });
+            touch.on(tar, 'dragend', function (ev) {
+                dx += ev.x;
+                dy += ev.y;
+            });
+        }
+
     }
     //轮播
     (function () {

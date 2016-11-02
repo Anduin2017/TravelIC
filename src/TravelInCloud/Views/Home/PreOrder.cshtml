@@ -1,0 +1,32 @@
+﻿@model TravelInCloud.Models.HomeViewModels.PreOrderViewModel
+@{
+    Layout = "_LayoutFish";
+    ViewData["Title"] = "订单";
+    ViewBag.NoFoot = true;
+}
+@section css{
+    <link rel="stylesheet" href="~/css/order.css" type="text/css" />
+}
+<a class="back-bar" id="back-bar" href="javascript:window.history.back()"></a>
+<header class="myorder-header pro-header">
+    <h3 class="myorder-title">@Model.TargetProduct.ProductTypeName</h3>
+    <p class="myorder-link"><a asp-controller="Home" asp-action="Notice" class="c-base">预订须知 ></a></p>
+</header>
+<form asp-controller="Home" asp-action="PreOrder" method="post" id="validateForm" name="validateForm">
+    <input type="hidden" asp-for="TargetProductId" />
+    <div class="page-line"></div>
+    <ul class="order-list myorder-list">
+        <li>
+            <label for="" class="lab-title">使用日期</label>
+            <div class="order-item">
+                <input type="date" asp-for="UseDate" value="@DateTime.Now" />
+            </div>
+        </li>
+    </ul>
+</form>
+<div class="order-footer">
+    <div class="order-total float-layer">
+        <a href="javascript:$('#validateForm').submit();" class="fr btn-order background-base">提交订单</a>
+        <p class="total-price">订单总金额：<span class="price"><em>￥</em><strong id="totalprice">@Model.TargetProduct.Price</strong></span></p>
+    </div>
+</div>

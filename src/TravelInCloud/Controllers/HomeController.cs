@@ -57,18 +57,6 @@ namespace TravelInCloud.Controllers
             return View(Model);
         }
 
-        public async Task<IActionResult> Buy()
-        {
-            var _user = await GetCurrentUserAsync();
-            if (!_user.FullInfo())
-            {
-                return RedirectToAction(nameof(ChangeMyInfo), new { ReturnUrl = Request.Path });
-            }
-            else
-            {
-                return View();
-            }
-        }
 
         public IActionResult Cart()
         {
@@ -312,9 +300,16 @@ namespace TravelInCloud.Controllers
         }
         public async Task<IActionResult> PayTest()
         {
-            string wxJsApiParam;
             var cuser = await GetCurrentUserAsync();
-            var jsApiPay = new JsApiPay(cuser.openid, 1, HttpContext.Connection.RemoteIpAddress.ToString());
+            var TargetOrder = await _dbContext
+                .Orders
+                .Include(t => t.ProductType)
+                .Where(t => t.OwnerId == cuser.Id)//这个人的订单中
+                .OrderByDescending(t => t.CreateTime)//按创建时间排序
+                .FirstAsync();//的第一个，也就是最新的那个
+
+            string wxJsApiParam;
+            var jsApiPay = new JsApiPay(cuser.openid, TargetOrder.ProductType.Price, HttpContext.Connection.RemoteIpAddress.ToString());
             var unifiedOrderResult = await jsApiPay.GetUnifiedOrderResult();
 
             wxJsApiParam = jsApiPay.GetJsApiParameters();
@@ -325,6 +320,44 @@ namespace TravelInCloud.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);
+        }
+
+        public async Task<IActionResult> PreOrder(int id)
+        {
+            var TargetProductType = await _dbContext.ProductTypes.SingleOrDefaultAsync(t => t.ProductTypeId == id);
+
+            var user = await GetCurrentUserAsync();
+            if (!user.FullInfo())
+            {
+                return RedirectToAction(nameof(ChangeMyInfo), new { ReturnUrl = Request.Path });
+            }
+            var _Model = new PreOrderViewModel
+            {
+                TargetProductId = id,
+                TargetProduct = TargetProductType
+            };
+            return View(_Model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PreOrder(PreOrderViewModel Model)
+        {
+            if (ModelState.IsValid)
+            {
+                var cuser = await GetCurrentUserAsync();
+                _dbContext.Orders.Add(new Order
+                {
+                    OwnerId = cuser.Id,
+                    CreateTime = DateTime.Now,
+                    Paid = false,
+                    ProductTypeId = Model.TargetProductId,
+                    UseTime = Model.UseDate
+                });
+                await _dbContext.SaveChangesAsync();
+
+                return RedirectToAction(nameof(PayTest));
+            }
+            return RedirectToAction(nameof(PreOrder), new { id = Model.TargetProductId });
         }
     }
 }

@@ -1,0 +1,96 @@
+﻿
+/*脦脪碌脛露漏碌楼脧锚脟茅碌脛脥路*/
+.myorder-header{ padding: 0 0.75rem 0.5rem; background-color: #fff; font-size: 0.5rem; color: #666;}
+.myorder-explian{ padding-top: 0.5rem; color: #999;}
+.myorder-explian span{ margin-right: 0.5rem;}
+.myorder-explian em{ margin: 0 0.05rem;}
+.myorder-title{ font-size: 0.75rem; color: #333;  padding-top: 0.5rem;}
+.myorder-pay{ padding: 0.5rem 0 0; font-size: 0.6rem; border-top: 1px solid #eee; margin-top: 0.5rem;}
+.myorder-pay .price{ color: #f66; font-size: 0.6rem;}
+.pay-mold{ font-size: 0.6rem; color: #999;}
+.myorder-hotel-explian span{ color: #999;}
+
+/*脨脭卤冒碌炉鲁枚虏茫*/
+.sex-dialog{ position: fixed; bottom: -7rem; left: 0; width: 100%; z-index: 21; display: none;}
+.sex-dialog ul{ background-color: #fff;}
+.sex-dialog ul li{ border-bottom: 1px solid #dcdcdc;}
+.sex-dialog ul li a{ display: block; padding: 0.65rem 0; height: 0.8rem; line-height: 0.8rem; text-align: center; font-size: 0.6rem;}
+.sex-handle{ margin-top: 0.25rem;}
+/*.sex-handle a{display: block; padding: 0.65rem 0; height: 0.8rem; line-height: 0.8rem; text-align: center; font-size: 0.6rem; color: #333;}*/
+
+/*露漏碌楼脢卤录盲*/
+.order-time{ margin-right: 0.2rem; color: #f66; font-size: 0.6rem;}
+.order-time em{ margin-left: 0.5rem; }
+.order-time .price{ vertical-align: top;}
+.order-time .price strong{ font-size: 0.65rem;}
+.order-textarea{ font-size: 0.6rem; display: block; width: 100%; height:100%; border: 0; }
+.pro-header .myorder-title{ border-bottom: none;}
+
+/*脰搂赂露路陆脢陆*/
+.pay-list .font-icon{ font-size:1rem; height: 1.2rem; line-height: 1.2rem; vertical-align: middle;}
+.wenxin .icon-iconfont-weixin{ color: #33cc33;}
+.qq .icon-iconfont-qq{ color: #3366cc;}
+.zhifubao .icon-iconfont-zhifubao{ color: #33ccff;}
+.pay-list .icon-iconfont-gougou{ color: #999;}
+.pay-list .c-base{color: #f66;}
+
+.order-handle{ background-color: #fff;}
+.order-handle .btn{ width: 6.25rem;}
+.order-handle p{ margin-right: 6.5rem; font-size: 0.6rem; padding-left: 0.75rem;}
+.order-handle p a{ margin-right: 0.75rem;}
+.order-handle p a i{ margin-right: 0.25rem; font-size: 0.85rem; vertical-align: middle;}
+
+.account-list li .order-item > a.arrow{ display: inline-block; width: 1rem; vertical-align: middle; transform:rotate(90deg); -webkit-transform:rotate(90deg);  }
+.account-list li .order-item > a.arrow i{ display: inline-block; height: 1rem; line-height: 1rem; width: auto; margin-top: 0; text-align: center; width: 1rem;}
+.account-list li .order-item > a.arrow-down{ transform:rotate(-90deg); -webkit-transform:rotate(-90deg);}
+
+.order-details{ font-size: 0.6rem; padding: 4%; border-top: 1px solid #eee; display: none; box-shadow:0px 0px 5px #ddd inset; }
+.order-details .lab-title{ float: left; width: 20%; line-height: 180%; color: #666;}
+.order-details .order-item{ margin-left: 24%; color: #999; line-height: 200%; word-break:break-all;}
+.order-details li .price em,.order-details li .price strong{ color: #999; font-size: 0.6rem;}
+
+/*脰搂赂露陆谩鹿没脮鹿脢戮*/
+.pay-results{ text-align: center;}
+.pay-results .font-icon{width: 3rem; font-size: 4rem; margin: 4rem 0 1rem;}
+.pay-results .icon-iconfont-chenggong{ color: #693;}
+.pay-results .icon-iconfont-shibai{ color: #f33;}
+.pay-results p{ font-size: 0.9rem; color: #333;}
+.results-info{ width: 80%; margin: 1rem auto; text-align: center; line-height: 160%;}
+.results-only{ font-size: 0.5rem; color: #666; margin-top: 0.25rem; text-align: center; line-height: 180%; margin: 1rem auto; width: 30%;}
+.results-info p:first-child{ font-size: 0.65rem; color: #333; line-height: 180%;}
+.results-info p:last-child{ font-size: 0.5rem; color: #666; margin-top: 0.25rem;}
+.results-handle{ text-align: center; color: #999; font-size: 0.6rem; height: 0.8rem; line-height: 0.8rem; margin-top: 2rem;}
+.results-handle a{ margin: 0 0.25rem; color: #666; font-size: 0.65rem; display: inline-block; vertical-align: middle;}
+
+.cost-detail{ position: absolute; right: 0; top:0;}
+.cost{text-decoration: underline; font-size: 0.55rem;}
+
+/*路脩脫脙脙梅脧赂碌炉鲁枚虏茫*/
+.cost-dialog-list{ max-height:10.5rem; overflow-y:auto; overflow-x: hidden;}
+.cost-dialog-title{ height: 2.1rem; line-height: 2.1rem; font-size: 0.6rem; padding: 0 0.75rem; border-bottom: 1px solid #eee;}
+.cost-dialog-list li{ height: 2.1rem; line-height: 2.1rem; box-sizing:border-box; font-size: 0.6rem; padding: 0 0.75rem; border-bottom: 1px solid #eee; clear: both;}
+.cost-dialog-list li .price em,.cost-dialog-list li .price strong{ color: #999; font-size: 0.6rem;}
+.cost-dialog-explian{ height: 2.5rem; line-height: 2.5rem; text-align: right; font-size: 0.6rem; padding: 0 0.75rem; border-top: 1px solid #eee;}
+
+.hotel-explian{ padding-bottom: 0.5rem; font-size: 0.65rem; color: #999;}
+
+.zyx-calendar .calendar-contnet{ padding-top: 0;}
+.zyx-calendar .calendar-contnet table th{ background-color: #fff; font-size: 0.6rem; height: 1.1rem;line-height: 1.1rem; color: #999;}
+
+.order-copies{ width: 48%; float: left; margin-right: 4%;}
+.copies-last{ margin-right: 0;}
+.order-copies p{ float: left;}
+.order-copies p span{ display: block; text-align: center;}
+.order-copies p span.price strong{ font-size: 0.45rem;}
+.order-copies .fr{ padding-top: 0.25rem;}
+.order-copies .numSpinnerBox input{ width: 1rem;}
+/**/
+.myorder-list .mandatory{ color: #ff4000; }
+.myorder-list .lab-title{ position:relative;}
+.myorder-list .mandatory{ position:absolute; left:-0.5rem; top:0.2rem;}
+.order-info { display: block !important; }
+.order-content {
+  font-size: 0.55rem;
+  color: #999;
+  margin-top: 0.3rem;
+}

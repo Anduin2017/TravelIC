@@ -268,6 +268,8 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161023100819_CreateView
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161023100819_CreateViewTimes.Designer.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161101074000_ChangeOrder.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161101074000_ChangeOrder.Designer.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161102083938_CreateUseTime.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161102083938_CreateUseTime.Designer.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\ApplicationDbContextModelSnapshot.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ApplicationUser.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\TravelModels.cs
@@ -287,6 +289,7 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\MineViewModel.
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\OrderViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ParentViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\PayViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\PreOrderViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductListViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\SetMethodViewModel.cs

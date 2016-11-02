@@ -60,7 +60,7 @@ namespace TravelInCloud.Models
     }
     public class JsApiPay
     {
-        public JsApiPay(string OpenId,int Amount,string IP)
+        public JsApiPay(string OpenId,decimal Amount,string IP)
         {
             this.openid = OpenId;
             this.total_fee = Amount;
@@ -69,7 +69,7 @@ namespace TravelInCloud.Models
         //private Controller Controller { get; set; }
         public string openid { get; set; }
         public string access_token { get; set; }
-        public int total_fee { get; set; }
+        public decimal total_fee { get; set; }
         public string IP { get; set; }
         public WxPayData unifiedOrderResult { get; set; }
 

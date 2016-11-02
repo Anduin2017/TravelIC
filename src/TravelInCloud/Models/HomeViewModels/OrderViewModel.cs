@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TravelInCloud.Models.HomeViewModels
 {
-    public class OrderViewModel
+    public class PreOrderViewModel
     {
-        public virtual string NickName { get; set; }
-        public virtual string IconAddress { get; set; }
-        public virtual bool OurAccount { get; set; }
-        public virtual List<Order> Orders { get; set; }
+        public virtual int TargetProductId { get; set; }
+        public virtual ProductType TargetProduct { get; set; }
+        [Required]
+        public virtual DateTime UseDate { get; set; }
     }
 }

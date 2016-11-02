@@ -178,6 +178,7 @@ namespace TravelInCloud.Models
 
         public virtual bool Paid { get; set; }
         public virtual DateTime CreateTime { get; set; }
+        public virtual DateTime UseTime { get; set; }
     }
 
     /// <summary>
