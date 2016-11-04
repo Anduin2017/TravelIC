@@ -1,36 +1,32 @@
 @model TravelInCloud.Models.ProductTypesViewModels.IndexViewModel
+@using TravelInCloud.Services
 
-    @{
-        ViewData["Title"] = "Index";
+@{
+    ViewData["Title"] = "商品类型管理";
+}
+
+<div class="page__ft">
+</div>
+
+
+<div class="page__bd page__bd_spacing">
+    <a class="weui-btn weui-btn_primary" asp-controller="ProductTypes" asp-action="Create" asp-route-ProductId="@Model.ProductId">新建商品类型</a>
+</div>
+<div class="weui-cells">
+
+    @foreach (var item in Model.ProductTypes)
+    {
+        <a class="weui-cell weui-cell_access" asp-action="Edit" asp-route-id="@item.ProductTypeId">
+            <div class="weui-cell__bd">
+                <p>@item.ProductTypeName</p>
+            </div>
+            <div class="weui-cell__ft">@item.ProductTypeDetails.OTake(10)</div>
+        </a>
     }
-
-    <h2>Index</h2>
-
-    <p>
-        <a asp-action="Create" asp-route-ProductId="@Model.ProductId">Create New</a>
-    </p>
-    <table class="table">
-        <tbody>
-            @foreach (var item in Model.ProductTypes)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OldPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductTypeDetails)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductTypeName)
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.ProductTypeId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ProductTypeId">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <a class="weui-cell weui-cell_access" asp-controller="Products" asp-action="PreEdit" asp-route-id="@Model.ProductId">
+        <div class="weui-cell__bd">
+            <p>返回商品编辑</p>
+        </div>
+        <div class="weui-cell__ft">返回商品编辑页面</div>
+    </a>
+</div>

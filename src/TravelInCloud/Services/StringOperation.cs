@@ -43,6 +43,7 @@ namespace TravelInCloud.Services
         }
         public static string OTake(this string source, int Count)
         {
+            source = source ?? string.Empty;
             if (source.Length <= Count)
             {
                 return source;

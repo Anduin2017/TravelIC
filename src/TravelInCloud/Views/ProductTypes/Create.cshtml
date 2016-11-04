@@ -1,56 +1,58 @@
 @model TravelInCloud.Models.ProductType
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "创建商品类型";
 }
 
-<h2>Create</h2>
+<form asp-action="Create" asp-controller="ProductTypes" method="post" class="page input" style="opacity: 1;">
+    <div class="page__bd">
+        <input type="hidden" asp-for="BelongingProductId" />
+        <div asp-validation-summary="All" class="page__desc"></div>
+        <div class="weui-cells__title">新建商品表单</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">商品类型名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="ProductTypeName" placeholder="例如：学生票">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">优惠前价格</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="OldPrice" placeholder="这将以被划掉的形式显示给用户">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">价格</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" asp-for="Price" placeholder="这将直接显示给用户">
+                </div>
+            </div>
+        </div>
 
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>ProductType</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="BelongingProductId" value="@Model.BelongingProductId" />
-        <div class="form-group">
-            <label asp-for="OldPrice" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="OldPrice" class="form-control" />
-                <span asp-validation-for="OldPrice" class="text-danger" />
+        <div class="weui-cells__title">商品类型细节</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" asp-for="ProductTypeDetails" placeholder="例如：仅限学生使用" rows="5"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Price" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger" />
-            </div>
+
+        <div class="weui-btn-area">
+            <button class="weui-btn weui-btn_primary" id="showTooltips" type="submit">保存商品类型 </button>
         </div>
-        <div class="form-group">
-            <label asp-for="ProductTypeDetails" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductTypeDetails" class="form-control" />
-                <span asp-validation-for="ProductTypeDetails" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductTypeName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductTypeName" class="form-control" />
-                <span asp-validation-for="ProductTypeName" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
     </div>
 </form>
 
-<div>
-    <a asp-action="Index" asp-controller="ProductTypes" asp-route-ProductId="@Model.BelongingProductId">Back to List</a>
+<div class="page__bd page__bd_spacing">
+    <a class="weui-btn weui-btn_warn" asp-action="Index" asp-controller="ProductTypes" asp-route-ProductId="@Model.BelongingProductId">返回商品类型列表</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

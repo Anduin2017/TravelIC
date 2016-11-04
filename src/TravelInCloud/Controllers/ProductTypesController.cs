@@ -60,23 +60,6 @@ namespace TravelInCloud.Controllers
             return View(_model);
         }
 
-        // GET: ProductTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productType = await _context.ProductTypes.SingleOrDefaultAsync(m => m.ProductTypeId == id);
-            if (productType == null)
-            {
-                return NotFound();
-            }
-
-            return View(productType);
-        }
-
         // GET: ProductTypes/Create
         public IActionResult Create(int ProductId)
         {
