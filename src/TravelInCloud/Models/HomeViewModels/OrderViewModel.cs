@@ -11,6 +11,7 @@ namespace TravelInCloud.Models.HomeViewModels
         public virtual int TargetProductId { get; set; }
         public virtual ProductType TargetProduct { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy年MM月dd日}")]
         public virtual DateTime UseDate { get; set; }
     }
 }

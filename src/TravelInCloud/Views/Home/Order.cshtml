@@ -33,26 +33,33 @@
                 <span class="order-info">
                     <i class="font-icon icon-order-shopping"></i>
                     <em>购物</em>|
-                    <em class="payed">
-                        @if(Order.Paid)
-                        {
-                            @:已支付
-                        }
-                        else
-                        {
-                            @:未支付
-                        }
-                    </em>
+                    @if (Order.Paid)
+                    {
+                        <em class="payed">
+                            已支付
+                        </em>
+                    }
+                    else
+                    {
+                        <em class="unpay">
+                            未支付
+                        </em>
+                    }
                 </span>
-                <span>下单日期：@Html.DisplayFor(t=>Order.CreateTime)</span>
-                <span class="price fr"><em>￥</em>1.0</span>
+                <br />
+                <span>下单日期：@Html.DisplayFor(t => Order.CreateTime)</span><br />
+                <span>使用日期：@Html.DisplayFor(t => Order.UseTime)</span>
+                <span class="price fr"><em>￥</em>@Order.ProductType.Price</span>
             </div>
-            <a href="/wap/order/userOrder!info.htm?orderId=16237">
-                <h3 class="myorder-item-title">@Order.ProductType.BelongingProduct.ProductName </h3>
-                <p>
-
-                </p>
-                <p><i class="font-icon fr icon-iconfont-jiantou"></i>1份</p>
+            <a asp-controller="Home" asp-action="Product" asp-route-id="@Order.ProductType.BelongingProduct.ProductId" style="height:90px;">
+                <img style="float: left; width: 4.45rem; height: 3.5rem;" src="@Order.ProductType.BelongingProduct.ImageOfProducts.First().ImageSrc" />
+                <div class="gline-con" style="margin-left:130px;">
+                    <h3 class="myorder-item-title">@Order.ProductType.BelongingProduct?.ProductName - @Order.ProductType.ProductTypeName </h3>
+                    <p>
+                        @Order.ProductType.ProductTypeDetails
+                    </p>
+                    <p><i class="font-icon fr icon-iconfont-jiantou"></i>1份</p>
+                </div>
             </a>
         </div>
     </div>

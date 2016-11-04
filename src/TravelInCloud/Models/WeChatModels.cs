@@ -60,16 +60,16 @@ namespace TravelInCloud.Models
     }
     public class JsApiPay
     {
-        public JsApiPay(string OpenId,decimal Amount,string IP)
+        public JsApiPay(string OpenId, decimal Amount, string IP)
         {
             this.openid = OpenId;
-            this.total_fee = Amount;
+            this.total_fee = Convert.ToInt32(Amount * 100);//微信要求单位为分
             this.IP = IP;
         }
         //private Controller Controller { get; set; }
         public string openid { get; set; }
         public string access_token { get; set; }
-        public decimal total_fee { get; set; }
+        public int total_fee { get; set; }
         public string IP { get; set; }
         public WxPayData unifiedOrderResult { get; set; }
 

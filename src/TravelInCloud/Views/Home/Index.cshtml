@@ -46,9 +46,9 @@
         <div class="region-screen">
             <strong class="region-this">大同</strong>
         </div>
-        <div class="header-login">
+        @*<div class="header-login">
             <a href="/wap/user/consumer.htm"></a>
-        </div>
+        </div>*@
     </div>
 </div>
 <!--头部 end-->
@@ -56,13 +56,13 @@
 <div class="swiper-container home-slider">
     <ul class="swiper-wrapper">
         <li class="swiper-slide">
-            <a href="http://wap.yungangyunyou.com/wap/ticket/buyTicket.htm?id=2880"><img src="~/images/member/header.jpg" alt="" /></a>
+            <a href="/Home/Product/2"><img src="~/images/member/header.jpg" alt="" /></a>
         </li>
         <li class="swiper-slide">
-            <a href="http://wap.yungangyunyou.com/wap/goods/index!info.htm?id=2642"><img src="~/images/member/orderheader.jpg" alt="" /></a>
+            <a href="/Home/Product/2"><img src="~/images/member/orderheader.jpg" alt="" /></a>
         </li>
         <li class="swiper-slide">
-            <a href="http://wap.yungangyunyou.com/wap/repast/index!info.htm?id=2480"><img src="~/images/member/signinheader.jpg" alt="" /></a>
+            <a href="/Home/Product/2"><img src="~/images/member/signinheader.jpg" alt="" /></a>
         </li>
     </ul>
     <div class="swiper-pagination"></div>
@@ -115,10 +115,10 @@
 <div class="page-line"></div>
 <!--活动 start-->
 <div class="home-activity clearfix">
-    <a href="/wap/strategy/dtjy.htm">
+    <a href="/Home/Product/2">
         <img src="~/images/member/signinheader2.jpg" alt="">
     </a>
-    <a href="/wap/strategy/yhhd.htm">
+    <a href="/Home/Product/3">
 
         <img src="~/images/member/signinheader.jpg" alt="">
     </a>
@@ -127,10 +127,10 @@
 <!--活动 end-->
 <!--热销产品 start-->
 <div class="hot-pro">
-    <h3>热销产品<em>Hot products</em></h3>
+    <h3>精品推荐<em>Best Suggestion</em></h3>
     <ul>
-        @foreach (var P in Model.Products)
-            {
+        @foreach (var P in Model.Products.OrderByDescending(t=>t.ViewTimes))
+        {
             <li>
                 <a asp-action="Product" asp-controller="Home" asp-route-id="@P.ProductId">
                     <img src="@P.TryGetFirst()" alt="">
@@ -139,7 +139,8 @@
                         <p class="con-text"></p>
                         <p class="con-lab">
                             <span class="price"><em>￥@P.TryGetPrice()</em> <del>￥@P.TryGetPrice()</del></span>
-                            <span class="sold">已售：@P.BuyTimes</span>
+                            <span class="sold">已售：@P.BuyTimes</span>&nbsp;
+                            <span class="sold" style="margin-right:10px;">浏览次数：@P.ViewTimes</span>
                         </p>
                     </div>
                 </a>
@@ -155,9 +156,9 @@
 <div class="region-layer">
     <h3>选择城市<a href="javascript:;" class="close-reglayer"><i class="font-icon icon-iconfont-32pxchaxian"></i></a></h3>
     <ul>
-        <li class="cur"><a href="/wap/index.htm?citeCode=004&flag=false">太原</a></li>
-        <li class="cur"><a href="/wap/index.htm?citeCode=003&flag=false">晋中</a></li>
-        <li class="cur"><a href="/wap/index.htm?citeCode=002&flag=false">忻州</a></li>
-        <li class="cur"><a href="/wap/index.htm?citeCode=000&flag=false">大同</a></li>
+        <li class="cur"><a href="#">北京</a></li>
+        <li class="cur"><a href="#">太原</a></li>
+        <li class="cur"><a href="#">大同</a></li>
+        <li class="cur"><a href="#">朔州</a></li>
     </ul>
 </div>

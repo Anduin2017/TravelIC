@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,6 +58,7 @@ namespace TravelInCloud.Models
         public virtual string StoreName { get; set; }
         public virtual string StoreDescription { get; set; }
         public virtual string StoreLocation { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy年MM月dd日}")]
         public virtual DateTime StartStoreTime { get; set; } = DateTime.Now;
 
         /// <summary>
@@ -177,7 +179,9 @@ namespace TravelInCloud.Models
         public virtual int ProductTypeId { get; set; }
 
         public virtual bool Paid { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy年MM月dd日}")]
         public virtual DateTime CreateTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy年MM月dd日}")]
         public virtual DateTime UseTime { get; set; }
     }
 

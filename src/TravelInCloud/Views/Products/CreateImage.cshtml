@@ -37,6 +37,6 @@
             </div>
         </div>
         <button class="weui-btn weui-btn_warn" type="submit">上传</button>
-        <a class="weui-btn weui-btn_default" asp-action="Index">返回</a>
+        <a class="weui-btn weui-btn_default" asp-controller="ProductTypes" asp-action="Index" asp-route-ProductId="@Model.ProductId">继续添加商品类型</a>
     </form>
 </div>

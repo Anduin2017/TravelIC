@@ -283,6 +283,7 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\SendCodeVie
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\VerifyCodeViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ApplyStoreViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ChangeMyInfoViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ChangeStoreInfoViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\CreateAccountViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\IndexViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\MineViewModel.cs

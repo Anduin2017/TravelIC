@@ -52,7 +52,7 @@ namespace TravelInCloud.Controllers
 
             var Model = new IndexViewModel
             {
-                Products = _products.OrderByDescending(t => t.BuyTimes).Take(10).ToList()
+                Products = _products.OrderByDescending(t => t.BuyTimes).Take(5).ToList()
             };
             return View(Model);
         }
@@ -104,11 +104,12 @@ namespace TravelInCloud.Controllers
                     .Include(t => t.Owner)
                     .Where(t => t.OwnerId == user.Id)
                     .ToList();
-            Orders.ForEach(async t =>
+            Orders.ForEach(t =>
             {
-                t.ProductType.BelongingProduct = await _dbContext
+                t.ProductType.BelongingProduct = _dbContext
                     .Products
-                    .SingleOrDefaultAsync(p => p.ProductId == t.ProductType.BelongingProductId);
+                    .Include(k => k.ImageOfProducts)
+                    .SingleOrDefault(p => p.ProductId == t.ProductType.BelongingProductId);
             });
 
             var Model = new OrderViewModel
@@ -298,6 +299,7 @@ namespace TravelInCloud.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> PayTest()
         {
             var cuser = await GetCurrentUserAsync();
@@ -358,6 +360,58 @@ namespace TravelInCloud.Controllers
                 return RedirectToAction(nameof(PayTest));
             }
             return RedirectToAction(nameof(PreOrder), new { id = Model.TargetProductId });
+        }
+
+        public async Task<IActionResult> ChangeStoreInfo()
+        {
+            var user = await GetCurrentUserAsync() as Store;
+            if (user != null)
+            {
+                var _Model = new ChangeStoreInfoViewModel
+                {
+                    StoreDescription = user.StoreDescription,
+                    StoreLocation = user.StoreLocation,
+                    StoreName = user.StoreName,
+                    StoreOwnerCode = user.StoreOwnerCode,
+                    StoreOwnerName = user.StoreOwnerName,
+                    StoreOwnerPhone = user.PhoneNumber
+                };
+                return View(_Model);
+            }
+            return RedirectToAction(nameof(Settings));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeStoreInfo(ChangeStoreInfoViewModel Model)
+        {
+            var user = await GetCurrentUserAsync() as Store;
+            if (ModelState.IsValid && user != null)
+            {
+                user.StoreDescription = Model.StoreDescription;
+                user.StoreName = Model.StoreName;
+                user.StoreLocation = Model.StoreLocation;
+                user.StoreOwnerCode = Model.StoreOwnerCode;
+                user.StoreOwnerName = Model.StoreOwnerName;
+                user.PhoneNumber = Model.StoreOwnerPhone;
+                await _userManager.UpdateAsync(user);
+                return RedirectToAction(nameof(Settings));
+            }
+            return View(Model);
+        }
+
+        public async Task<IActionResult> PayFinished()
+        {
+            var cuser = await GetCurrentUserAsync();
+            var TargetOrder = await _dbContext
+                .Orders
+                .Include(t => t.ProductType)
+                .Where(t => t.OwnerId == cuser.Id)//这个人的订单中
+                .OrderByDescending(t => t.CreateTime)//按创建时间排序
+                .FirstAsync();//的第一个，也就是最新的那个
+
+            TargetOrder.Paid = true;
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Order));
         }
     }
 }
