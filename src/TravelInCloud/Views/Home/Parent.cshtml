@@ -16,10 +16,10 @@
 </header>
 <section>
     <ul class="tab clearfix member-tab">
-        <li><a asp-controller="Home" asp-action="Order"><i class="font-icon icon-iconfont-dingdan"></i>全部订单</a></li>
-        <li><a href="/wap/order/userOrder.htm?payStatus=1"><i class="font-icon icon-iconfont-yizhifu dingdan-pay"></i>已支付</a></li>
-        <li><a href="/wap/order/userOrder.htm?payStatus=0"><i class="font-icon icon-iconfont-weizhifu dingdan-unpay"></i>待支付</a></li>
-        <li><a href="/wap/order/userOrder.htm?orderStatus=3"><i class="font-icon icon-iconfont-tuik dingdan-yellow"></i>退款</a></li>
+        <li><a asp-controller="Home" asp-action="Order" asp-route-OrderStatus="-1"><i class="font-icon icon-iconfont-dingdan"></i>全部订单</a></li>
+        <li><a asp-controller="Home" asp-action="Order" asp-route-OrderStatus="1"><i class="font-icon icon-iconfont-yizhifu dingdan-pay"></i>已支付</a></li>
+        <li><a asp-controller="Home" asp-action="Order" asp-route-OrderStatus="0"><i class="font-icon icon-iconfont-weizhifu dingdan-unpay"></i>待支付</a></li>
+        <li><a asp-controller="Home" asp-action="Order" asp-route-OrderStatus="4"><i class="font-icon icon-iconfont-tuik dingdan-yellow"></i>退款</a></li>
     </ul>
 </section>
 

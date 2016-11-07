@@ -33,17 +33,30 @@
                 <span class="order-info">
                     <i class="font-icon icon-order-shopping"></i>
                     <em>购物</em>|
-                    @if (Order.Paid)
+                    @switch (Order.OrderStatus)
                     {
-                        <em class="payed">
-                            已支付
-                        </em>
-                    }
-                    else
-                    {
-                        <em class="unpay">
-                            未支付
-                        </em>
+                        case OrderStatus.unPaid:
+                            <em class="unpay">
+                                未支付
+                            </em>
+                            break;
+                        case OrderStatus.Paid:
+                            <em class="payed">
+                                已付款
+                            </em>
+                            break;
+                        case OrderStatus.Used:
+                            <em class="payed">
+                                已使用
+                            </em>
+                            break;
+                        case OrderStatus.Refunded:
+                            <em class="unpay">
+                                已退款
+                            </em>
+                            break;
+                        default:
+                            throw new Exception("Page Argument Exception");
                     }
                 </span>
                 <br />
@@ -66,17 +79,98 @@
 }
 <div class="page-line"></div>
 <ul class="tab-search-panel" id="all">
-    <li><a href="/wap/order/userOrder.htm?orderType=" class="c-base">全部</a></li>
-    <li><a href="/wap/order/userOrder.htm?payStatus=0&orderType=">未支付</a></li>
-    <li><a href="/wap/order/userOrder.htm?payStatus=1&orderType=">已支付</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderStatus=3&orderType=">退单</a></li>
+    <li><a asp-route-OrderStatus="-1">全部</a></li>
+    <li><a asp-route-OrderStatus="0">未支付</a></li>
+    <li><a asp-route-OrderStatus="1">已支付</a></li>
+    <li><a asp-route-OrderStatus="2">已使用</a></li>
+    <li><a asp-route-OrderStatus="4">已退款</a></li>
 </ul>
 <ul class="tab-search-panel" id="default">
-    <li><a href="/wap/order/userOrder.htm?payStatus=&orderStatus=" class="c-base">订单类型</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderType=0&payStatus=&orderStatus=">门票订单</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderType=1&payStatus=&orderStatus=">酒店订单</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderType=2&payStatus=&orderStatus=">美食订单</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderType=3&payStatus=&orderStatus=">周边游订单</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderType=4&payStatus=&orderStatus=">跟团游订单</a></li>
-    <li><a href="/wap/order/userOrder.htm?orderType=5&payStatus=&orderStatus=">商品订单</a></li>
+    <li><a asp-route-ProductType="-1" class="c-base">订单类型</a></li>
+    <li><a asp-route-ProductType="1">酒店</a></li>
+    <li><a asp-route-ProductType="2">景点</a></li>
+    <li><a asp-route-ProductType="3">KTV</a></li>
+    <li><a asp-route-ProductType="4">洗浴汗蒸</a></li>
+    <li><a asp-route-ProductType="10">饭店</a></li>
+    <li><a asp-route-ProductType="11">商品</a></li>
+    <li><a asp-route-ProductType="12">租车</a></li>
+    <li><a asp-route-ProductType="13">附近游</a></li>
+    <li><a asp-route-ProductType="14">跟团游</a></li>
 </ul>
+
+@section js{
+    <script src="~/js/touch.js"></script>
+    <script>
+        $(function () {
+            $(".tab-search-panel").each(function () {
+                var height = $(this).outerHeight(true);
+                $(this).css("top", -height + "px");
+            });
+            var touchobj = $("#searchtab").find("a"), div, tabpanel = $(".tab-search-panel").find("a");
+            touch.on(touchobj, 'tap', function () {
+                if ($(this).hasClass("c-base")) {
+                    div = dialogclose(div);
+                }
+                else {
+                    dialogclose(div);
+                    div = $(this).parent().data("div");
+                    $(this).addClass("c-base");
+                    if (dodiv()) {
+                        setTimeout(function () {
+                            $("#" + div).stop().animate({
+                                top: $("#searchtab").outerHeight(true) - 1
+                            }, 300);
+                        }, 300);
+                    } else {
+                        $("#" + div).stop().animate({
+                            top: $("#searchtab").outerHeight(true) - 1
+                        }, 300);
+                    }
+                    $("#mask").fadeIn();
+                }
+            });
+            touch.on("#mask", "tap", function () {
+                div = dialogclose(div);
+            });
+            touch.on("#mask", "touchend", function (event) {
+                event.preventDefault();
+            });
+            touch.on(tabpanel, 'tap', function (ev) {
+                var text = $(this).text();
+                var height = $("#" + div).outerHeight(true);
+                //$(".page-list").find("a").addClass("prevent");
+                $("#searchtab").find("li[data-div=" + div + "]").find("a").text(text);
+                $(this).parent().siblings().find("a").removeClass("c-base");
+                $(this).addClass("c-base");
+                window.location.href = $(this).attr("href");
+                div = dialogclose(div);
+                ev.preventDefault();
+            });
+            touch.on(tabpanel, 'touchend', function (event) {
+                event.preventDefault();
+            });
+        });
+        function dialogclose(div) {
+            var height = $("#" + div).outerHeight(true);
+            $("#" + div).stop().animate({
+                top: -height + "px"
+            }, 300);
+            $("#mask").hide();
+            $("#searchtab").find("a").removeClass("c-base");
+            div = null;
+            return div;
+        }
+        function dodiv() {
+            var flag = false;
+            $(".tab-search-panel").each(function () {
+                var top = $(this).position().top;
+                if (top > 0) {
+                    flag = true;
+                    return false;
+                }
+            });
+            return flag;
+        }
+    </script>
+
+}

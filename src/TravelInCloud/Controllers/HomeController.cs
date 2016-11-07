@@ -42,8 +42,10 @@ namespace TravelInCloud.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Index(int LocationId)
         {
+
+
             var _products = _dbContext.Products
                 .Include(t => t.Owner)
                 .Include(t => t.ImageOfProducts)
@@ -95,7 +97,7 @@ namespace TravelInCloud.Controllers
         }
 
 
-        public async Task<IActionResult> Order()
+        public async Task<IActionResult> Order(int OrderStatus = -1, int ProductType = -1)
         {
             var user = await GetCurrentUserAsync();
             var Orders = _dbContext
@@ -109,8 +111,17 @@ namespace TravelInCloud.Controllers
                 t.ProductType.BelongingProduct = _dbContext
                     .Products
                     .Include(k => k.ImageOfProducts)
+                    .Include(m => m.Owner)
                     .SingleOrDefault(p => p.ProductId == t.ProductType.BelongingProductId);
             });
+            if (OrderStatus != -1)
+            {
+                Orders = Orders.Where(t => t.OrderStatus == (OrderStatus)OrderStatus).ToList();
+            }
+            if (ProductType != -1)
+            {
+                Orders = Orders.Where(t => t.ProductType.BelongingProduct.Owner.StoreType == (StoreType)ProductType).ToList();
+            }
 
             var Model = new OrderViewModel
             {
@@ -163,7 +174,7 @@ namespace TravelInCloud.Controllers
                     Model.QueryMethod = "按人气排序";
                     break;
                 case 3:
-                    Model.Products = _products;
+                    Model.Products = _products.OrderByDescending(t=>t.ProductId).ToList();
                     Model.QueryMethod = "默认排序";
                     break;
                 case 4:
@@ -351,7 +362,7 @@ namespace TravelInCloud.Controllers
                 {
                     OwnerId = cuser.Id,
                     CreateTime = DateTime.Now,
-                    Paid = false,
+                    OrderStatus = OrderStatus.unPaid,
                     ProductTypeId = Model.TargetProductId,
                     UseTime = Model.UseDate
                 });
@@ -409,9 +420,19 @@ namespace TravelInCloud.Controllers
                 .OrderByDescending(t => t.CreateTime)//按创建时间排序
                 .FirstAsync();//的第一个，也就是最新的那个
 
-            TargetOrder.Paid = true;
+            TargetOrder.OrderStatus = OrderStatus.Paid;
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Order));
+        }
+
+        public async Task<IActionResult> ProductWarning(int id)
+        {
+            var Product = await _dbContext.Products.SingleOrDefaultAsync(t => t.ProductId == id);
+            var _model = new ProductWarningViewModel
+            {
+                Product = Product
+            };
+            return View(_model);
         }
     }
 }

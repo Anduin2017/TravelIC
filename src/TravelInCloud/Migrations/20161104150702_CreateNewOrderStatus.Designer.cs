@@ -8,9 +8,10 @@ using TravelInCloud.Data;
 namespace TravelInCloud.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161104150702_CreateNewOrderStatus")]
+    partial class CreateNewOrderStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -207,18 +208,6 @@ namespace TravelInCloud.Migrations
                     b.ToTable("ImageOfProduct");
                 });
 
-            modelBuilder.Entity("TravelInCloud.Models.Location", b =>
-                {
-                    b.Property<int>("LocationId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("LocationName");
-
-                    b.HasKey("LocationId");
-
-                    b.ToTable("Location");
-                });
-
             modelBuilder.Entity("TravelInCloud.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -295,8 +284,6 @@ namespace TravelInCloud.Migrations
                 {
                     b.HasBaseType("TravelInCloud.Models.ApplicationUser");
 
-                    b.Property<int>("LocationId");
-
                     b.Property<DateTime>("StartStoreTime");
 
                     b.Property<string>("StoreDescription");
@@ -310,8 +297,6 @@ namespace TravelInCloud.Migrations
                     b.Property<string>("StoreOwnerName");
 
                     b.Property<int>("StoreType");
-
-                    b.HasIndex("LocationId");
 
                     b.ToTable("Store");
 
@@ -387,14 +372,6 @@ namespace TravelInCloud.Migrations
                     b.HasOne("TravelInCloud.Models.Product", "BelongingProduct")
                         .WithMany("ProductTypes")
                         .HasForeignKey("BelongingProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TravelInCloud.Models.Store", b =>
-                {
-                    b.HasOne("TravelInCloud.Models.Location", "Location")
-                        .WithMany("StoresHere")
-                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

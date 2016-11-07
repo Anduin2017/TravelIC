@@ -1,0 +1,31 @@
+﻿@using TravelInCloud.Controllers
+@model TravelInCloud.Models.HomeViewModels.ProductWarningViewModel
+@{
+    Layout = "_LayoutFish";
+    ViewData["Title"] = "购买警示";
+}
+@section css{
+<link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" asp-append-version="true" />
+}
+<div class="tab-swiper swiper-container-horizontal swiper-wp8-horizontal">
+    <ul class="tab details-triple clearfix" id="details-tab">
+        <li class="swiper-li active swiper-slide-active" style="width: 171.25px;"><a class="active" href="javascript:;" data-div="book">产品购买警示</a></li>
+    </ul>
+</div>
+
+<div class="details-tab-panel swiper-container-horizontal swiper-container-autoheight swiper-wp8-horizontal">
+    <div class="ticket-details-tabs" id="tab-panel" style="height: 157px;">
+        <div class="details-tab-item swiper-slide-active" id="book" style="width: 685px;">
+            <div class="tab-article" style="font-size:25px;margin:10px;">
+                <p>@Model.Product.ProductWarnning</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="page__ft">
+</div>
+<div class="page__bd page__bd_spacing">
+    <a class="weui-btn weui-btn_primary" asp-controller="Home" asp-action="Product" asp-route-id="@Model.Product.ProductId">返回商品信息页</a>
+</div>

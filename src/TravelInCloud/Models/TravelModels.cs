@@ -23,6 +23,15 @@ namespace TravelInCloud.Models
         TravelWithGroup = 14
     }
 
+    public class Location
+    {
+        public virtual int LocationId { get; set; }
+        public virtual string LocationName { get; set; }
+
+        [InverseProperty(nameof(Store.Location))]
+        public virtual List<Store> StoresHere { get; set; }
+    }
+
     /// <summary>
     /// 商店用户
     /// </summary>
@@ -66,6 +75,10 @@ namespace TravelInCloud.Models
         /// </summary>
         [InverseProperty(nameof(Product.Owner))]
         public virtual List<Product> Products { get; set; }
+
+        [ForeignKey(nameof(LocationId))]
+        public virtual Location Location { get; set; }
+        public virtual int LocationId { get; set; }
     }
 
     /// <summary>
@@ -157,6 +170,14 @@ namespace TravelInCloud.Models
 
     }
 
+    public enum OrderStatus : short
+    {
+        unPaid = 0,
+        Paid = 1,
+        Used = 2,
+        Refunded = 4
+    }
+
     /// <summary>
     /// 订单
     /// </summary>
@@ -178,7 +199,11 @@ namespace TravelInCloud.Models
         public virtual ProductType ProductType { get; set; }
         public virtual int ProductTypeId { get; set; }
 
-        public virtual bool Paid { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
+        //public virtual bool Paid { get; set; } = false;
+        //public virtual bool Used { get; set; } = false;
+        //public virtual bool Refunded { get; set; } = false;
         [DisplayFormat(DataFormatString = "{0:yyyy年MM月dd日}")]
         public virtual DateTime CreateTime { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy年MM月dd日}")]

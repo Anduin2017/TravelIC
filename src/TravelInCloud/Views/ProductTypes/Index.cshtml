@@ -16,7 +16,7 @@
 
     @foreach (var item in Model.ProductTypes)
     {
-        <a class="weui-cell weui-cell_access" asp-action="Edit" asp-route-id="@item.ProductTypeId">
+        <a class="weui-cell weui-cell_access" asp-action="Delete" asp-route-id="@item.ProductTypeId">
             <div class="weui-cell__bd">
                 <p>@item.ProductTypeName</p>
             </div>
