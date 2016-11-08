@@ -42,23 +42,26 @@ namespace TravelInCloud.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index(int LocationId)
+        public async Task<IActionResult> Index(int LocationId = -1)
         {
-
-
-            var _products = _dbContext.Products
+            IEnumerable<Product> _products = _dbContext.Products
                 .Include(t => t.Owner)
                 .Include(t => t.ImageOfProducts)
-                .Include(t => t.ProductTypes)
-                .ToList();
+                .Include(t => t.ProductTypes);
+
+            if (LocationId != -1)
+            {
+                _products = _products.Where(t => t.Owner.LocationId == LocationId);
+            }
 
             var Model = new IndexViewModel
             {
-                Products = _products.OrderByDescending(t => t.BuyTimes).Take(5).ToList()
+                Products = _products.OrderByDescending(t => t.ViewTimes).Take(5),
+                Locations = _dbContext.Locations,
+                CurrentLocation = await _dbContext.Locations.SingleOrDefaultAsync(t => t.LocationId == LocationId)
             };
             return View(Model);
         }
-
 
         public IActionResult Cart()
         {
@@ -77,6 +80,7 @@ namespace TravelInCloud.Controllers
             };
             return View(_model);
         }
+
         [HttpPost]
         public async Task<IActionResult> ChangeMyInfo(ChangeMyInfoViewModel model, string ReturnUrl = "")
         {
@@ -96,31 +100,24 @@ namespace TravelInCloud.Controllers
             }
         }
 
-
         public async Task<IActionResult> Order(int OrderStatus = -1, int ProductType = -1)
         {
             var user = await GetCurrentUserAsync();
-            var Orders = _dbContext
+            IEnumerable<Order> Orders = _dbContext
                     .Orders
                     .Include(t => t.ProductType)
+                    .Include(t => t.ProductType.BelongingProduct)
+                    .Include(t => t.ProductType.BelongingProduct.ImageOfProducts)
                     .Include(t => t.Owner)
-                    .Where(t => t.OwnerId == user.Id)
-                    .ToList();
-            Orders.ForEach(t =>
-            {
-                t.ProductType.BelongingProduct = _dbContext
-                    .Products
-                    .Include(k => k.ImageOfProducts)
-                    .Include(m => m.Owner)
-                    .SingleOrDefault(p => p.ProductId == t.ProductType.BelongingProductId);
-            });
+                    .Where(t => t.OwnerId == user.Id);
+
             if (OrderStatus != -1)
             {
-                Orders = Orders.Where(t => t.OrderStatus == (OrderStatus)OrderStatus).ToList();
+                Orders = Orders.Where(t => t.OrderStatus == (OrderStatus)OrderStatus);
             }
             if (ProductType != -1)
             {
-                Orders = Orders.Where(t => t.ProductType.BelongingProduct.Owner.StoreType == (StoreType)ProductType).ToList();
+                Orders = Orders.Where(t => t.ProductType.BelongingProduct.Owner.StoreType == (StoreType)ProductType);
             }
 
             var Model = new OrderViewModel
@@ -132,6 +129,7 @@ namespace TravelInCloud.Controllers
             };
             return View(Model);
         }
+
         public async Task<IActionResult> Parent()
         {
             var user = await GetCurrentUserAsync();
@@ -151,9 +149,7 @@ namespace TravelInCloud.Controllers
                 .Include(t => t.Owner)
                 .Include(t => t.ImageOfProducts)
                 .Include(t => t.ProductTypes)
-                .ToList()
-                .Where(t => t.Owner.StoreType == StoreType)
-                .ToList();
+                .Where(t => t.Owner.StoreType == StoreType);
 
             var Model = new ProductListViewModel
             {
@@ -164,21 +160,20 @@ namespace TravelInCloud.Controllers
             {
                 case 1:
                     Model.Products = _products
-                        .Where(t => t.ProductTypes.Count > 0)//所有具有价值的商品
-                        .OrderBy(t => t.ProductTypes.Min(p => p.Price))//价格最低值
-                        .ToList();
+                        .Where(t => t.ProductTypes.Count > 0)
+                        .OrderBy(t => t.ProductTypes.Min(p => p.Price));
                     Model.QueryMethod = "按价格排序";
                     break;
                 case 2:
-                    Model.Products = _products.OrderByDescending(t => t.BuyTimes).ToList();
+                    Model.Products = _products.OrderByDescending(t => t.BuyTimes);
                     Model.QueryMethod = "按人气排序";
                     break;
                 case 3:
-                    Model.Products = _products.OrderByDescending(t=>t.ProductId).ToList();
+                    Model.Products = _products.OrderByDescending(t => t.ProductId);
                     Model.QueryMethod = "默认排序";
                     break;
                 case 4:
-                    Model.Products = _products.OrderByDescending(t => t.ViewTimes).ToList();
+                    Model.Products = _products.OrderByDescending(t => t.ViewTimes);
                     Model.QueryMethod = "按浏览量排序";
                     break;
                 default:
@@ -265,23 +260,10 @@ namespace TravelInCloud.Controllers
         public async Task<IActionResult> ApplyStore()
         {
             var _user = await GetCurrentUserAsync() as Store;
-            if (_user != null)
+            return View(new ApplyStoreViewModel
             {
-                return View(new ApplyStoreViewModel
-                {
-                    StoreDescription = _user.StoreDescription,
-                    StoreName = _user.StoreName,
-                    StoreLocation = _user.StoreLocation,
-                    StoreOwnerCode = _user.StoreOwnerCode,
-                    StoreOwnerName = _user.StoreOwnerName,
-                    StoreOwnerPhone = _user.PhoneNumber,
-                    StoreType = _user.StoreType
-                });
-            }
-            else
-            {
-                return View(new ApplyStoreViewModel { });
-            }
+                AvaliableLocations = _dbContext.Locations
+            });
         }
 
         [HttpPost]
@@ -290,6 +272,10 @@ namespace TravelInCloud.Controllers
             if (ModelState.IsValid)
             {
                 var User = await GetCurrentUserAsync();
+                var TempOrders = User.Orders.ToList();
+                _dbContext.Orders.RemoveRange(User.Orders);
+                await _dbContext.SaveChangesAsync();
+
                 var NewStoreUser = new Store(User);
                 NewStoreUser.StoreDescription = Model.StoreDescription;
                 NewStoreUser.StoreLocation = Model.StoreLocation;
@@ -298,8 +284,11 @@ namespace TravelInCloud.Controllers
                 NewStoreUser.StoreOwnerName = Model.StoreOwnerName;
                 NewStoreUser.PhoneNumber = Model.StoreOwnerPhone;
                 NewStoreUser.StoreType = Model.StoreType;
+                NewStoreUser.LocationId = Model.LocationId;
+
                 await _userManager.DeleteAsync(User);
                 await _userManager.CreateAsync(NewStoreUser);
+
                 await _signInManager.SignInAsync(NewStoreUser, false);
                 return RedirectToAction(nameof(Settings));
             }
@@ -330,9 +319,11 @@ namespace TravelInCloud.Controllers
             return View(new PayViewModel { unifiedOrderResult = Result, wxJsApiParam = wxJsApiParam });
         }
 
-        private Task<ApplicationUser> GetCurrentUserAsync()
+        private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return _userManager.GetUserAsync(HttpContext.User);
+            return await _dbContext.Users
+                .Include(t => t.Orders)
+                .SingleOrDefaultAsync(t => t.UserName == User.Identity.Name);
         }
 
         public async Task<IActionResult> PreOrder(int id)
@@ -416,11 +407,13 @@ namespace TravelInCloud.Controllers
             var TargetOrder = await _dbContext
                 .Orders
                 .Include(t => t.ProductType)
+                .Include(t => t.ProductType.BelongingProduct)
                 .Where(t => t.OwnerId == cuser.Id)//这个人的订单中
                 .OrderByDescending(t => t.CreateTime)//按创建时间排序
                 .FirstAsync();//的第一个，也就是最新的那个
 
             TargetOrder.OrderStatus = OrderStatus.Paid;
+            TargetOrder.ProductType.BelongingProduct.BuyTimes++;
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Order));
         }

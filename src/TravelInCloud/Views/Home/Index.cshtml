@@ -3,37 +3,29 @@
     Layout = "_LayoutFish";
 }
 @section css{
-<link rel="stylesheet" type="text/css" href="~/lib/Swiper/dist/css/swiper.min.css">
-<link rel="stylesheet" type="text/css" href="~/css/index.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/index.css">
 }
 @section js{
-<script type="text/javascript">
-    $(function () {
-		//$(".region-layer ul").css({"max-height":$(window).height()*0.6-$(".region-layer h3").height()});
-		$(".region-layer").css({"margin-top":-$(".region-layer").height()/2});
-		$(".region-layer li").click(function(){
-			$(this).addClass("cur").siblings().removeClass("cur");
-			$(".region-this").html($(this).text());
-			$(".region-layer").removeClass("thisshow");
-			$(".region-layer").hide()
-			$(".mask").hide();
-			$('body').removeAttr('style');
-		});
-		$(".close-reglayer").click(function(){
-			$(".region-layer").removeClass("thisshow");
-			$(".region-layer").hide();
-			$(".mask").hide();
-			$('body').removeAttr('style');
-		});
-        //头部地区选择
-		$(".region-this").click(function(){
-			$(".region-layer").show();
-			$(".mask").show();
-			$('body').css({'overflow':'hidden','height':$(window).height(),'position':'fixed','left':0,'top':0,'right':0});
-			$(".region-layer").addClass("thisshow");
-		});
-    });
-</script>
+    <script type="text/javascript">
+        $(function () {
+            //$(".region-layer ul").css({"max-height":$(window).height()*0.6-$(".region-layer h3").height()});
+            $(".region-layer").css({ "margin-top": -$(".region-layer").height() / 2 });
+            $(".close-reglayer").click(function () {
+                $(".region-layer").removeClass("thisshow");
+                $(".region-layer").hide();
+                $(".mask").hide();
+                $('body').removeAttr('style');
+            });
+            //头部地区选择
+            $(".region-this").click(function () {
+                $(".region-layer").show();
+                $(".mask").show();
+                $('body').css({ 'overflow': 'hidden', 'height': $(window).height(), 'position': 'fixed', 'left': 0, 'top': 0, 'right': 0 });
+                $(".region-layer").addClass("thisshow");
+            });
+        });
+    </script>
 }
 <input type="hidden" name="flag" id="flag" value="" />
 <!--返回顶部 start-->
@@ -44,11 +36,11 @@
     <h1 class="logo fl">云中旅行</h1>
     <div class="header-r fr">
         <div class="region-screen">
-            <strong class="region-this">大同</strong>
+            <strong class="region-this">@(Model.CurrentLocation?.LocationName ?? "全部")</strong>
         </div>
         @*<div class="header-login">
-            <a href="/wap/user/consumer.htm"></a>
-        </div>*@
+                <a href="/wap/user/consumer.htm"></a>
+            </div>*@
     </div>
 </div>
 <!--头部 end-->
@@ -129,7 +121,7 @@
 <div class="hot-pro">
     <h3>精品推荐<em>Best Suggestion</em></h3>
     <ul>
-        @foreach (var P in Model.Products.OrderByDescending(t=>t.ViewTimes))
+        @foreach (var P in Model.Products)
         {
             <li>
                 <a asp-action="Product" asp-controller="Home" asp-route-id="@P.ProductId">
@@ -149,16 +141,15 @@
     </ul>
 </div>
 
-
-
 <!--底部 end-->
 <div class="mask"></div>
 <div class="region-layer">
     <h3>选择城市<a href="javascript:;" class="close-reglayer"><i class="font-icon icon-iconfont-32pxchaxian"></i></a></h3>
     <ul>
-        <li class="cur"><a href="#">北京</a></li>
-        <li class="cur"><a href="#">太原</a></li>
-        <li class="cur"><a href="#">大同</a></li>
-        <li class="cur"><a href="#">朔州</a></li>
+        <li class="cur"><a asp-route-LocationId="-1">全部</a></li>
+        @foreach (var Loc in Model.Locations)
+        {
+            <li class="cur"><a asp-route-LocationId="@Loc.LocationId">@Loc.LocationName</a></li>
+        }
     </ul>
 </div>

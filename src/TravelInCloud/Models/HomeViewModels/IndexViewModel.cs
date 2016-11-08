@@ -8,6 +8,8 @@ namespace TravelInCloud.Models.HomeViewModels
 {
     public class IndexViewModel
     {
-        public virtual List<Product> Products { get; set; }
+        public virtual IEnumerable<Product> Products { get; set; }
+        public virtual IEnumerable<Location> Locations { get; set; }
+        public Location CurrentLocation { get; set; }
     }
 }

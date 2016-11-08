@@ -150,12 +150,29 @@
             </div>
         </div>
 
+        <div class="weui-cells">
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label class="weui-label" for="">运营地区</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select asp-for="LocationId" class="weui-select">
+                        @foreach (var Loc in Model.AvaliableLocations)
+                        {
+                            <option value="@Loc.LocationId">@Loc.LocationName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <label class="weui-agree" for="weuiAgree">
             <input class="weui-agree__checkbox" id="weuiAgree" type="checkbox">
             <span class="weui-agree__text">
                 阅读并同意<a href="javascript:void(0);">《相关条款》</a>
             </span>
         </label>
+
         <div class="weui-btn-area">
             <button class="weui-btn weui-btn_primary" id="showTooltips" type="submit">提交开店申请</button>
         </div>

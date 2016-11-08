@@ -273,6 +273,8 @@
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161104150702_CreateNewOrderStatus.Designer.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161106155604_CreateLocationSheet.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161106155604_CreateLocationSheet.Designer.cs"
+"D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108085756_RenameLocationTable.cs"
+"D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108085756_RenameLocationTable.Designer.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\ApplicationDbContextModelSnapshot.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\ApplicationUser.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\TravelModels.cs"

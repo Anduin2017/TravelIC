@@ -10,12 +10,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>Server=localhost;Database=TravelInCloud;Integrated Security=true;</Value>
+      <Value>Server=localhost;Database=Obisoft-TravelInCloud;Integrated Security=true;</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
   <ItemGroup>
     <EfMigrations Include="TravelInCloud.Data.ApplicationDbContext">
-      <Value>Server=localhost;Database=TravelInCloud;Integrated Security=true;</Value>
+      <Value>Server=localhost;Database=Obisoft-TravelInCloud;Integrated Security=true;</Value>
     </EfMigrations>
   </ItemGroup>
 </Project>

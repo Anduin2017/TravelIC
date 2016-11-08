@@ -91,7 +91,8 @@ namespace TravelInCloud
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            await app.ApplicationServices.GetRequiredService<ApplicationDbContext>().Database.EnsureCreatedAsync();
+            //await app.ApplicationServices.GetRequiredService<ApplicationDbContext>().Database.EnsureCreatedAsync();
+            await app.ApplicationServices.GetRequiredService<ApplicationDbContext>().Seed();
         }
     }
 }

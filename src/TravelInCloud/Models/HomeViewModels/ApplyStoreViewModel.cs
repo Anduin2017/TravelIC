@@ -22,5 +22,10 @@ namespace TravelInCloud.Models.HomeViewModels
         public string StoreDescription { get; set; }
         [Required]
         public string StoreLocation { get; set; }
+
+        public IEnumerable<Location> AvaliableLocations { get; set; }
+
+        public virtual int LocationId { get; set; }
+
     }
 }
