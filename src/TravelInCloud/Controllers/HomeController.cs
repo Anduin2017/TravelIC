@@ -427,5 +427,52 @@ namespace TravelInCloud.Controllers
             };
             return View(_model);
         }
+
+        public async Task<IActionResult> ManageOrders(int OrderStatus = -1)
+        {
+            var User = await GetCurrentUserAsync() as Store;
+            if (User != null)
+            {
+                var _model = new ManageOrdersViewModel
+                {
+                    Orders = _dbContext
+                        .Orders
+                        .Include(t => t.Owner)
+                        .Include(t => t.ProductType)
+                        .Include(t => t.ProductType.BelongingProduct)
+                        .Include(t => t.ProductType.BelongingProduct.ImageOfProducts)
+                        .Where(t => t.ProductType.BelongingProduct.OwnerId == User.Id)
+                        .OrderBy(t => t.CreateTime)
+                };
+
+                if (OrderStatus != -1)
+                {
+                    _model.Orders = _model.Orders.Where(t => t.OrderStatus == (OrderStatus)OrderStatus);
+                }
+
+                return View(_model);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> SetUsed(int OrderId, OrderStatus Target)
+        {
+            var TargetOrder = await _dbContext
+                .Orders
+                .Include(t => t.ProductType)
+                .Include(t => t.ProductType.BelongingProduct)
+                .Include(t => t.ProductType.BelongingProduct.Owner)
+                .SingleOrDefaultAsync(t => t.OrderId == OrderId);
+
+            var User = await GetCurrentUserAsync() as Store;
+            //Confirm this order is his order...
+            if (TargetOrder.ProductType.BelongingProduct.OwnerId == User.Id)
+            {
+                TargetOrder.OrderStatus = Target;
+                await _dbContext.SaveChangesAsync();
+                return RedirectToAction(nameof(ManageOrders));
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

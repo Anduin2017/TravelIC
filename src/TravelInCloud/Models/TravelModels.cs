@@ -186,7 +186,7 @@ namespace TravelInCloud.Models
         public virtual int OrderId { get; set; }
 
         /// <summary>
-        /// 订单所属用户
+        /// 下单的用户
         /// </summary>
         [ForeignKey(nameof(OwnerId))]
         public virtual ApplicationUser Owner { get; set; }

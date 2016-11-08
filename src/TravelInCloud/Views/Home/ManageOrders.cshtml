@@ -1,7 +1,7 @@
-﻿@model TravelInCloud.Models.HomeViewModels.OrderViewModel
+﻿@model TravelInCloud.Models.HomeViewModels.ManageOrdersViewModel
 @{
     Layout = "_LayoutFish";
-    ViewData["Title"] = "订单";
+    ViewData["Title"] = "管理订单";
 }
 
 @section css{
@@ -16,14 +16,9 @@
                 <i class="font-icon icon-header-tab-b"></i>
             </a>
         </li>
-        <li data-div="default">
-            <a href="javascript:;">
-                订单类型
-                <i class="font-icon icon-header-tab-b"></i>
-            </a>
-        </li>
     </ul>
 </section>
+
 @foreach (var Order in Model.Orders)
 {
     <div id="right">
@@ -62,7 +57,10 @@
                 <br />
                 <span>单号：@Html.DisplayFor(t => Order.OrderId)</span><br />
                 <span>下单日期：@Html.DisplayFor(t => Order.CreateTime)</span><br />
-                <span>使用日期：@Html.DisplayFor(t => Order.UseTime)</span>
+                <span>使用日期：@Html.DisplayFor(t => Order.UseTime)</span><br />
+                <span>下单用户：@Html.DisplayFor(t => Order.Owner.Name)</span><br />
+                <span>用户手机：@Html.DisplayFor(t => Order.Owner.PhoneNumber)</span><br />
+                <span>身份证号：@Html.DisplayFor(t => Order.Owner.IDCode)</span><br />
                 <span class="price fr"><em>￥</em>@Order.ProductType.Price</span>
             </div>
             <a asp-controller="Home" asp-action="Product" asp-route-id="@Order.ProductType.BelongingProduct.ProductId" style="height:90px;">
@@ -75,9 +73,18 @@
                     <p><i class="font-icon fr icon-iconfont-jiantou"></i>1份</p>
                 </div>
             </a>
+            <div class="myorder-header">
+                <ul class="order-list member-list">
+                    <li style="padding:0"><a asp-controller="Home" asp-action="SetUsed" asp-route-OrderId="@Order.OrderId" asp-route-Target="0"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>强制改为未付款</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+                    <li style="padding:0"><a asp-controller="Home" asp-action="SetUsed" asp-route-OrderId="@Order.OrderId" asp-route-Target="1"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>强制改为已支付</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+                    <li style="padding:0"><a asp-controller="Home" asp-action="SetUsed" asp-route-OrderId="@Order.OrderId" asp-route-Target="2"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>设置为已使用</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+                    <li style="padding:0"><a asp-controller="Home" asp-action="SetUsed" asp-route-OrderId="@Order.OrderId" asp-route-Target="4"><label class="lab-title" for=""><i class="font-icon icon-iconfont-zhanghu"></i>设置为已退款</label><i class="font-icon fr icon-iconfont-jiantou"></i></a></li>
+                </ul>
+            </div>
         </div>
     </div>
 }
+
 <div class="page-line"></div>
 <ul class="tab-search-panel" id="all">
     <li><a asp-route-OrderStatus="-1">全部</a></li>
@@ -85,18 +92,6 @@
     <li><a asp-route-OrderStatus="1">已支付</a></li>
     <li><a asp-route-OrderStatus="2">已使用</a></li>
     <li><a asp-route-OrderStatus="4">已退款</a></li>
-</ul>
-<ul class="tab-search-panel" id="default">
-    <li><a asp-route-ProductType="-1" class="c-base">订单类型</a></li>
-    <li><a asp-route-ProductType="1">酒店</a></li>
-    <li><a asp-route-ProductType="2">景点</a></li>
-    <li><a asp-route-ProductType="3">KTV</a></li>
-    <li><a asp-route-ProductType="4">洗浴汗蒸</a></li>
-    <li><a asp-route-ProductType="10">饭店</a></li>
-    <li><a asp-route-ProductType="11">商品</a></li>
-    <li><a asp-route-ProductType="12">租车</a></li>
-    <li><a asp-route-ProductType="13">附近游</a></li>
-    <li><a asp-route-ProductType="14">跟团游</a></li>
 </ul>
 
 @section js{
