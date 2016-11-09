@@ -149,7 +149,8 @@ namespace TravelInCloud.Controllers
                 .Include(t => t.Owner)
                 .Include(t => t.ImageOfProducts)
                 .Include(t => t.ProductTypes)
-                .Where(t => t.Owner.StoreType == StoreType);
+                .Where(t => t.Owner.StoreType == StoreType)
+                .Take(20);
 
             var Model = new ProductListViewModel
             {
@@ -473,6 +474,42 @@ namespace TravelInCloud.Controllers
                 return RedirectToAction(nameof(ManageOrders));
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> PublishComment(int ProductId)
+        {
+            var TargetProduct = await _dbContext.Products.SingleOrDefaultAsync(t => t.ProductId == ProductId);
+            if (TargetProduct != null)
+            {
+                return View(new PublishCommentViewModel { });
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PublishComment(PublishCommentViewModel model)
+        {
+            var user = await GetCurrentUserAsync();
+            
+            var TargetProduct = await _dbContext
+                .Products
+                .Include(t => t.Comments)
+                .SingleOrDefaultAsync(t => t.ProductId == model.ProductId);
+
+            _dbContext.Comments.Add(new Comment
+            {
+                ProductId = model.ProductId,
+                UserId = user.Id,
+                Content = model.Content,
+                PublishTime = DateTime.Now
+            });
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(AllComments), new { ProductId = model.ProductId });
+        }
+
+        public async Task<IActionResult> AllComments(int ProductId)
+        {
+            return null;
         }
     }
 }

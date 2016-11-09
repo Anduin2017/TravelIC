@@ -75,6 +75,19 @@
                     <p><i class="font-icon fr icon-iconfont-jiantou"></i>1份</p>
                 </div>
             </a>
+            <div class="myorder-header">
+                <ul class="order-list member-list">
+                    <li style="padding:0">
+                        <a asp-controller="Home" asp-action="PublishComment" asp-route-ProductId="@Order.OrderId">
+                            <label class="lab-title" for="">
+                                <i class="font-icon icon-iconfont-zhanghu"></i>
+                                评价订单
+                            </label>
+                            <i class="font-icon fr icon-iconfont-jiantou"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 }

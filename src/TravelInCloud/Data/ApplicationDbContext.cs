@@ -14,6 +14,7 @@ namespace TravelInCloud.Data
         {
         }
 
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Location> Locations { get; set; }

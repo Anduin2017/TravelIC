@@ -13,12 +13,16 @@ namespace TravelInCloud.Models
         public virtual string openid { get; set; }
         public virtual string NickName { get; set; }
         public virtual string IconAddress { get; set; }
+        public virtual string Discriminator { get; set; }
+
         /// <summary>
         /// 该用户下的所有订单
         /// </summary>
         [InverseProperty(nameof(Order.Owner))]
         public virtual List<Order> Orders { get; set; }
-        public virtual string Discriminator { get; set; }
+
+        [InverseProperty(nameof(Comment.User))]
+        public virtual List<Comment> Comments { get; set; }
 
         public virtual DateTime RegisterTime { get; set; } = DateTime.Now;
 

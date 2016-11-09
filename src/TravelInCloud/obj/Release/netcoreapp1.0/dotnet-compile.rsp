@@ -278,6 +278,10 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161106155604_CreateLoca
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161106155604_CreateLocationSheet.Designer.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108085756_RenameLocationTable.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108085756_RenameLocationTable.Designer.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108130527_CreateComment.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108130527_CreateComment.Designer.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108130907_RenameComments.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\20161108130907_RenameComments.Designer.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Migrations\ApplicationDbContextModelSnapshot.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ApplicationUser.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\TravelModels.cs
@@ -303,6 +307,7 @@ D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\PreOrderViewMo
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductListViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ProductWarningViewModel.cs
+D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\PublishCommentViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\SetMethodViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\SettingsViewModel.cs
 D:\Projects\TravelInCloud\src\TravelInCloud\Models\ManageViewModels\AddPhoneNumberViewModel.cs

@@ -111,6 +111,9 @@ namespace TravelInCloud.Models
             }
         }
 
+        [InverseProperty(nameof(Comment.Product))]
+        public List<Comment> Comments { get; set; }
+
         /// <summary>
         /// 商品所属用户
         /// </summary>
@@ -164,10 +167,29 @@ namespace TravelInCloud.Models
         /// <summary>
         /// 票型的所属商品
         /// </summary>
-        [ForeignKey(nameof(BelongingProductId))]
         public int BelongingProductId { get; set; }
+        [ForeignKey(nameof(BelongingProductId))]
         public Product BelongingProduct { get; set; }
 
+    }
+
+    /// <summary>
+    /// 商品的评价
+    /// </summary>
+    public class Comment
+    {
+        public virtual int CommentId { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        public virtual Product Product { get; set; }
+        public virtual int ProductId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public virtual ApplicationUser User { get; set; }
+        public virtual string UserId { get; set; }
+
+        public virtual DateTime PublishTime { get; set; }
+        public virtual string Content { get; set; }
     }
 
     public enum OrderStatus : short

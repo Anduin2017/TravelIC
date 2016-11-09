@@ -1,0 +1,35 @@
+﻿@model TravelInCloud.Models.HomeViewModels.PublishCommentViewModel
+
+<form asp-action="PublishComment" asp-controller="Home" method="post" class="page input" style="opacity: 1;">
+    <div class="page__bd">
+        <div asp-validation-summary="All" class="page__desc"></div>
+        <input type="hidden" asp-for="ProductId" />
+        <div class="weui-cells__title">发表评论</div>
+
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" asp-for="Content" placeholder="评论内容" rows="5"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+        </div>
+
+        <label class="weui-agree" for="weuiAgree">
+            <input class="weui-agree__checkbox" id="weuiAgree" type="checkbox">
+            <span class="weui-agree__text">
+                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+            </span>
+        </label>
+        <div class="weui-btn-area">
+            <button class="weui-btn weui-btn_primary" id="showTooltips" type="submit">发表评论</button>
+        </div>
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
+    </div>
+</form>
+
+<div class="page__bd page__bd_spacing">
+    <a class="weui-btn weui-btn_warn" asp-controller="Products" asp-action="AllComments" asp-route-ProductId="@Model.ProductId">返回评论列表</a>
+</div>
