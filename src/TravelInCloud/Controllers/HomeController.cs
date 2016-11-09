@@ -199,6 +199,7 @@ namespace TravelInCloud.Controllers
                 .Include(t => t.ImageOfProducts)
                 .Include(t => t.ProductTypes)
                 .Include(t => t.Owner)
+                .Include(t => t.Comments)
                 .SingleOrDefaultAsync(t => t.ProductId == id);
 
             _product.ViewTimes++;
@@ -490,7 +491,7 @@ namespace TravelInCloud.Controllers
         public async Task<IActionResult> PublishComment(PublishCommentViewModel model)
         {
             var user = await GetCurrentUserAsync();
-            
+
             var TargetProduct = await _dbContext
                 .Products
                 .Include(t => t.Comments)
@@ -507,9 +508,21 @@ namespace TravelInCloud.Controllers
             return RedirectToAction(nameof(AllComments), new { ProductId = model.ProductId });
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> AllComments(int ProductId)
         {
-            return null;
+            var TargetProduct = await _dbContext
+                .Products
+                .Include(t => t.Comments)
+                .SingleOrDefaultAsync(t => t.ProductId == ProductId);
+
+            var _model = new AllCommentsViewModel
+            {
+                ProductId = ProductId,
+                Comments = TargetProduct.Comments
+            };
+
+            return View(_model);
         }
     }
 }

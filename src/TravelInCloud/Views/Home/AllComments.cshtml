@@ -1,0 +1,31 @@
+﻿@model TravelInCloud.Models.HomeViewModels.AllCommentsViewModel
+@{
+    Layout = "_LayoutFish";
+    ViewData["Title"] = "所有评论";
+}
+
+@section css{
+    <link rel="stylesheet" href="~/css/list.css" asp-append-version="true" />
+}
+
+<div class="member-handle btn-handle">
+    <a asp-controller="Home" asp-action="Product" asp-route-id="@Model.ProductId" class="btn">退出登录</a>
+</div>
+
+@foreach (var Comment in Model.Comments)
+{
+    <div id="right">
+        <div class="page-line"></div>
+        <div class="myorder-item">
+            <div class="myorder-header">
+                <span class="order-info">
+                    <i class="font-icon icon-order-shopping"></i>
+                    <em>匿名评论</em>|
+                </span>
+                <br />
+                <span>@Comment.Content</span><br />
+            </div>
+
+        </div>
+    </div>
+}

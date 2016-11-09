@@ -26,7 +26,7 @@
     <h3 class="details-title">@Model.Product.ProductName </h3>
     <p class="details-explian">@Model.Product.Owner.StoreName</p>
     <p class="details-explian"><span class="flag-panel">@Model.Product.Owner.StoreType</span><span class="price fr"><em>￥</em><strong>@Model.Product.TryGetPrice()</strong>起</span></p>
-    <a href="/wap/ticket/parkComments.htm?id=2880" class="details-comment clearfix">
+    <a asp-controller="Home" asp-action="AllComments" asp-route-ProductId="@Model.Product.ProductId" class="details-comment clearfix">
         <span class="comment-score c-base">
             <em>5</em>
             <i class="font-icon icon-iconfont-aixin"></i>
@@ -35,7 +35,7 @@
             <i class="font-icon icon-iconfont-aixin"></i>
             <i class="font-icon icon-iconfont-aixin"></i>
         </span>
-        查看1条评论 <i class="font-icon fr icon-iconfont-jiantou"></i>
+        查看@(Model.Product.Comments.Count())条评论 <i class="font-icon fr icon-iconfont-jiantou"></i>
     </a>
 </div>
 <div class="page-line"></div>

@@ -289,6 +289,7 @@
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\ResetPasswordViewModel.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\SendCodeViewModel.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\AccountViewModels\VerifyCodeViewModel.cs"
+"D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\AllCommentsViewModel.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ApplyStoreViewModel.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ChangeMyInfoViewModel.cs"
 "D:\Projects\TravelInCloud\src\TravelInCloud\Models\HomeViewModels\ChangeStoreInfoViewModel.cs"
