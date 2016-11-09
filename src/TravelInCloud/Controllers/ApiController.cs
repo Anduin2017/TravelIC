@@ -87,31 +87,31 @@ namespace TravelInCloud.Controllers
                 {
                     name = "云中游官网",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect","Index")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}","Index")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "酒店预留",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}", "ProductList?StoreType=1")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "旅游景区",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}", "ProductList?StoreType=2")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "周边看看",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}", "ProductList?StoreType=13")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "拼拼跟团",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}", "ProductList?StoreType=14")
                 });
                 Buttons.button.Add(NewButton);
             }
@@ -126,25 +126,25 @@ namespace TravelInCloud.Controllers
                 {
                     name = "兴趣小游",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}", "ProductList?StoreType=2")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "每日签到",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "金币小礼",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "积分景区",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}")
                 });
                 Buttons.button.Add(NewButton);
             }
@@ -159,32 +159,32 @@ namespace TravelInCloud.Controllers
                 {
                     name = "我的订单",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}", "Order")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "个人中心",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect","Parent")
+                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/{nameof(AuthRedirect)}","Parent")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "在线客服",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = await GenerateAuthUrlAsync($"tel:13080868017")
                 });
                 NewButton.sub_button.Add(new SubButton
                 {
                     name = "天气预报",
                     type = "view",
-                    url = await GenerateAuthUrlAsync($"https://{Secrets.Host}/api/AuthRedirect")
+                    url = "http://m.weather.com.cn/mweather/401370100.shtml"
                 });
                 Buttons.button.Add(NewButton);
             }
             return JsonConvert.SerializeObject(Buttons);
         }
 
-        // GET: /api/AuthRedirect
+        // GET: /api/{nameof(AuthRedirect)}
         public async Task<IActionResult> AuthRedirect(string code = "", string state = "Index")
         {
             //If user is using browser from wechat
@@ -209,7 +209,7 @@ namespace TravelInCloud.Controllers
                     //_wuser.IconAddress = WCUser.headimgurl;
                     //await _userManager.UpdateAsync(_wuser);
 
-                    return RedirectToAction(state, "Home");
+                    return Redirect($"/Home/{state}");
                 }
                 //Not Our User
                 else

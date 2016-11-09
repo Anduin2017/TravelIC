@@ -149,8 +149,10 @@ namespace TravelInCloud.Controllers
                 .Include(t => t.Owner)
                 .Include(t => t.ImageOfProducts)
                 .Include(t => t.ProductTypes)
+                .Include(t => t.Comments)
                 .Where(t => t.Owner.StoreType == StoreType)
-                .Take(20);
+                .Take(20)
+                .ToList();
 
             var Model = new ProductListViewModel
             {
