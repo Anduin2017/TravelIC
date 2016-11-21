@@ -276,10 +276,12 @@ namespace TravelInCloud.Controllers
             if (ModelState.IsValid)
             {
                 var User = await GetCurrentUserAsync();
-                var TempOrders = User.Orders.ToList();
-                _dbContext.Orders.RemoveRange(User.Orders);
-                await _dbContext.SaveChangesAsync();
-
+                var TempOrders = User.Orders?.ToList();
+                if (TempOrders != null && TempOrders.Count > 0)
+                {
+                    _dbContext.Orders.RemoveRange(User.Orders);
+                    await _dbContext.SaveChangesAsync();
+                }
                 var NewStoreUser = new Store(User);
                 NewStoreUser.StoreDescription = Model.StoreDescription;
                 NewStoreUser.StoreLocation = Model.StoreLocation;
@@ -296,6 +298,7 @@ namespace TravelInCloud.Controllers
                 await _signInManager.SignInAsync(NewStoreUser, false);
                 return RedirectToAction(nameof(Settings));
             }
+            Model.AvaliableLocations = _dbContext.Locations;
             return View(Model);
         }
 
