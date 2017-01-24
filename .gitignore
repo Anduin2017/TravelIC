@@ -1,0 +1,8 @@
+.vs
+lib
+*.lock.json
+*.user
+*.min.css
+*.min.js
+bin
+obj
