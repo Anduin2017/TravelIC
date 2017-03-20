@@ -6,3 +6,6 @@ lib
 *.min.js
 bin
 obj
+node_modules
+.vscode
+Properties
