@@ -1,4 +1,6 @@
 # TravelIC
+[![Build Status](https://travis-ci.org/Anduin2017/TravelIC.svg?branch=master)](https://travis-ci.org/Anduin2017/TravelIC)
+
 TravelIC is a simple WeChat application which allows your WeChat followers sell and buy their own things.
 
 TravelIC is based on dot net core.
