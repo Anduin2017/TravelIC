@@ -13,7 +13,7 @@ using static TravelInCloud.Services.WeChatService;
 
 namespace TravelInCloud.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class ApiController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

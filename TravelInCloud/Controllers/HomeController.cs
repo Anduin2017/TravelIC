@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TravelInCloud.Controllers
 {
-	[RequireHttps]
+	//[RequireHttps]
 	[Authorize]
     public class HomeController : Controller
     {

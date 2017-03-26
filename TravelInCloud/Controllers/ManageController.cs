@@ -14,7 +14,7 @@ using TravelInCloud.Data;
 namespace TravelInCloud.Controllers
 {
     [Authorize]
-    [RequireHttps]
+    //[RequireHttps]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
