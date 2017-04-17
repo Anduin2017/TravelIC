@@ -17,7 +17,9 @@ TravelIC is based on dot net core.
 
 ## How to run locally
 
-1. Change the database connection string to your own database.
+1. Change the database connection string to your own database.  
+    The connection string of this app is located at `./TravelInCloud/appsettings.json`  
+    About How to write connection string please view [here](https://www.connectionstrings.com/)
 2. Excute `bower install` to download all front-end packages
 3. Excute `dotnet restore` to restore all dotnet requirements
 4. Excute `dotnet ef database update` to update your database
@@ -44,3 +46,9 @@ TravelIC is based on dot net core.
 9. Configure your WeChat pay
 
 For more information about how to run it in your WeChat account, please view WeChat Document at [https://mp.weixin.qq.com/wiki](https://mp.weixin.qq.com/wiki)
+
+## How to contribute
+
+Directly fork this repo and edit it. When you have successfully fixed an issue or have successfully made some useful change, please create a pull request.
+
+If you are faceing any problem, please disscuss it at Issues.
