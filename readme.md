@@ -7,13 +7,19 @@ TravelIC is based on dot net core.
 
 ## Requirements
 
+Requirements about how to run
 * Windows Server or Ubuntu
 * dot net Core 1.1.0 or later
-* dot net Core SDK 1.0.1 or later
 * SQL Server or SQL Server LocalDB
 * bower
 
 **bower depends on nodejs, npm and git!**
+
+Requirements about how to develope
+* Windows 10 or Ubuntu desktop
+* dot net Core SDK 1.0.3 or later
+* SQL Server or SQL Server LocalDB
+* bower, nodejs, npm, git
 
 ## How to run locally
 
