@@ -8,18 +8,24 @@ TravelIC is based on dot net core.
 ## Requirements
 
 Requirements about how to run
-* Windows Server or Ubuntu
-* dot net Core 1.1.0 or later
-* SQL Server or SQL Server LocalDB
-* bower
+* Windows Server or Ubuntu Server
+* [dot net Core 1.1.0 or later](https://github.com/dotnet/core/tree/master/release-notes)
+* [SQL Server or SQL Server LocalDB](http://www.microsoft.com/en-us/sql-server/sql-server-2016)
+* [bower](https://bower.io)
+* [nodejs and npm](https://nodejs.org)
+* [git](https://git-scm.com)
 
 **bower depends on nodejs, npm and git!**
 
 Requirements about how to develope
 * Windows 10 or Ubuntu desktop
-* dot net Core SDK 1.0.3 or later
-* SQL Server or SQL Server LocalDB
-* bower, nodejs, npm, git
+* [dot net Core SDK 1.0.3 or later](https://github.com/dotnet/core/tree/master/release-notes)
+* [SQL Server or SQL Server LocalDB](http://www.microsoft.com/en-us/sql-server/sql-server-2016)
+* [bower](https://bower.io)
+* [nodejs and npm](https://nodejs.org)
+* [git](https://git-scm.com)
+
+* [VS Code](https://code.visualstudio.com)(Strongly suggest)
 
 ## How to run locally
 
@@ -39,6 +45,8 @@ Requirements about how to develope
 3. Copy `./TravelInCloud/bin/Debug/netcoreapp1.1/publish` path to your server
 4. Excute `dotnet TravelInCloud.dll` at `./TravelInCloud/bin/Debug/netcoreapp1.1/publish` path on your server
 
+**When you have successfully published the app to your server, it is not running properly! You need the following setps.**
+
 ## How to run in WeChat
 
 1. Create a WeChat MP Account at [https://mp.weixin.qq.com](https://mp.weixin.qq.com)
@@ -50,8 +58,9 @@ Requirements about how to develope
 7. Validate your wechat app at `ServerRoot\api\WeChatVerify`
 8. Set your menu at `ServerRoot\api\ApplyMenu`
 9. Configure your WeChat pay
+10. Chnfigure your WeChat OAuth authorization
 
-For more information about how to run it in your WeChat account, please view WeChat Document at [https://mp.weixin.qq.com/wiki](https://mp.weixin.qq.com/wiki)
+For more information about how to run it in your WeChat account, please view WeChat document at [https://mp.weixin.qq.com/wiki](https://mp.weixin.qq.com/wiki)
 
 ## How to contribute
 
